@@ -13,11 +13,22 @@ class Article(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=80)
     address = models.TextField()
+    sido = models.CharField(max_length=20)
+    sigungu = models.CharField(max_length=30)
+    roadname = models.CharField(max_length=20)
     number = models.CharField(max_length=20)
     opening_hour = models.CharField(max_length=40)
     menu = models.TextField()
     parking = models.CharField(max_length=20)
     dayoff = models.CharField(max_length=20)
+    category = (
+        ("분위기가 좋은", "분위기가 좋은"),
+        ("디저트가 맛있는", "디저트가 맛있는"),
+        ("커피가 맛있는", "커피가 맛있는"),
+        ("작업하기 좋은", "작업하기 좋은"),
+        ("커피가 저렴한", "커피가 저렴한"),
+        ("이색적인", "이색적인"),
+    )
     image = ProcessedImageField(
         upload_to="images/cafe",
         blank=False,

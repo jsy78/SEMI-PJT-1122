@@ -13,6 +13,7 @@ class ArticleForm(forms.ModelForm):
             "menu",
             "parking",
             "dayoff",
+            "category",
             "image",
         ]
         labels = {
@@ -23,6 +24,7 @@ class ArticleForm(forms.ModelForm):
             "menu": "메뉴",
             "parking": "주차",
             "dayoff": "휴일",
+            "category": "분류",
             "image": "사진",
         }
 
