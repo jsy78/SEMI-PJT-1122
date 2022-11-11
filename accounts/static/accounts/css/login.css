@@ -34,6 +34,10 @@ form {
     padding: 0.7rem;
 }
 
+.form-text {
+    color: #b8b8b8;
+}
+
 
 /* 회원이 아니신가요? */
 .go-signup {
