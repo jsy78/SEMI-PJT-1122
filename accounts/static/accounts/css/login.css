@@ -1,18 +1,18 @@
 @charset "UTF-8";
 
 /* 배경 사진 */
-.background {
+body {
     background-image: url('../images/background.jpg');
-    background-size: cover;
-    height: 1024px;
+    background-size: 100%;
     width: 100%;
 }
 
 .bg-effect {
     background-color: rgba(217, 217, 217, 0.28);
     height: 100%;
+    padding-bottom: 20.7rem;
     margin: auto;
-    width: 60%;
+    width: 100%;
 }
 
 
@@ -20,7 +20,7 @@
 form {
     margin: auto;
     padding-top: 33%;
-    width: 55%;
+    width: 70%;
 }
 
 
