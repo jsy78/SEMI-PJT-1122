@@ -8,6 +8,9 @@ class ArticleForm(forms.ModelForm):
         fields = [
             "name",
             "address",
+            "sido",
+            "sigungu",
+            "roadname",
             "number",
             "opening_hour",
             "menu",
@@ -19,6 +22,9 @@ class ArticleForm(forms.ModelForm):
         labels = {
             "name": "가게 이름",
             "address": "주소",
+            "sido": "시/도",
+            "sigungu": "시/군/구",
+            "roadname": "도로명",
             "number": "전화번호",
             "opening_hour": "개점 시간",
             "menu": "메뉴",
