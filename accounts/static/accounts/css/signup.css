@@ -1,5 +1,32 @@
 @charset "UTF-8";
 
+/* 배경 사진 */
 .background {
-    background-image: url('https://www.hdwallpapers.in/download/closeup_view_of_green_plant_leaves_hd_green_aesthetic-1920x1080.jpg');
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    height: 1024px;
+    width: 100%;
+}
+
+.bg-effect {
+    background-color: rgba(217, 217, 217, 0.28);
+    height: 100%;
+    margin: auto;
+    width: 60%;
+}
+
+
+/* 회원가입 버튼 */
+.signup-button {
+    align-items: center;
+    background-color: #ECE7B4;
+    border: none;
+    border-radius: 20rem;
+    color: #666666;
+    display: flex;
+    font-weight: 600;
+    height: 4rem;
+    justify-content: center;
+    margin: 5rem auto;
+    width: 13rem;
 }
