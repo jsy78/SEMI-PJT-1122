@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+/* 배경 화면 */
+.background {
+    background-color: #32502E;
+    width: 100%;
+}
+
+
+/* 전체 여백 */
+.container {
+    margin: auto;
+    width: 70%;
+}
+
+
+/* 개인정보 부분 정렬 */
+.personal-info {
+    align-items: center;
+    display: flex;
+}
+
+
+/* 개인정보 사진 */
+.personal-info img {
+    border-radius: 50rem;
+    height: 11rem;
+    object-fit: cover;
+    width: 11rem;
+}
+
+
+/* 개인정보 글자 부분 */
+.info-letter {
+    display: flex;
+    flex-direction: column;
+    margin-left: 4rem;
+}
+
+.info-upper {
+    align-items: center;
+    display: flex;
+}
+
+.info-upper p {
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.edit-button {
+    align-items: center;
+    background-color: #ECE7B4;
+    border: none;
+    border-radius: 20rem;
+    color: #666666;
+    display: flex;
+    font-size: 1rem;
+    font-weight: 600;
+    height: 3rem;
+    justify-content: center;
+    margin-left: 4rem;
+    width: 11rem;
+}
+
+.info-lower {
+    align-items: center;
+    color: #ffffff;
+    display: flex;
+    font-size: 1.2rem;
+}
+
+.follow {
+    margin-right: 2.5rem;
+}
