@@ -1,0 +1,24 @@
+.test_btn1{
+    border-radius: 10px;
+    margin-right:-3px;
+}
+.test_btn2{
+    border-radius: 10px;
+    margin-left:-3px;
+}
+.btn_group button{
+    border: 1px solid #ece7b4;
+    background-color: #ece7b4;
+    color: #060606;
+    padding: 5px;
+}
+.btn_group2 button{
+  border: 1px solid #ece7b4;
+  background-color: #e9e9e9;
+  color: #060606;
+  padding: 5px;
+}
+.btn_group button:hover{
+    color:rgb(9, 9, 9);
+    background-color: #bdb992;
+}
