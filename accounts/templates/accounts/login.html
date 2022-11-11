@@ -4,12 +4,16 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="static/accounts/css/login.css">
+<link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
 {% endblock css %}
+
 {% block content %}
 <div class="background">
-    (로그인 폼)
-    <p><a href="{% url 'accounts:signup' %}">회원이 아니신가요?</a></p>
-    <button type="submit">로그인</button>
+    <div class="bg-effect">
+        <form action="" class="login-form">(로그인 폼)
+            <p class="go-signup"><a href="{% url 'accounts:signup' %}">회원이 아니신가요?</a></p>
+            <button type="submit" class="login-button">로그인</button>
+        </form>
+    </div>
 </div>
 {% endblock content %}
