@@ -16,6 +16,29 @@
 }
 
 
+/* 폼 사이즈 조절 */
+form {
+    margin: auto;
+    padding-top: 20%;
+    width: 55%;
+}
+
+
+/* 폼 조절 */
+.form-label {
+    color: #ffffff;
+    margin-top: 1.5rem;
+}
+
+.form-control {
+    padding: 0.7rem;
+}
+
+.form-text {
+    color: #b8b8b8;
+}
+
+
 /* 회원가입 버튼 */
 .signup-button {
     align-items: center;

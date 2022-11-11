@@ -16,6 +16,25 @@
 }
 
 
+/* 폼 사이즈 조절 */
+form {
+    margin: auto;
+    padding-top: 33%;
+    width: 55%;
+}
+
+
+/* 폼 조절 */
+.form-label {
+    color: #ffffff;
+    margin-top: 1.5rem;
+}
+
+.form-control {
+    padding: 0.7rem;
+}
+
+
 /* 회원이 아니신가요? */
 .go-signup {
     display: flex;
