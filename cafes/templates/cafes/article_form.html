@@ -4,10 +4,83 @@
 {% load static %}
 
 {% block css %}
+  {{ form.media }}
 {% endblock css %}
 
 {% block content %}
+  <div class="d-flex justify-content-center">
+    {% if request.resolver_match.url_name == "cafe_create" %}
+      <h1 class="text-center p-3 m-3 fs-3 fw-bold rounded">카페 작성</h1>
+    {% elif request.resolver_match.url_name == "cafe_update" %}
+      <h1 class="text-center p-3 m-3 fs-3 fw-bold rounded">카페 수정</h1>
+    {% endif %}
+  </div>
+  <div class="d-flex justify-content-center p-5">
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <button class="btn btn-outline-primary form-control mb-3" type="submit">OK</button>
+    </form>
+  </div>
 {% endblock content %}
 
 {% block js %}
-{% endblock js %}
+  <!-- 주소 API -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <!-- 지도 API -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={% include 'cafes/appkey.txt' %}&libraries=services"></script>
+  <script>
+    document.querySelectorAll('.mb-3').item(1).insertAdjacentHTML('beforeend',
+      `
+      <div id="map" class="mt-3 d-none rounded" style="width: 300px; height: 300px;"></div>
+      `
+    )
+    const addressInput = document.querySelector('#id_address')
+    const sidoInput = document.querySelector('#id_sido')
+    const sigunguInput = document.querySelector('#id_sigungu')
+    const roadnameInput = document.querySelector('#id_roadname')
+    const mapContainer = document.querySelector('#map')
+    const mapOption = {
+      center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심 좌표
+      level: 2 // 지도의 확대 레벨
+    }
+    //지도를 미리 생성
+    const map = new kakao.maps.Map(mapContainer, mapOption)
+    // 주소-좌표 변환 객체를 생성
+    const geocoder = new kakao.maps.services.Geocoder()
+    //마커를 미리 생성
+    const marker = new kakao.maps.Marker({
+      position: new kakao.maps.LatLng(37.537187, 127.005476),
+      map: map
+    })
+        
+    addressInput.addEventListener('click', function () {
+      new daum.Postcode({
+        oncomplete: function(data) {
+          // 주소 정보를 해당 필드에 넣는다.
+          addressInput.value = data.address
+          sidoInput.value = data.sido
+          sigunguInput.value = data.sigungu
+          roadnameInput.value = data.roadname
+          // 주소로 상세 정보를 검색
+          geocoder.addressSearch(data.address, function(results, status) {
+            // 정상적으로 검색이 완료됐으면
+            if (status === daum.maps.services.Status.OK) {
+              const result = results[0] //첫번째 결과의 값을 활용
+              // 해당 주소에 대한 좌표를 받아서
+              const coords = new kakao.maps.LatLng(result.y, result.x)
+              // 지도를 보여준다.
+              mapContainer.classList.remove('d-none')
+              mapContainer.classList.add('d-block')
+              map.relayout()
+              // 지도 중심을 변경한다.
+              map.setCenter(coords)
+              // 마커를 결과값으로 받은 위치로 옮긴다.
+              marker.setPosition(coords)
+            }
+          });
+        }
+      }).open()
+    })
+  </script>
+  {% endblock js %}

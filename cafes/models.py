@@ -1,4 +1,5 @@
 from django.db import models
+from froala_editor.fields import FroalaField
 from imagekit.models import ProcessedImageField, ImageSpecField
 from imagekit.processors import ResizeToFill
 from django.conf import settings
@@ -12,13 +13,18 @@ from django.utils import timezone
 class Article(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=80)
-    address = models.TextField()
+    address = models.CharField(max_length=80)
     sido = models.CharField(max_length=20)
     sigungu = models.CharField(max_length=30)
     roadname = models.CharField(max_length=20)
     number = models.CharField(max_length=20)
     opening_hour = models.CharField(max_length=40)
-    menu = models.TextField()
+    menu = FroalaField(
+        options={
+            "toolbarSticky": False,
+            "heightMin": 200,
+        }
+    )
     parking = models.CharField(max_length=20)
     dayoff = models.CharField(max_length=20)
     category = (
@@ -29,6 +35,7 @@ class Article(models.Model):
         ("커피가 저렴한", "커피가 저렴한"),
         ("이색적인", "이색적인"),
     )
+    cafeType = models.CharField(max_length=20, choices=category, null=True)
     image = ProcessedImageField(
         upload_to="images/cafe",
         blank=False,
@@ -72,7 +79,12 @@ class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     cafe = models.ForeignKey(Article, on_delete=models.CASCADE)
     title = models.CharField(max_length=80)
-    content = models.TextField()
+    content = FroalaField(
+        options={
+            "toolbarSticky": False,
+            "heightMin": 300,
+        }
+    )
     rate = models.FloatField(
         default=0.0,
         validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],
