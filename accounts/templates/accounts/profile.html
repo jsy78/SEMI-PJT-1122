@@ -5,38 +5,68 @@
 {% endblock css %}
 
 {% block content %}
-<div class="background">
-    <div class="container">
-        <div class="personal-info">
-            <img src="https://hungrito.com/wp-content/uploads/2021/03/FEATURED-IMAGE.jpg" alt="프로필 사진">
-            <div class="info-letter">
-                <div class="info-upper">
-                    <p>아이디</p>
-                    <button type="submit" class="edit-button">회원 정보 수정</button>
-                </div>
-                <div class="info-lower">
-                    <p class="follow">팔로우 (여기 숫자)</p>
-                    <p class="follower">팔로워 (여기 숫자)</p>
-                </div>
+<div class="container">
+
+    <!-- 메뉴 위 상단 부분 -->
+    <div class="personal-info">
+        <img src="https://hungrito.com/wp-content/uploads/2021/03/FEATURED-IMAGE.jpg" alt="프로필 사진">
+        <div class="info-letter">
+            <div class="info-upper">
+                <p>아이디</p>
+                <button type="submit" class="edit-button">회원 정보 수정</button>
+                <!-- {% if not 자신의 프로필 }
+                <button type="submit" class="follow-button">팔로우</button>-->
+            </div>
+            <div class="info-lower">
+                <p class="follow">팔로우 (여기 숫자)</p>
+                <p class="follower">팔로워 (여기 숫자)</p>
             </div>
         </div>
-        <hr>
-        <div class="personal-cate">
-            <p>작성한 글</p>
-            <p>즐겨찾기 한 글</p>
-            <p>좋아요 한 글</p>
-        </div>
-        <hr>
-        <div class="personal-img">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-        </div>
-        <button type="" class="more">더보기</button>
+    </div>
 
+    <!-- 메뉴 -->
+    <ul class="personal-tabs">
+        <li class="active" rel="tab1">작성한 글</li>
+        <li class="li" rel="tab2">즐겨찾기한 글</li>
+        <li class="li" rel="tab3">좋아요한 글</li>
+    </ul>
+
+    <!-- 메뉴 내용 -->
+    <div class="tab-container">
+        <div id="tab1" class="tab-content">
+            <img src="https://placeimg.com/363/363/animal" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <button type="" class="more">더보기</button>
+        </div>
+
+        <div id="tab2" class="tab-content">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <button type="" class="more">더보기</button>
+        </div>
+
+        <div id="tab3" class="tab-content">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+            <button type="" class="more">더보기</button>
+        </div>
     </div>
 </div>
 {% endblock content %}
+
+{% block js %}
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="{% static 'accounts/js/profile.js' %}"></script>
+{% endblock js %}
