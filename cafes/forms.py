@@ -1,8 +1,19 @@
 from django import forms
+from froala_editor.widgets import FroalaEditor
 from .models import Article, Review, Comment
 
 
 class ArticleForm(forms.ModelForm):
+    menu = forms.CharField(
+        label="메뉴",
+        widget=FroalaEditor(
+            options={
+                "toolbarSticky": False,
+                "heightMin": 200,
+            }
+        ),
+    )
+
     class Meta:
         model = Article
         fields = [
@@ -16,7 +27,7 @@ class ArticleForm(forms.ModelForm):
             "menu",
             "parking",
             "dayoff",
-            "category",
+            "cafeType",
             "image",
         ]
         labels = {
@@ -30,12 +41,44 @@ class ArticleForm(forms.ModelForm):
             "menu": "메뉴",
             "parking": "주차",
             "dayoff": "휴일",
-            "category": "분류",
+            "cafeType": "분류",
             "image": "사진",
+        }
+        widgets = {
+            "address": forms.TextInput(
+                attrs={
+                    "readonly": "True",
+                }
+            ),
+            "sido": forms.HiddenInput(
+                attrs={
+                    "readonly": "True",
+                }
+            ),
+            "sigungu": forms.HiddenInput(
+                attrs={
+                    "readonly": "True",
+                }
+            ),
+            "roadname": forms.HiddenInput(
+                attrs={
+                    "readonly": "True",
+                }
+            ),
         }
 
 
 class ReviewForm(forms.ModelForm):
+    content = forms.CharField(
+        label="내용",
+        widget=FroalaEditor(
+            options={
+                "toolbarSticky": False,
+                "heightMin": 300,
+            }
+        ),
+    )
+
     class Meta:
         model = Review
         fields = [

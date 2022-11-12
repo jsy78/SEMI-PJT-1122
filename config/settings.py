@@ -40,6 +40,7 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     "accounts",
     "cafes",
+    "froala_editor",
     "imagekit",
     "debug_toolbar",
     "django_extensions",

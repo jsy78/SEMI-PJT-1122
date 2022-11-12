@@ -19,7 +19,7 @@ def index(request):
 
 @require_safe
 def category(request, article_category):
-    articles = Article.objects.filter(category=article_category).order_by("-pk")
+    articles = Article.objects.filter(cafeType=article_category).order_by("-pk")
     context = {
         "articles": articles,
     }
@@ -44,7 +44,7 @@ def cafe_detail(request, article_pk):
     return render(request, "cafes/cafe_detail.html", context)
 
 
-@login_required
+
 @require_http_methods(["GET", "POST"])
 def cafe_create(request):
     if request.method == "POST":
