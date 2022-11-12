@@ -29,7 +29,3 @@ def login(request):
         form = AuthenticationForm()
     context = {"form": form}
     return render(request, "accounts/login.html", context)
-
-
-def profile(request):
-    return render(request, "accounts/profile.html")
