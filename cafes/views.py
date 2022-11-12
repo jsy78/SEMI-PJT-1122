@@ -44,7 +44,7 @@ def cafe_detail(request, article_pk):
     return render(request, "cafes/cafe_detail.html", context)
 
 
-
+@login_required
 @require_http_methods(["GET", "POST"])
 def cafe_create(request):
     if request.method == "POST":
