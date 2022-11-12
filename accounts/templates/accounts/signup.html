@@ -8,13 +8,11 @@
 {% endblock css %}
 
 {% block content %}
-<div class="background">
-    <div class="bg-effect">
-        <form action="" method="POST" class="signup-form">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <button type="submit" class="signup-button">회원가입</button>
-        </form>
-    </div>
+<div class="bg-effect">
+    <form action="" method="POST" class="signup-form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="signup-button">회원가입</button>
+    </form>
 </div>
 {% endblock content %}
