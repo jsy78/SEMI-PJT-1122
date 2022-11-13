@@ -5,7 +5,10 @@ from imagekit.processors import Thumbnail
 
 # Create your models here.
 class User(AbstractUser):
-    address = models.TextField()
+    address = models.CharField(max_length=80)
+    sido = models.CharField(max_length=20)
+    sigungu = models.CharField(max_length=30)
+    roadname = models.CharField(max_length=20)
     role = models.CharField(max_length=20)
     profile = ProcessedImageField(
         upload_to="images/profile",
