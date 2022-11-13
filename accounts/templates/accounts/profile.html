@@ -9,17 +9,28 @@
 
     <!-- 메뉴 위 상단 부분 -->
     <div class="personal-info">
-        <img src="https://hungrito.com/wp-content/uploads/2021/03/FEATURED-IMAGE.jpg" alt="프로필 사진">
+        {% if .user.image %}
+        <img src="{{ .user.image.url }}" alt="직접 설정해둔 프로필 사진">
+        {% else %}
+        <img src="https://hungrito.com/wp-content/uploads/2021/03/FEATURED-IMAGE.jpg" alt="기본 프로필 사진">
+        {% endif %}
         <div class="info-letter">
             <div class="info-upper">
-                <p>아이디</p>
+                <!-- 선택한 user의 아이디가 보임(자신의 아이디 X) -->
+                <p>{{ .user }}</p>
+                <!-- 로그인 하면 버튼이 보임 -->
+                {% if .user.is_authenticated %}
+                <button type="submit" class="follow-button">팔로우</button>
+                <!-- 만약 profile이 자신의 것이라면 회원 정보 수정 버튼이 보임 -->
+                {% if .user == .user %}
                 <button type="submit" class="edit-button">회원 정보 수정</button>
-                <!-- {% if not 자신의 프로필 }
-                <button type="submit" class="follow-button">팔로우</button>-->
+                {% endif %}
+                {% endif %}
             </div>
             <div class="info-lower">
-                <p class="follow">팔로우 (여기 숫자)</p>
-                <p class="follower">팔로워 (여기 숫자)</p>
+                <!-- 팔로우/팔로워 숫자가 카운트 됨 -->
+                <p class="follow">팔로우 {{ .user.followings.count }}</p>
+                <p class="follower">팔로워 {{ .user.followers.all|length }}</p>
             </div>
         </div>
     </div>
