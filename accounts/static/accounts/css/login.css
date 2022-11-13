@@ -10,17 +10,17 @@ body {
 .bg-effect {
     background-color: rgba(217, 217, 217, 0.28);
     height: 100%;
-    padding-bottom: 20.7rem;
+    padding-bottom: 12rem;
     margin: auto;
-    width: 100%;
+    width: 90%;
 }
 
 
 /* 폼 사이즈 조절 */
 form {
     margin: auto;
-    padding-top: 33%;
-    width: 70%;
+    padding-top: 22%;
+    width: 55%;
 }
 
 

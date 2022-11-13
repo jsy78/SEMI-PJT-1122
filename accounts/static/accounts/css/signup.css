@@ -10,9 +10,9 @@ body {
 .bg-effect {
     background-color: rgba(217, 217, 217, 0.28);
     height: 100%;
-    padding-bottom: 10rem;
+    padding-bottom: 3rem;
     margin: auto;
-    width: 100%;
+    width: 90%;
 }
 
 
@@ -20,7 +20,7 @@ body {
 form {
     margin: auto;
     padding-top: 10%;
-    width: 65%;
+    width: 55%;
 }
 
 
