@@ -14,6 +14,9 @@ class CustomUserCreationForm(UserCreationForm):
         fields = (
             "username",
             "address",
+            "sido",
+            "sigungu",
+            "roadname",
             "email",
             "profile",
             "first_name",
@@ -22,10 +25,35 @@ class CustomUserCreationForm(UserCreationForm):
         labels = {
             "username": "아이디",
             "address": "주소",
+            "sido": "시/도",
+            "sigungu": "시/군/구",
+            "roadname": "도로명",
             "email": "이메일",
             "profile": "프로필 이미지",
             "first_name": "이름",
             "last_name": "성",
+        }
+        widgets = {
+            "address": forms.TextInput(
+                attrs={
+                    "readonly": "True",
+                }
+            ),
+            "sido": forms.HiddenInput(
+                attrs={
+                    "readonly": "True",
+                }
+            ),
+            "sigungu": forms.HiddenInput(
+                attrs={
+                    "readonly": "True",
+                }
+            ),
+            "roadname": forms.HiddenInput(
+                attrs={
+                    "readonly": "True",
+                }
+            ),
         }
 
     def clean_username(self):
@@ -50,6 +78,9 @@ class CustomUserChangeForm(UserChangeForm):
         model = get_user_model()
         fields = (
             "address",
+            "sido",
+            "sigungu",
+            "roadname",
             "email",
             "role",
             "profile",
@@ -58,11 +89,36 @@ class CustomUserChangeForm(UserChangeForm):
         )
         labels = {
             "address": "주소",
+            "sido": "시/도",
+            "sigungu": "시/군/구",
+            "roadname": "도로명",
             "email": "이메일",
             "role": "역할",
             "profile": "프로필 이미지",
             "first_name": "이름",
             "last_name": "성",
+        }
+        widgets = {
+            "address": forms.TextInput(
+                attrs={
+                    "readonly": "True",
+                }
+            ),
+            "sido": forms.HiddenInput(
+                attrs={
+                    "readonly": "True",
+                }
+            ),
+            "sigungu": forms.HiddenInput(
+                attrs={
+                    "readonly": "True",
+                }
+            ),
+            "roadname": forms.HiddenInput(
+                attrs={
+                    "readonly": "True",
+                }
+            ),
         }
 
     def clean_email(self):
