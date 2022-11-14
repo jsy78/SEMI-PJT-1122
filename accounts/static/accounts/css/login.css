@@ -34,8 +34,8 @@ body {
     padding: 0.7rem;
 }
 
-.login-form .form-text {
-    color: #b8b8b8;
+.login-form .form-control::placeholder {
+    font-size: 0.9rem;
 }
 
 

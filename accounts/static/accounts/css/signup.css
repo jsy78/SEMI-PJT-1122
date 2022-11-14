@@ -34,8 +34,13 @@ body {
     padding: 0.7rem;
 }
 
+.signup-form .form-control::placeholder {
+    font-size: 0.9rem;
+}
+
 .signup-form .form-text {
     color: #b8b8b8;
+    font-size: 0.8rem;
 }
 
 
