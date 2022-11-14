@@ -3,7 +3,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import get_user_model
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
+from django.contrib import messages
 
 
 def signup(request):
@@ -45,4 +46,15 @@ def profile(request, username):
 
 
 def update(request):
-    return render(request, "accounts/update.html")
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "프로필 정보가 성공적으로 변경되었습니다.")
+            return redirect("accounts:detail", request.user.pk)
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+    context = {
+        "form": form,
+    }
+    return render(request, "accounts/update.html", context=context)

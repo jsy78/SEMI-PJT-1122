@@ -9,8 +9,8 @@
     <!-- 메뉴 위 상단 부분 -->
     <div class="personal-info">
         <!-- 프로필 사진이 설정되어 있으면 프로필 사진을 띄움 -->
-        {% if user.image %}
-        <img src="{{ user.image.url }}" alt="직접 설정해둔 프로필 사진">
+        {% if user.profile %}
+        <img src="{{ user.profile.url }}" alt="직접 설정해둔 프로필 사진">
         {% else %}
         <img src="https://hungrito.com/wp-content/uploads/2021/03/FEATURED-IMAGE.jpg" alt="기본 프로필 사진">
         {% endif %}
@@ -27,7 +27,8 @@
                 {% else %}
                 <!-- 팔로우 버튼 -->
                 {% if request.user != user %}
-                <form action="{% url 'accounts:follow' %}" method='POST'>
+                <!-- % url 'accounts:follow'로 업데이트 % -->
+                <form action="#" method='POST'>
                     {% csrf_token %}
                     {% if request.user in user.followers.all %}
                     <input type="submit" value='팔로우 취소' class="follow-button">
