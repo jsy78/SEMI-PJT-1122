@@ -42,3 +42,7 @@ def profile(request, username):
         "user": user,
     }
     return render(request, "accounts/profile.html", context)
+
+
+def update(request):
+    return render(request, "accounts/update.html")
