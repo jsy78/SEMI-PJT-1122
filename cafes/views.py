@@ -2,7 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST, require_safe, require_http_methods
+from django.views.decorators.http import (
+    require_POST,
+    require_safe,
+    require_http_methods,
+)
 from django.db.models import Prefetch, Q
 from .models import Article, Review, Comment
 from .forms import ArticleForm, ReviewForm, CommentForm, ReplyForm
@@ -142,7 +146,9 @@ def cafe_search(request):
     if "q" in request.GET:
         query = request.GET.get("q")
         article = Article.objects.order_by("-pk").filter(
-            Q(name__contains=query) | Q(address__contains=query) | Q(menu__contains=query)
+            Q(name__contains=query)
+            | Q(address__contains=query)
+            | Q(menu__contains=query)
         )
     context = {
         "article": article,
