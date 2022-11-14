@@ -10,7 +10,7 @@ body {
 /* 전체 여백 */
 .container {
     margin: auto;
-    width: 80%;
+    width: 51%;
 }
 
 
@@ -18,7 +18,7 @@ body {
 .personal-info {
     align-items: center;
     display: flex;
-    padding: 10rem 0 4rem;
+    padding: 20% 0 4rem;
 }
 
 
@@ -38,8 +38,54 @@ body {
 }
 
 
+/* 폼 사이즈 조절 */
+.update-form {
+    margin: auto;
+}
+
+
+/* 폼 조절 */
+.update-form .form-label {
+    color: #ffffff;
+    margin-top: 1.5rem;
+}
+
+.update-form .form-control {
+    padding: 0.7rem;
+}
+
+.update-form .form-control::placeholder {
+    font-size: 0.9rem;
+}
+
+.update-form .form-text {
+    color: #b8b8b8;
+    font-size: 0.8rem;
+}
+
+.update-form .form-text a {
+    color: #ECE7B4;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.form-control-static {
+    color: #e2e2e2;
+    font-size: 0.9rem;
+}
+
+
 /* 회원 탈퇴 */
-.update-form a {
+.delete {
+    color: #AA4A4A;
+    display: flex;
+    font-size: 0.85rem;
+    justify-content: flex-end;
+    text-decoration: none;
+}
+
+.delete:hover {
     color: #AA4A4A;
     display: flex;
     font-size: 0.85rem;
