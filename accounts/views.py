@@ -29,12 +29,16 @@ def login(request):
             return redirect(request.GET.get("next") or "main")
     else:
         form = AuthenticationForm()
-    context = {"form": form}
+    context = {
+        "form": form,
+    }
     return render(request, "accounts/login.html", context)
 
 
 def profile(request, username):
     User = get_user_model()
     user = get_object_or_404(User, username=username)
-    context = {"user": user}
+    context = {
+        "user": user,
+    }
     return render(request, "accounts/profile.html", context)
