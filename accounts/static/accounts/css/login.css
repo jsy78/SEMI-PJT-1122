@@ -17,7 +17,7 @@ body {
 
 
 /* 폼 사이즈 조절 */
-form {
+.login-form {
     margin: auto;
     padding-top: 22%;
     width: 55%;
@@ -25,28 +25,28 @@ form {
 
 
 /* 폼 조절 */
-.form-label {
+.login-form .form-label {
     color: #ffffff;
     margin-top: 1.5rem;
 }
 
-.form-control {
+.login-form .form-control {
     padding: 0.7rem;
 }
 
-.form-text {
-    color: #b8b8b8;
+.login-form .form-control::placeholder {
+    font-size: 0.9rem;
 }
 
 
 /* 회원이 아니신가요? */
-.go-signup {
+.login-form .go-signup {
     display: flex;
     justify-content: center;
     margin: auto;
 }
 
-.go-signup a {
+.login-form .go-signup a {
     color: #ffffff;
     opacity: 50%;
     text-decoration: none;
@@ -54,7 +54,7 @@ form {
 
 
 /* 로그인 버튼 */
-.login-button {
+.login-form .login-button {
     align-items: center;
     background-color: #ECE7B4;
     border: none;
