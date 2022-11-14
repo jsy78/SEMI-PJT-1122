@@ -17,7 +17,7 @@ body {
 
 
 /* 폼 사이즈 조절 */
-form {
+.signup-form {
     margin: auto;
     padding-top: 10%;
     width: 55%;
@@ -25,22 +25,22 @@ form {
 
 
 /* 폼 조절 */
-.form-label {
+.signup-form .form-label {
     color: #ffffff;
     margin-top: 1.5rem;
 }
 
-.form-control {
+.signup-form .form-control {
     padding: 0.7rem;
 }
 
-.form-text {
+.signup-form .form-text {
     color: #b8b8b8;
 }
 
 
 /* 회원가입 버튼 */
-.signup-button {
+.signup-form .signup-button {
     align-items: center;
     background-color: #ECE7B4;
     border: none;
