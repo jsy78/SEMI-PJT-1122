@@ -36,5 +36,11 @@ def login(request):
 def profile(request, username):
     User = get_user_model()
     user = get_object_or_404(User, username=username)
-    context = {"user": user}
+    context = {
+        "user": user,
+    }
     return render(request, "accounts/profile.html", context)
+
+
+def update(request):
+    return render(request, "accounts/update.html")
