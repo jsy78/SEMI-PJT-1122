@@ -8,6 +8,7 @@
 <div class="container">
     <!-- 메뉴 위 상단 부분 -->
     <div class="personal-info">
+        <!-- 프로필 사진이 설정되어 있으면 프로필 사진을 띄움 -->
         {% if user.image %}
         <img src="{{ user.image.url }}" alt="직접 설정해둔 프로필 사진">
         {% else %}
@@ -16,11 +17,25 @@
         <div class="info-letter">
             <div class="info-upper">
                 <p>{{ user }}</p>
+                <!-- 로그인 했을 경우 버튼이 뜸-->
                 {% if request.user.is_authenticated %}
+                <!-- 회원정보 수정 -->
                 {% if user == request.user %}
-                <button type="submit" class="edit-button">회원 정보 수정</button>
+                <button type="submit" class="edit-button" onclick="location.href='{% url 'accounts:update' %}'">
+                    회원정보 수정
+                </button>
                 {% else %}
-                <button type="submit" class="follow-button">팔로우</button>
+                <!-- 팔로우 버튼 -->
+                {% if request.user != user %}
+                <form action="{% url 'accounts:follow' %}" method='POST'>
+                    {% csrf_token %}
+                    {% if request.user in user.followers.all %}
+                    <input type="submit" value='팔로우 취소' class="follow-button">
+                    {% else %}
+                    <input type="submit" value='팔로우' class="follow-button">
+                    {% endif %}
+                </form>
+                {% endif %}
                 {% endif %}
                 {% endif %}
             </div>
