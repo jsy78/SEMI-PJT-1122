@@ -11,5 +11,5 @@ urlpatterns = [
     # path("password/", views.password, name="password"),
     # path("delete/", views.delete, name="delete"),
     # path("follow/<username>/", views.follow, name="follow"),
-    # path("profile/<username>/", views.profile, name="profile"),
+    path("profile/<username>/", views.profile, name="profile"),
 ]
