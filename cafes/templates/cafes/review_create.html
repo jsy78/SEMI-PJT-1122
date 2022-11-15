@@ -1,18 +1,12 @@
-{% extends 'base.html' %} {% load django_bootstrap5 %} {% load static %} {%block content %} {% bootstrap_javascript %}
-<h1>카페이름은 어떠셨나요?</h1>
- 내용
-<div class="review_contents">
-	<div class="warning_msg">
-		5자 이상으로 작성해 주세요.
-	</div>
-	<textarea class="review_textarea w-100"></textarea>
-</div>
-<div class="">
-	<label for="exampleFormControlInput1" class="form-label">이미지</label>
-	<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="이미지"/>
-</div>
+{% comment %} 
+{% extends 'base.html' %} 
+
+{% load django_bootstrap5 %} 
+{% load static %} 
+
+{% block css %}
 <style>
-  .rating .rate_radio + label {
+.rating .rate_radio + label {
     position: relative;
     display: inline-block;
     margin-left: -4px;
@@ -77,6 +71,22 @@
   border: 1px solid #e0e0e0;
 }
 </style>
+{% endblock css %}
+
+{% block content %} 
+<h1>카페이름은 어떠셨나요?</h1>
+ 내용
+<div class="review_contents">
+	<div class="warning_msg">
+		5자 이상으로 작성해 주세요.
+	</div>
+	<textarea class="review_textarea w-100"></textarea>
+</div>
+<div class="">
+	<label for="exampleFormControlInput1" class="form-label">이미지</label>
+	<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="이미지"/>
+</div>
+
 <div class="wrap">
 	<h1>점수</h1>
 	<form name="reviewform" class="reviewform" method="post" action="/save">
@@ -104,61 +114,65 @@
 		</div>
 	</form>
 </div>
+{% endblock content %}
+
+{% block js %}
 <script>
-function Rating(){};
-Rating.prototype.rate = 0;
-Rating.prototype.setRate = function(newrate){
-    this.rate = newrate;
-    let items = document.querySelectorAll('.rate_radio');
-    items.forEach(function(item, idx){
-        if(idx < newrate){
-            item.checked = true;
-        }else{
-            item.checked = false;
+  function Rating(){};
+  Rating.prototype.rate = 0;
+  Rating.prototype.setRate = function(newrate){
+      this.rate = newrate;
+      let items = document.querySelectorAll('.rate_radio');
+      items.forEach(function(item, idx){
+          if(idx < newrate){
+              item.checked = true;
+          }else{
+              item.checked = false;
+          }
+      });
+  }
+  let rating = new Rating();
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelector('.rating').addEventListener('click',function(e){
+        let elem = e.target;
+        if(elem.classList.contains('rate_radio')){
+            rating.setRate(parseInt(elem.value));
         }
-    });
-}
-let rating = new Rating();
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelector('.rating').addEventListener('click',function(e){
-      let elem = e.target;
-      if(elem.classList.contains('rate_radio')){
-          rating.setRate(parseInt(elem.value));
-      }
-  })
-});
-document.querySelector('.review_textarea').addEventListener('keydown',function(){
-  let review = document.querySelector('.review_textarea');
-  let lengthCheckEx = /^.{400,}$/;
-  if(lengthCheckEx.test(review.value)){
-      review.value = review.value.substr(0,400);
+    })
+  });
+  document.querySelector('.review_textarea').addEventListener('keydown',function(){
+    let review = document.querySelector('.review_textarea');
+    let lengthCheckEx = /^.{400,}$/;
+    if(lengthCheckEx.test(review.value)){
+        review.value = review.value.substr(0,400);
+    }
+  });
+  document.querySelector('#save').addEventListener('click', function(e){
+    if(rating.rate == 0){
+        rating.showMessage('rate');
+        return false;
+    }
+    if(document.querySelector('.review_textarea').value.length < 5){
+        rating.showMessage('review');
+        return false;
+    }
+  });
+  Rating.prototype.showMessage = function(type){
+    switch(type){
+        case 'rate':
+            document.querySelector('.review_rating .warning_msg').style.display = 'block';
+            setTimeout(function(){
+                document.querySelector('.review_rating .warning_msg').style.display = 'none';
+            },1000);            
+            break;
+        case 'review':
+            document.querySelector('.review_contents .warning_msg').style.display = 'block';
+            setTimeout(function(){
+                document.querySelector('.review_contents .warning_msg').style.display = 'none';
+            },1000);    
+            break;
+    }
   }
-});
-document.querySelector('#save').addEventListener('click', function(e){
-  if(rating.rate == 0){
-      rating.showMessage('rate');
-      return false;
-  }
-  if(document.querySelector('.review_textarea').value.length < 5){
-      rating.showMessage('review');
-      return false;
-  }
-});
-Rating.prototype.showMessage = function(type){
-  switch(type){
-      case 'rate':
-          document.querySelector('.review_rating .warning_msg').style.display = 'block';
-          setTimeout(function(){
-              document.querySelector('.review_rating .warning_msg').style.display = 'none';
-          },1000);            
-          break;
-      case 'review':
-          document.querySelector('.review_contents .warning_msg').style.display = 'block';
-          setTimeout(function(){
-              document.querySelector('.review_contents .warning_msg').style.display = 'none';
-          },1000);    
-          break;
-  }
-}
-</script>
-{% block js %}{% endblock js %} {% endblock %}
+  </script>
+{% endblock js %} 
+{% endcomment %}
