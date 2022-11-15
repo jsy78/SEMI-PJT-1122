@@ -5,7 +5,7 @@ app_name = "cafes"
 
 urlpatterns = [
     # path("", views.index, name="index"),
-    # path("category/<article_category>/", views.category, name="category"),
+    path("category/<article_category>/", views.category, name="category"),
     path("<int:article_pk>/", views.cafe_detail, name="cafe_detail"),
     path("cafe_create/", views.cafe_create, name="cafe_create"),
     path("<int:article_pk>/cafe_update/", views.cafe_update, name="cafe_update"),
