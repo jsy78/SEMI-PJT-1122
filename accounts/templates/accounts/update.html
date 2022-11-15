@@ -16,14 +16,14 @@
   {% endif %}
   <p>{{ request.user }}</p>
 </div>
-<div class="update-form">
+<div class="update">
   <form action="" method="POST" enctype="multipart/form-data" class="update-form">
     {% csrf_token %}
     {% bootstrap_form form %}
     <!-- % url 'accounts:delete' % 로 연결 -->
     <a href="#" class="delete">회원 탈퇴</a>
     <div class="buttons">
-      <input type="submit" value="수정" class="update-button" />
+      <button type="submit" class="update-button">수정</button>
       <!-- % url 'accounts:profile' username % 로 연결-->
       <button type="button" class="back-button" onclick="location.href='#'">취소</button>
   </form>

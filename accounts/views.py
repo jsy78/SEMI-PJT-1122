@@ -65,7 +65,7 @@ def update(request):
         if form.is_valid():
             form.save()
             messages.success(request, "프로필 정보가 성공적으로 변경되었습니다.")
-            return redirect("accounts:detail", request.user.pk)
+            return redirect("accounts:profile", request.username)
     else:
         form = CustomUserChangeForm(instance=request.user)
     context = {
@@ -74,13 +74,16 @@ def update(request):
     return render(request, "accounts/update.html", context=context)
 
 
+
+@login_required
 def password(request):
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
-        if form.is_vaild():
-            user = form.save()
-            update_session_auth_hash(request, user)
-            return redirect(request.GET.get("next") or "main")
+        if form.is_valid():
+            form.save()
+            messages.success(request, "비밀번호 변경이 성공적으로 완료되었습니다.")
+            messages.warning(request, "새로 로그인해주세요.")
+            return redirect("accounts:login")
     else:
         form = PasswordChangeForm(request.user)
     context = {
@@ -94,3 +97,4 @@ def delete(request):
     request.user.delete()
     auth_logout(request)
     return redirect("accounts:login")
+
