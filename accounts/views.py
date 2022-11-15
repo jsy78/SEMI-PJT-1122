@@ -5,11 +5,12 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import get_user_model
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def signup(request):
     if request.method == "POST":
-        form = CustomUserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             # return redirect("cafes:index")
@@ -45,6 +46,18 @@ def profile(request, username):
     return render(request, "accounts/profile.html", context)
 
 
+@login_required
+def follow(request, username):
+    user = get_object_or_404(get_user_model(), username=username)
+    if user != request.user:
+        if user.followers.filter(username=request.user.username).exists():
+            user.followers.remove(request.user)
+        else:
+            user.followers.add(request.user)
+    return redirect("accounts:profile", user.username)
+
+
+@login_required
 def update(request):
     if request.method == "POST":
         form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
