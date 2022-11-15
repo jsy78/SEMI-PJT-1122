@@ -1,25 +1,28 @@
-{% extends 'base.html' %} {% load django_bootstrap5 %} {% load static %} {% block css %} {{ form.media }}
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block css %}
+{{ form.media }}
 <link rel="stylesheet" href="{% static 'cafes/css/article_form.css' %}" />
-{% endblock css %} {% block content %}
+{% endblock css %}
+
+{% block content %}
 <div class="container">
   <div class="welcome-text">
     {% if request.resolver_match.url_name == "cafe_create" %}
-      <p>
-        <span class="cafe-name">{{ name }}</span>에 대해 알려주세요!
-      </p>
+    <p>
+      <span class="cafe-name">{{ name }}</span>에 대해 알려주세요!
+    </p>
     {% elif request.resolver_match.url_name == "cafe_update" %}
-       <p>
-         <span class="cafe-name">{{ name }}</span>의 바뀐 점을 알려주세요!
-       </p>
+    <p>
+      <span class="cafe-name">{{ name }}</span>의 바뀐 점을 알려주세요!
+    </p>
     {% endif %}
   </div>
-  <form
-    action=""
-    method="POST"
-    enctype="multipart/form-data"
-    class="c-create-form"
-  >
-    {% csrf_token %} {% bootstrap_form form %}
+  <form action="" method="POST" enctype="multipart/form-data" class="c-create">
+    {% csrf_token %}
+    {% bootstrap_form form %}
     <div class="buttons">
       <button type="submit" class="c-create-button">작성</button>
       <!-- 취소는 detail 페이지로 이동해야 함 url cafes:cafe_detail? -->
@@ -29,14 +32,14 @@
     </div>
   </form>
 </div>
-{% endblock content %} {% block js %}
+{% endblock content %}
+
+{% block js %}
 <!-- 주소 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- 지도 API -->
-<script
-  type="text/javascript"
-  src="//dapi.kakao.com/v2/maps/sdk.js?appkey={% include 'cafes/appkey.txt' %}&libraries=services"
-></script>
+<script type="text/javascript"
+  src="//dapi.kakao.com/v2/maps/sdk.js?appkey={% include 'cafes/appkey.txt' %}&libraries=services"></script>
 <script>
   document
     .querySelectorAll(".mb-3")
