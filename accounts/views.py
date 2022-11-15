@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import get_user_model
@@ -71,3 +72,10 @@ def update(request):
         "form": form,
     }
     return render(request, "accounts/update.html", context=context)
+
+
+@login_required
+def delete(request):
+    request.user.delete()
+    auth_logout(request)
+    return redirect("accounts:login")
