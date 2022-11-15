@@ -1,14 +1,23 @@
-{% load django_bootstrap5 %} {% load static %} {% bootstrap_javascript %} {% block content %} {% block css %}
-<link rel="stylesheet" href="static/cafes/css/detail.css">
+{% extends 'base.html' %}
+
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'cafes/css/detail.css' %}">
 {% endblock css %}
-<h2>{{article.name}}</h2>
-조회수 좋아요 북마크 공유
-<p class="text-end">
-	{% if request.user == article.user %}
-<div class="d-flex justify-content-end">
-	<a href="{% url 'cafes:cafe_update' article.pk %}" class="btn btn-warning">수정</a>
+
+{% block content %}
+<div class="cafes-upper">
+	<h2>{{article.name}}</h2>
+	조회수 좋아요 북마크 공유
+	<p class="text-end">
+		{% if request.user == article.user %}
+	<div class="d-flex justify-content-end">
+		<a href="{% url 'cafes:cafe_update' article.pk %}" class="btn btn-warning">수정</a>
+	</div>
+	{% endif %}
 </div>
-{% endif %}
 </p>
 {% comment %} <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 	<div class="carousel-inner">
