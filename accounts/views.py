@@ -70,7 +70,7 @@ def update(request):
     context = {
         "form": form,
     }
-    return render(request, "accounts/update.html", context=context)
+    return render(request, "accounts/update.html", context)
 
 
 @login_required
