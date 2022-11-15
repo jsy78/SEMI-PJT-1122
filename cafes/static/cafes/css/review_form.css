@@ -14,7 +14,7 @@ body {
 }
 
 
-/* (카페 이름)에 대해 알려주세요! */
+/* (카페 이름)은 어떠셨나요 */
 .welcome-text {
     color: #ffffff;
     font-size: 1.8rem;
@@ -28,22 +28,22 @@ body {
 
 
 /* 폼 사이즈 조절 */
-.c-create {
+.r-create {
     margin: auto;
 }
 
 
 /* 폼 조절 */
-.c-create .form-label {
+.r-create .form-label {
     color: #ffffff;
     margin-top: 1.5rem;
 }
 
-.c-create .form-control {
+.r-create .form-control {
     padding: 0.7rem;
 }
 
-.c-create .form-control::placeholder {
+.r-create .form-control::placeholder {
     font-size: 0.9rem;
 }
 
@@ -76,7 +76,7 @@ body {
 
 
 /* 수정 버튼 */
-.c-create-button {
+.r-create-button {
     align-items: center;
     background-color: #ECE7B4;
     border: none;
