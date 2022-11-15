@@ -1,180 +1,41 @@
-{% extends 'base.html' %} {% load django_bootstrap5 %} {% load static %} {% bootstrap_javascript %} {% block content %} {% block css %}
+{% extends 'base.html' %} 
+
+{% load django_bootstrap5 %} 
+{% load static %} 
+
+{% block css %}
 <link rel="stylesheet" href="static/cafes/css/detail.css">
- {% endblock css %}
-<h2>카페 이름</h2>
- 조회수 좋아요 북마크 공유
-<p class="text-end">
-	<button>수정</button>
-</p>
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-	<div class="carousel-inner">
-		<div class="carousel-item active">
-			<img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="w-100 height=400px' "/>
-		</div>
-		<div class="carousel-item">
-			<img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="d-block w-100 " alt="..."/>
-		</div>
-		<div class="carousel-item">
-			<img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="d-block w-100" alt="..."/>
-		</div>
-	</div>
-	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	<span class="visually-hidden">Previous</span>
-	</button>
-	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-	<span class="visually-hidden">Next</span>
-	</button>
-</div>
-<div class="row mt-5 container">
-	<div class="row col-sm-9">
-		<div class="card">
-			<div class="card-body">
-				<div class="card-body">
-					<p>
-						 주소
-					</p>
-					<html>
-					<head>
-					<meta charset="utf-8">
-					<title>좌표로 주소를 얻어내기</title>
-					<style>
-                        .map_wrap {position:relative;width:100%;height:350px;}
-                        .title {font-weight:bold;display:block;}
-                        .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
-                        #centerAddr {display:block;margin-top:2px;font-weight: normal;}
-                        .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-					</style>
-					</head>
-					<body>
-					<div class="map_wrap">
-						<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;">
-						</div>
-						<div class="hAddr">
-							<span class="title">지도중심기준 행정동 주소정보</span>
-							<span id="centerAddr"></span>
-						</div>
-					</div>
-					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1c71e5e49c9371b541c377c8e93cf1d6&libraries=services"></script>
-					<script>
-                    var mapContainer = document.getElementById('map'), 
-                        mapOption = {
-                            center: new kakao.maps.LatLng(37.566826, 126.9786567),
-                            level: 1 
-                        };  
-                    var map = new kakao.maps.Map(mapContainer, mapOption); 
-                    var geocoder = new kakao.maps.services.Geocoder();
-                    var marker = new kakao.maps.Marker(), 
-                        infowindow = new kakao.maps.InfoWindow({zindex:1}); 
-                    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-                    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-                        searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-                            if (status === kakao.maps.services.Status.OK) {
-                                var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-                                detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-                                var content = '<div class="bAddr">' +
-                                                '<span class="title">법정동 주소정보</span>' + 
-                                                detailAddr + 
-                                            '</div>';
-                                marker.setPosition(mouseEvent.latLng);
-                                marker.setMap(map);
-                                infowindow.setContent(content);
-                                infowindow.open(map, marker);
-                            }   
-                        });
-                    });
-                    kakao.maps.event.addListener(map, 'idle', function() {
-                        searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-                    });
-                    function searchAddrFromCoords(coords, callback) {
-                        geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
-                    }
-                    function searchDetailAddrFromCoords(coords, callback) {
-                        geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-                    }
-                    function displayCenterInfo(result, status) {
-                        if (status === kakao.maps.services.Status.OK) {
-                            var infoDiv = document.getElementById('centerAddr');
-                            for(var i = 0; i < result.length; i++) {
-                                if (result[i].region_type === 'H') {
-                                    infoDiv.innerHTML = result[i].address_name;
-                                    break;
-                                }
-                            }
-                        }    
-                    }
-                    </script>
-					</body>
-					</html>
-					<p>
-						전화번호
-					</p>
-					<p>
-						영업 시간
-					</p>
-					<p>
-						휴일
-					</p>
-					<p>
-						주차
-					</p>
-					<p>
-						메뉴
-					</p>
-					<p>
-						포털검색
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-8 col-md-3 ms-4">
-		<div class="card">
-			<div class="card-body opacity-20">
-				<p>
-					 이 매장이 소개된 테마
-				</p>
-				<img src="https://dummyimage.com/200x200" alt="">
-				<p>
-					브런치가 맛있는 카페
-				</p>
-				<img src="https://dummyimage.com/200x200" alt="">
-				<p>
-					원두부터 맛있는 카페
-				</p>
-				<img src="https://dummyimage.com/200x200" alt="">
-				<p>
-					원두부터 맛있는 카페
-				</p>
-			</div>
-		</div>
-	</div>
-</div>
-<hr>
-<div>
-	<h2>카페 이름 후기
-	<div class="dropdown text-end">
-    <select class="down" onchange="if(this.value) location.href=(this.value);">
-      <option value="" disabled selected>정렬 선택</option>
-      <option value="/new" >최신순</option>
-      <option value="/good">좋아요순</option>
-    </select>
-		<a class="btn btn-primary" href="{}" role="button" aria-expanded="false"> 후기작성</a>
-		</h2>
-		<div class="card w-100">
-			<div class="card-body">
-				<div class="container">
-					<div class="personal-info">
-						 {% if .user.image %} <img src="{{ .user.image.url }}" alt="설정해둔 프로필 사진">
-						{% else %} <img class="" src="https://dummyimage.com/100x100" alt="기본 프로필 사진">
-						{% endif %}
-						<p>
-							닉네임
-						</p>
-						 {% block js %} 평점
-						<style>
-  .rating .rate_radio + label {
+<style>
+.map_wrap {
+	position:relative;
+	width:100%;
+	height:350px;
+}
+.title {
+	font-weight:bold;
+	display:block;
+}
+.hAddr {
+	position:absolute;
+	left:10px;
+	top:10px;
+	border-radius:2px;
+	background:#fff;
+	background:rgba(255,255,255,0.8);
+	z-index:1;
+	padding:5px;}
+#centerAddr {
+	display:block;
+	margin-top:2px;
+	font-weight: normal;
+}
+.bAddr {
+	padding:5px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.rating .rate_radio + label {
     position: relative;
     display: inline-block;
     margin-left: -4px;
@@ -238,7 +99,122 @@
   box-sizing: border-box;
   border: 1px solid #e0e0e0;
 }
-						</style>
+</style>
+{% endblock css %}
+
+{% block content %} 
+<h2>카페 이름</h2>
+ 조회수 좋아요 북마크 공유
+<p class="text-end">
+	<button>수정</button>
+</p>
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="w-100 height=400px' "/>
+		</div>
+		<div class="carousel-item">
+			<img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="d-block w-100 " alt="..."/>
+		</div>
+		<div class="carousel-item">
+			<img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="d-block w-100" alt="..."/>
+		</div>
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+	<span class="visually-hidden">Next</span>
+	</button>
+</div>
+<div class="row mt-5 container">
+	<div class="row col-sm-9">
+		<div class="card">
+			<div class="card-body">
+				<div class="card-body">
+					<p>
+						 주소
+					</p>
+
+					<div class="map_wrap">
+						<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;">
+						</div>
+						<div class="hAddr">
+							<span class="title">지도중심기준 행정동 주소정보</span>
+							<span id="centerAddr"></span>
+						</div>
+					</div>
+
+					<p>
+						전화번호
+					</p>
+					<p>
+						영업 시간
+					</p>
+					<p>
+						휴일
+					</p>
+					<p>
+						주차
+					</p>
+					<p>
+						메뉴
+					</p>
+					<p>
+						포털검색
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-8 col-md-3 ms-4">
+		<div class="card">
+			<div class="card-body opacity-20">
+				<p>
+					 이 매장이 소개된 테마
+				</p>
+				<img src="https://dummyimage.com/200x200" alt="">
+				<p>
+					브런치가 맛있는 카페
+				</p>
+				<img src="https://dummyimage.com/200x200" alt="">
+				<p>
+					원두부터 맛있는 카페
+				</p>
+				<img src="https://dummyimage.com/200x200" alt="">
+				<p>
+					원두부터 맛있는 카페
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<hr>
+<div>
+	<h2>카페 이름 후기
+	<div class="dropdown text-end">
+    <select class="down" onchange="if(this.value) location.href=(this.value);">
+      <option value="" disabled selected>정렬 선택</option>
+      <option value="/new" >최신순</option>
+      <option value="/good">좋아요순</option>
+    </select>
+		<a class="btn btn-primary" href="{}" role="button" aria-expanded="false"> 후기작성</a>
+		</h2>
+		<div class="card w-100">
+			<div class="card-body">
+				<div class="container">
+					<div class="personal-info">
+						 {% if .user.image %} <img src="{{ .user.image.url }}" alt="설정해둔 프로필 사진">
+							{% else %} <img class="" src="https://dummyimage.com/100x100" alt="기본 프로필 사진">
+							{% endif %}
+						<p>
+							닉네임
+						</p>
+						<p>
+						 평점
+						</p>
 						<form name="reviewform" class="reviewform" method="post" action="/save">
 							<input type="hidden" name="rate" id="rate" value="0"/>
 							<div class="review_rating">
@@ -259,63 +235,7 @@
 							</div>
 						</form>
 					</div>
-					<script>
-function Rating(){};
-Rating.prototype.rate = 0;
-Rating.prototype.setRate = function(newrate){
-    this.rate = newrate;
-    let items = document.querySelectorAll('.rate_radio');
-    items.forEach(function(item, idx){
-        if(idx < newrate){
-            item.checked = true;
-        }else{
-            item.checked = false;
-        }
-    });
-}
-let rating = new Rating();
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelector('.rating').addEventListener('click',function(e){
-      let elem = e.target;
-      if(elem.classList.contains('rate_radio')){
-          rating.setRate(parseInt(elem.value));
-      }
-  })
-});
-document.querySelector('.review_textarea').addEventListener('keydown',function(){
-  let review = document.querySelector('.review_textarea');
-  let lengthCheckEx = /^.{400,}$/;
-  if(lengthCheckEx.test(review.value)){
-      review.value = review.value.substr(0,400);
-  }
-});
-document.querySelector('#save').addEventListener('click', function(e){
-  if(rating.rate == 0){
-      rating.showMessage('rate');
-      return false;
-  }
-  if(document.querySelector('.review_textarea').value.length < 5){
-      rating.showMessage('review');
-      return false;
-  }
-});
-Rating.prototype.showMessage = function(type){
-  switch(type){
-      case 'rate':
-          document.querySelector('.review_rating .warning_msg').style.display = 'block';
-          setTimeout(function(){
-              document.querySelector('.review_rating .warning_msg').style.display = 'none';
-          },1000);            
-          break;
-      case 'review':
-          document.querySelector('.review_contents .warning_msg').style.display = 'block';
-          setTimeout(function(){
-              document.querySelector('.review_contents .warning_msg').style.display = 'none';
-          },1000);    
-          break;
-  }
-}
-					</script>
+
 					<textarea class="replyContent" placeholder="댓글 입력" name="" id="" cols="100"></textarea>
 					<p>
 						작성글
@@ -350,5 +270,115 @@ Rating.prototype.showMessage = function(type){
 			</div>
 		</div>
 	</div>
+{% endblock content %}
+
+{% block js %}
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1c71e5e49c9371b541c377c8e93cf1d6&libraries=services"></script>
+<script>
+	var mapContainer = document.getElementById('map'), 
+			mapOption = {
+					center: new kakao.maps.LatLng(37.566826, 126.9786567),
+					level: 1 
+			};  
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	var geocoder = new kakao.maps.services.Geocoder();
+	var marker = new kakao.maps.Marker(), 
+			infowindow = new kakao.maps.InfoWindow({zindex:1}); 
+	searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+			searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+					if (status === kakao.maps.services.Status.OK) {
+							var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+							detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+							var content = '<div class="bAddr">' +
+															'<span class="title">법정동 주소정보</span>' + 
+															detailAddr + 
+													'</div>';
+							marker.setPosition(mouseEvent.latLng);
+							marker.setMap(map);
+							infowindow.setContent(content);
+							infowindow.open(map, marker);
+					}   
+			});
+	});
+	kakao.maps.event.addListener(map, 'idle', function() {
+			searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+	});
+	function searchAddrFromCoords(coords, callback) {
+			geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+	}
+	function searchDetailAddrFromCoords(coords, callback) {
+			geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+	}
+	function displayCenterInfo(result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+					var infoDiv = document.getElementById('centerAddr');
+					for(var i = 0; i < result.length; i++) {
+							if (result[i].region_type === 'H') {
+									infoDiv.innerHTML = result[i].address_name;
+									break;
+							}
+					}
+			}    
+	}
+</script>
+<script>
+	function Rating(){};
+	Rating.prototype.rate = 0;
+	Rating.prototype.setRate = function(newrate){
+			this.rate = newrate;
+			let items = document.querySelectorAll('.rate_radio');
+			items.forEach(function(item, idx){
+					if(idx < newrate){
+							item.checked = true;
+					}else{
+							item.checked = false;
+					}
+			});
+	}
+	let rating = new Rating();
+	document.addEventListener('DOMContentLoaded', function(){
+		document.querySelector('.rating').addEventListener('click',function(e){
+				let elem = e.target;
+				if(elem.classList.contains('rate_radio')){
+						rating.setRate(parseInt(elem.value));
+				}
+		})
+	});
+	document.querySelector('.review_textarea').addEventListener('keydown',function(){
+		let review = document.querySelector('.review_textarea');
+		let lengthCheckEx = /^.{400,}$/;
+		if(lengthCheckEx.test(review.value)){
+				review.value = review.value.substr(0,400);
+		}
+	});
+	document.querySelector('#save').addEventListener('click', function(e){
+		if(rating.rate == 0){
+				rating.showMessage('rate');
+				return false;
+		}
+		if(document.querySelector('.review_textarea').value.length < 5){
+				rating.showMessage('review');
+				return false;
+		}
+	});
+	Rating.prototype.showMessage = function(type){
+		switch(type){
+				case 'rate':
+						document.querySelector('.review_rating .warning_msg').style.display = 'block';
+						setTimeout(function(){
+								document.querySelector('.review_rating .warning_msg').style.display = 'none';
+						},1000);            
+						break;
+				case 'review':
+						document.querySelector('.review_contents .warning_msg').style.display = 'block';
+						setTimeout(function(){
+								document.querySelector('.review_contents .warning_msg').style.display = 'none';
+						},1000);    
+						break;
+		}
+	}
+</script>
 {% endblock js %}
-{% endblock %}
+
+
