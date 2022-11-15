@@ -12,17 +12,17 @@
 <div class="container">
   <div class="welcome-text">
     {% if request.resolver_match.url_name == "cafe_create" %}
-    <p><span class="cafe-name">{{ name }}</span>에 대해 알려주세요!</p>
+    <p><span class="cafe-name">이 카페</span>에 대해 알려주세요!</p>
     {% elif request.resolver_match.url_name == "cafe_update" %}
-    <p><span class="cafe-name">{{ name }}</span>의 바뀐 점을 알려주세요!</p>
+    <p><span class="cafe-name">이 카페</span>의 바뀐 점을 알려주세요!</p>
     {% endif %}
   </div>
-  <form action="" method="POST" enctype="multipart/form-data" class="c-create-form">
+  <form action="" method="POST" enctype="multipart/form-data" class="c-create">
     {% csrf_token %}
     {% bootstrap_form form %}
     <div class="buttons">
       <button type="submit" class="c-create-button">작성</button>
-      <!-- 취소는 detail 페이지로 이동해야 함 url cafes:cafe_detail? -->
+      <!-- 취소 : 카페 생성 버튼? 이 있는 곳으로 이동해야 함 -->
       <button type="button" class="back-button" onclick="location.href='#'">취소</button>
     </div>
   </form>

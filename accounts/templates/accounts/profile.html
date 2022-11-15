@@ -27,8 +27,7 @@
                 {% else %}
                 <!-- 팔로우 버튼 -->
                 {% if request.user != user %}
-                <!-- % url 'accounts:follow'로 업데이트 % -->
-                <form action="#" method='POST'>
+                <form action="{% url 'accounts:follow' user.username %}" method='POST'>
                     {% csrf_token %}
                     {% if request.user in user.followers.all %}
                     <input type="submit" value='팔로우 취소' class="follow-button">

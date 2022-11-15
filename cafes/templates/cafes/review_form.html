@@ -4,24 +4,32 @@
 {% load static %}
 
 {% block css %}
-  {{ form.media }}
+{{ form.media }}
+<link rel="stylesheet" href="{% static 'cafes/css/review_form.css' %}">
 {% endblock css %}
 
 {% block content %}
-  <div class="d-flex justify-content-center">
-    {% if request.resolver_match.url_name == "cafe_create" %}
-      <h1 class="text-center p-3 m-3 fs-3 fw-bold rounded">리뷰 작성</h1>
-    {% elif request.resolver_match.url_name == "cafe_update" %}
-      <h1 class="text-center p-3 m-3 fs-3 fw-bold rounded">리뷰 수정</h1>
+<div class="container">
+  <div class="welcome-text">
+    {% if request.resolver_match.url_name == "review_create" %}
+    <!-- 왜 이름이 안 되지. . . -->
+    <p><span class="cafe-name">{{ article.name }}</span>, 어떠셨나요?</p>
+    {% elif request.resolver_match.url_name == "review_update" %}
+    <p><span class="cafe-name">{{ article.name }}</span>, 어떠셨나요?</p>
     {% endif %}
   </div>
-  <div class="d-flex justify-content-center p-5">
+  <div class="r-create">
     <form action="" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {% bootstrap_form form %}
-      <button class="btn btn-outline-primary form-control mb-3" type="submit">OK</button>
+      <div class="buttons">
+        <button type="submit" class="r-create-button">작성</button>
+        <!-- 취소 : detail 페이지로 이동해야 함 -->
+        <button type="button" class="back-button" onclick="location.href='#'">취소</button>
+      </div>
     </form>
   </div>
+</div>
 {% endblock content %}
 
 {% block js %}
