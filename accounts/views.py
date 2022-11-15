@@ -65,14 +65,13 @@ def update(request):
         if form.is_valid():
             form.save()
             messages.success(request, "프로필 정보가 성공적으로 변경되었습니다.")
-            return redirect("accounts:profile", request.username)
+            return redirect("accounts:profile", request.user.username)
     else:
         form = CustomUserChangeForm(instance=request.user)
     context = {
         "form": form,
     }
     return render(request, "accounts/update.html", context=context)
-
 
 
 @login_required
@@ -97,4 +96,3 @@ def delete(request):
     request.user.delete()
     auth_logout(request)
     return redirect("accounts:login")
-
