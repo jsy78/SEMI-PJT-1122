@@ -27,6 +27,10 @@
       {% block content %}{% endblock content %}
     </div>
 
+    <div class="text-end mx-5 my-5 fixed-bottom">
+      <img src="{% static 'image/top_button.png' %}" alt="top_button" width="70" height="70" style="cursor:pointer;" onclick="window.scrollTo(0,0);">
+    </div>
+
     <!-- footer -->
     {% include "footer.html" %}
 
