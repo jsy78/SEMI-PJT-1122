@@ -14,7 +14,6 @@ def signup(request):
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            # return redirect("cafes:index")
             return redirect("accounts:login")
     else:
         form = CustomUserCreationForm()
@@ -71,7 +70,7 @@ def update(request):
     context = {
         "form": form,
     }
-    return render(request, "accounts/update.html", context=context)
+    return render(request, "accounts/update.html", context)
 
 
 @login_required
@@ -92,7 +91,13 @@ def password(request):
 
 
 @login_required
+def logout(request):
+    auth_logout(request)
+    return redirect("accounts:login")
+
+
+@login_required
 def delete(request):
     request.user.delete()
     auth_logout(request)
-    return redirect("accounts:login")
+    return redirect("main")
