@@ -93,11 +93,11 @@ def password(request):
 @login_required
 def logout(request):
     auth_logout(request)
-    return redirect("main")
+    return redirect("accounts:login")
 
 
 @login_required
 def delete(request):
     request.user.delete()
     auth_logout(request)
-    return redirect("accounts:login")
+    return redirect("main")
