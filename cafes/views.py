@@ -167,7 +167,7 @@ def review_create(request, article_pk):
         if form.is_valid():
             review = form.save(commit=False)
             review.user = request.user
-            review.article = article
+            review.cafe = article
             review.save()
             messages.success(request, "리뷰 작성이 완료되었습니다.")
             return redirect("cafes:cafe_detail", article_pk)
