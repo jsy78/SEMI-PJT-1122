@@ -1,7 +1,7 @@
 {% load static %}
 
 <!-- Nav -->
-<nav class="navbar navbar-dark bg-dark opacity-75 fixed-top" style="z-index: 1;">
+<nav class="navbar navbar-dark bg-dark opacity-75 fixed-top content_block">
   <div class="container-fluid">
     <a class="navbar-brand" href="https://www.starbucks.co.kr/index.do">
       <img src="{% static 'image/starbucks_logo.png' %}" alt="logo" width="75" height="75">
@@ -15,35 +15,43 @@
     </button>
     <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+        {% if request.user.is_authenticated %}
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">안녕하세요 <br> {{ request.user.first_name }} 님!</h5>
+        {% else %}
+        <a class="nav-link fs-3" href="{% url 'accounts:login' %}">로그인</a>
+        {% endif %}
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            {% if request.user.is_authenticated %}
+            <a class="nav-link active" aria-current="page" href="{% url 'accounts:profile' user.username %}">회원 정보</a>
+            {% else %}
+            <a class="nav-link active" aria-current="page" href="{% url 'accounts:signup' %}">회원 가입</a>
+            {% endif %}
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            {% if request.user.is_authenticated %}
+            <a class="nav-link" href="{% url 'accounts:logout' %}">로그아웃</a>
+            {% else %}
+            {% endif %}
           </li>
+          <hr>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
+              테마별 맛집
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="{% url 'cafes:category' '분위기가 좋은' %}">분위기가 좋은</a></li>
+              <li><a class="dropdown-item" href="{% url 'cafes:category' '디저트가 맛있는' %}">디저트가 맛있는</a></li>
+              <li><a class="dropdown-item" href="{% url 'cafes:category' '커피가 맛있는' %}">커피가 맛있는</a></li>
+              <li><a class="dropdown-item" href="{% url 'cafes:category' '작업하기 좋은' %}">작업하기 좋은</a></li>
+              <li><a class="dropdown-item" href="{% url 'cafes:category' '커피가 저렴한' %}">커피가 저렴한</a></li>
+              <li><a class="dropdown-item" href="{% url 'cafes:category' '이색적인' %}">이색적인</a></li>
             </ul>
           </li>
         </ul>
-        <form class="d-flex mt-3" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-success" type="submit">Search</button>
-        </form>
       </div>
     </div>
   </div>
