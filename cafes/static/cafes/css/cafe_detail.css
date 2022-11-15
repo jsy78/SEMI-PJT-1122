@@ -1,6 +1,93 @@
-.carousel-inner > .item > img {
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 400px;
-} 
+@charset "UTF-8";
+
+/* 배경 화면 */
+body {
+  background-color: #32502E;
+  width: 100%;
+}
+
+
+/* 카페 사진 위의 기본 정보 */
+.titles {
+  align-items: center;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  margin: 15% 0 4rem 0;
+}
+
+
+/* 가게 이름, 평점 */
+.cafe-upper {
+  display: flex;
+}
+
+.cafe-upper p {
+  margin-bottom: 0.5rem;
+}
+
+.cafe-name {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.rate-number {
+  color: #ECE7B4;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-left: 1.3rem;
+}
+
+
+/* 가게 이름 아래 아이콘들 */
+.cafe-lower {
+  display: flex;
+}
+
+.views {
+  display: flex;
+}
+
+.views img {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(235deg) brightness(108%) contrast(102%);
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
+.like img {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(235deg) brightness(108%) contrast(102%);
+  width: 1rem;
+}
+
+.bookmark img {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(235deg) brightness(108%) contrast(102%);
+  width: 1rem;
+}
+
+.share img {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(235deg) brightness(108%) contrast(102%);
+  width: 1rem;
+}
+
+
+/* 수정 버튼 */
+.edit-button {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  height: 5rem;
+  justify-content: center;
+}
+
+.edit-button img {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(235deg) brightness(108%) contrast(102%);
+  margin-bottom: 0.5rem;
+  width: 2rem;
+}
+
+.edit-button p {
+  color: #ffffff;
+  margin: 0;
+}
