@@ -4,22 +4,52 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'cafes/css/detail.css' %}">
+<link rel="stylesheet" href="{% static 'cafes/css/cafe_detail.css' %}">
 {% endblock css %}
 
 {% block content %}
-<div class="cafes-upper">
-	<h2>{{article.name}}</h2>
-	조회수 좋아요 북마크 공유
-	<p class="text-end">
-		{% if request.user == article.user %}
-	<div class="d-flex justify-content-end">
-		<a href="{% url 'cafes:cafe_update' article.pk %}" class="btn btn-warning">수정</a>
+<!-- 최상단 정보 -->
+<div class="titles">
+	<div class="cafe-left">
+		<!-- 카페 이름, 평점 -->
+		<div class="cafe-upper">
+			<p class="cafe-name">{{article.name}}</p>
+			<!-- 평점 구현 필요 -->
+			<p class="rate-number">평점</p>
+		</div>
+
+		<!-- 조회수, 좋아요, 북마크, 공유 -->
+		<div class="cafe-lower">
+			<div class="views">
+				<img src="https://cdn-icons-png.flaticon.com/512/159/159604.png" alt="조회수 아이콘">
+				<p>조회수</p>
+			</div>
+			<!-- 좋아요 구현 필요 -->
+			<div class="like">
+				<img src="https://cdn-icons-png.flaticon.com/512/5881/5881205.png" alt="좋아요 아이콘">
+			</div>
+			<!-- 북마크 구현 필요 -->
+			<div class="bookmark"><img src="https://cdn-icons-png.flaticon.com/512/3303/3303088.png" alt="북마크 아이콘">
+			</div>
+			<!-- 공유 구현 필요 -->
+			<div class="share"><img src="https://cdn-icons-png.flaticon.com/512/1330/1330134.png" alt="공유 아이콘"></div>
+		</div>
 	</div>
-	{% endif %}
+	<!-- 수정 버튼 -->
+	<div class="cafe-right">
+		{% if request.user == article.user %}
+		<button type="button" class="edit-button" onclick="location.href='{% url 'cafes:cafe_update' article.pk %}'">
+			<img src="https://cdn-icons-png.flaticon.com/512/1014/1014883.png" alt="수정 아이콘">
+			<p>수정</p>
+		</button>
+		{% endif %}
+	</div>
 </div>
-</p>
-{% comment %} <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+
+
+<!-- 이미지/캐러셀 -->
+<!-- 캐러셀 js 어디 있는지 찾아야 함 -->
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 	<div class="carousel-inner">
 		<div class="carousel-item active">
 			<img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg"
@@ -33,9 +63,8 @@
 			<img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="d-block w-100"
 				alt="..." />
 		</div>
-	</div> {% endcomment %}
-	{% comment %} <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-		data-bs-slide="prev">
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 		<span class="visually-hidden">Previous</span>
 	</button>
@@ -43,7 +72,10 @@
 		<span class="carousel-control-next-icon" aria-hidden="true"></span>
 		<span class="visually-hidden">Next</span>
 	</button>
-</div> {% endcomment %}
+</div>
+
+
+<!-- 가게 상세 -->
 <div class="row mt-5 container">
 	<div class="row col-sm-9">
 		<div class="card">
@@ -187,6 +219,8 @@
 		</div>
 	</div>
 </div>
+
+
 <hr>
 <div>
 	<h2>{{article.name}} 후기
