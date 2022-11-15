@@ -4,12 +4,12 @@ from . import views
 app_name = "cafes"
 
 urlpatterns = [
-    # path("", views.index, name="index"),
-    # path("category/<article_category>/", views.category, name="category"),
+    path("", views.index, name="index"),
+    path("category/<article_category>/", views.category, name="category"),
     path("<int:article_pk>/", views.cafe_detail, name="cafe_detail"),
     path("cafe_create/", views.cafe_create, name="cafe_create"),
     path("<int:article_pk>/cafe_update/", views.cafe_update, name="cafe_update"),
-    # path("<int:article_pk>/cafe_delete/", views.cafe_delete, name="cafe_delete"),
+    path("<int:article_pk>/cafe_delete/", views.cafe_delete, name="cafe_delete"),
     # path("<int:article_pk>/cafe_like/", views.cafe_like, name="cafe_like"),
     # path("<int:article_pk>/cafe_bookmark/", views.cafe_bookmark, name="cafe_bookmark"),
     # path("cafe_search/", views.cafe_search, name="cafe_search"),
