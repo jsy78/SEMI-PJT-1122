@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login as auth_login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import get_user_model
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib import messages
@@ -73,6 +74,7 @@ def update(request):
     return render(request, "accounts/update.html", context=context)
 
 
+
 @login_required
 def password(request):
     if request.method == "POST":
@@ -88,3 +90,11 @@ def password(request):
         "form": form,
     }
     return render(request, "accounts/password.html", context)
+
+
+@login_required
+def delete(request):
+    request.user.delete()
+    auth_logout(request)
+    return redirect("accounts:login")
+
