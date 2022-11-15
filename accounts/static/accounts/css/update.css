@@ -39,7 +39,7 @@ body {
 
 
 /* 폼 사이즈 조절 */
-.update-form {
+.update {
     margin: auto;
 }
 
@@ -73,6 +73,24 @@ body {
 .form-control-static {
     color: #e2e2e2;
     font-size: 0.9rem;
+}
+
+
+/* 현재 이미지 경로 */
+.col-auto {
+    color: #d9d9d9;
+    font-size: 0.8rem;
+}
+
+.col-auto a {
+    color: #ECE7B4;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.form-check-label {
+    color: #d9d9d9;
+    font-size: 0.8rem;
 }
 
 
