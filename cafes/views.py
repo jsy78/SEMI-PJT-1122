@@ -51,6 +51,7 @@ def cafe_detail(request, article_pk):
 @login_required
 @require_http_methods(["GET", "POST"])
 def cafe_create(request):
+    article = None
     if request.method == "POST":
         form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
@@ -62,6 +63,7 @@ def cafe_create(request):
     else:
         form = ArticleForm()
     context = {
+        "article": article,
         "form": form,
     }
     return render(request, "cafes/article_form.html", context)
@@ -86,6 +88,7 @@ def cafe_update(request, article_pk):
     else:
         form = ArticleForm(instance=article)
     context = {
+        "article": article,
         "form": form,
     }
     return render(request, "cafes/article_form.html", context)
@@ -161,19 +164,22 @@ def cafe_search(request):
 @require_http_methods(["GET", "POST"])
 def review_create(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
+    review = None
 
     if request.method == "POST":
         form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
             review = form.save(commit=False)
             review.user = request.user
-            review.article = article
+            review.cafe = article
             review.save()
             messages.success(request, "리뷰 작성이 완료되었습니다.")
             return redirect("cafes:cafe_detail", article_pk)
     else:
         form = ReviewForm()
     context = {
+        "article": article,
+        "review": review,
         "form": form,
     }
     return render(request, "cafes/review_form.html", context)
@@ -182,6 +188,7 @@ def review_create(request, article_pk):
 @login_required
 @require_http_methods(["GET", "POST"])
 def review_update(request, article_pk, review_pk):
+    article = get_object_or_404(Article, pk=article_pk)
     review = get_object_or_404(Review, pk=review_pk)
 
     if request.user != review.user:
@@ -199,6 +206,8 @@ def review_update(request, article_pk, review_pk):
     else:
         form = ReviewForm(instance=review)
     context = {
+        "article": article,
+        "review": review,
         "form": form,
     }
     return render(request, "cafes/review_form.html", context)
