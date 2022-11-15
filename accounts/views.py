@@ -14,7 +14,6 @@ def signup(request):
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            # return redirect("cafes:index")
             return redirect("accounts:login")
     else:
         form = CustomUserCreationForm()
@@ -89,6 +88,12 @@ def password(request):
         "form": form,
     }
     return render(request, "accounts/password.html", context)
+
+
+@login_required
+def logout(request):
+    auth_logout(request)
+    return redirect("main")
 
 
 @login_required
