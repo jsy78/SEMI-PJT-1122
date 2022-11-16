@@ -8,6 +8,7 @@ from django.views.decorators.http import (
     require_http_methods,
 )
 from django.db.models import Prefetch, Q
+from datetime import date, datetime, timedelta, timezone
 from .models import Article, Review, Comment
 from .forms import ArticleForm, ReviewForm, CommentForm, ReplyForm
 
@@ -33,6 +34,12 @@ def category(request, article_category):
 @require_safe
 def cafe_detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
+    cookie_value = request.COOKIES.get("hits", "_")
+
+    if f"_{article_pk}_" not in cookie_value:  # 쿠키에 없으면
+        article.hits += 1  # 조회수 증가
+        article.save()
+
     context = {
         "article": article,
         "reviews": Review.objects.prefetch_related(
@@ -45,7 +52,19 @@ def cafe_detail(request, article_pk):
         "comment_form": CommentForm(),
         "reply_form": ReplyForm(),
     }
-    return render(request, "cafes/cafe_detail.html", context)
+    response = render(request, "cafes/cafe_detail.html", context)
+
+    # https://arotein.tistory.com/40 쿠키를 이용하여 조회수 기능 만들기
+    if f"_{article_pk}_" not in cookie_value:
+        cookie_value += f"_{article_pk}_"
+        expire_date, now = datetime.now(), datetime.now()
+        expire_date += timedelta(days=1)
+        expire_date = expire_date.replace(hour=0, minute=0, second=0, microsecond=0)
+        expire_date -= now
+        max_age = expire_date.total_seconds()
+        response.set_cookie("hits", value=cookie_value, max_age=max_age, httponly=True)
+
+    return response
 
 
 @login_required
