@@ -57,6 +57,7 @@ class Article(models.Model):
     bookmark_users = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="bookmark_articles"
     )
+    hits = models.PositiveBigIntegerField(default=0, verbose_name="조회수")
 
     @property
     def created_time_string(self):
