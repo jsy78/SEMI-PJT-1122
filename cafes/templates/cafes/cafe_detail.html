@@ -22,11 +22,27 @@
       <div class="cafe-lower">
         <div class="views">
           <img src="https://cdn-icons-png.flaticon.com/512/159/159604.png" alt="조회수 아이콘">
-          <p>조회수</p>
+          <p>조회수 {{ article.hit_counter }}</p>
         </div>
+       
         <!-- 좋아요 구현 필요 -->
         <div class="like">
-          <img src="https://cdn-icons-png.flaticon.com/512/5881/5881205.png" alt="좋아요 아이콘">
+          <form action ="{% url 'cafes:cafe_like' article.pk %}" method ="POST" >
+            {% csrf_token %}
+          <button type = 'submit'> <img src="https://cdn-icons-png.flaticon.com/512/5881/5881205.png" alt="좋아요 아이콘"></button>
+            좋아요
+            <span id="like_count">{{article.like_users.count}}</span> 
+          
+    
+            <span class="small">
+              {% if user_likes %}
+              {{ user }} 님 외 {{ article.like_users.count }}명이 이 게시물을 좋아합니다
+              {% else %}
+              {{ article.like_user_set.first.user }} 님 외 {{ article.like_users.count }}명이 이 게시물을 좋아합니다
+              {% endif %}
+            </span>
+          </form>
+          
         </div>
         <!-- 북마크 구현 필요 -->
         <div class="bookmark"><img src="https://cdn-icons-png.flaticon.com/512/3303/3303088.png" alt="북마크 아이콘">
@@ -140,7 +156,7 @@
       <div class="card-body">
         <div class="container">
           <div class="personal-info">
-            {% if.user.image %}
+          {% if user.image %}
             <img src="{{ .user.image.url }}" alt="설정해둔 프로필 사진">
           {% else %}
             <img class="" src="https://dummyimage.com/100x100" alt="기본 프로필 사진">
