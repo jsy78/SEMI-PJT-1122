@@ -4,3 +4,7 @@
   z-index: 1;
   position: relative;
 }
+
+body{
+  background-image: url("/static/image/background.jpg");
+}
