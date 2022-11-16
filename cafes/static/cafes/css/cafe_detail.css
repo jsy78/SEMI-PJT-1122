@@ -91,3 +91,109 @@ body {
   color: #ffffff;
   margin: 0;
 }
+
+.map_wrap {
+  position: relative;
+  width: 100%;
+  height: 350px;
+}
+
+.title {
+  font-weight: bold;
+  display: block;
+}
+
+.hAddr {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  border-radius: 2px;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 1;
+  padding: 5px;
+}
+
+#centerAddr {
+  display: block;
+  margin-top: 2px;
+  font-weight: normal;
+}
+
+.bAddr {
+  padding: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.rating .rate_radio+label {
+  position: relative;
+  display: inline-block;
+  margin-left: -4px;
+  z-index: 10;
+  width: 60px;
+  height: 60px;
+  background-image: url('./image/starrate.png');
+  background-repeat: no-repeat;
+  background-size: 60px 60px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+
+.rating .rate_radio:checked+label {
+  background-color: #ff8;
+}
+
+.wrap {
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: #fff;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.rating .rate_radio {
+  position: relative;
+  display: inline-block;
+  z-index: 20;
+  opacity: 0.001;
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  cursor: pointer;
+  vertical-align: top;
+  display: none;
+}
+
+.rating .rate_radio+label {
+  position: relative;
+  display: inline-block;
+  margin-left: -4px;
+  z-index: 10;
+  width: 60px;
+  height: 60px;
+  background-image: url('./images/starrate.png');
+  background-repeat: no-repeat;
+  background-size: 60px 60px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+
+.rating .rate_radio:checked+label {
+  background-color: #ff8;
+}
+
+.warning_msg {
+  display: none;
+  position: relative;
+  text-align: center;
+  background: #ffffff;
+  line-height: 26px;
+  width: 100%;
+  color: red;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #e0e0e0;
+}
