@@ -110,6 +110,10 @@ class Review(models.Model):
     )
 
     @property
+    def like_count(self):
+        return self.like_user_set.count()
+
+    @property
     def created_time_string(self):
         time = datetime.now(tz=timezone.utc) - self.created_at
 
