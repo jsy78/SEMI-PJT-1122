@@ -1,16 +1,24 @@
 @charset "UTF-8";
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
+
 
 /* 배경 화면 */
 body {
-    background-color: #32502E;
+    /*background-image: url('../images/background.jpg');*/
+    background-size: 100%;
+    font-family: 'NanumSquare', sans-serif;
     width: 100%;
 }
 
 
 /* 전체 여백 */
 .container {
-    margin: auto;
-    width: 45%;
+    background-color: rgba(92, 92, 92, 0.5);
+    border-radius: 2rem;
+    padding: 3.5rem;
+    padding-bottom: 1rem;
+    margin: 5rem auto !important;
+    width: 50%;
 }
 
 
@@ -18,29 +26,31 @@ body {
 .personal-info {
     align-items: center;
     display: flex;
-    padding: 20% 0 4rem;
+    flex-direction: column;
+    padding: 4rem 0 0;
 }
 
 
 /* 개인정보 */
 .personal-info img {
     border-radius: 50rem;
-    height: 8rem;
+    height: 5.5rem;
     object-fit: cover;
-    width: 8rem;
+    width: 5.5rem;
 }
 
 .personal-info p {
     color: #ffffff;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 600;
-    margin: 0 0 0 3.5rem;
+    margin-top: 0.5rem;
 }
 
 
 /* 폼 사이즈 조절 */
 .update {
     margin: auto;
+    width: 62%;
 }
 
 
@@ -116,7 +126,7 @@ body {
 .buttons {
     display: flex;
     justify-content: space-between;
-    margin: 0 11rem;
+    margin: 0 3rem;
 }
 
 
@@ -129,7 +139,7 @@ body {
     color: #666666;
     font-weight: 600;
     height: 3.5rem;
-    margin: 5rem auto;
+    margin: 4.5rem auto 10rem;
     width: 11rem;
 }
 
@@ -143,6 +153,6 @@ body {
     color: #666666;
     font-weight: 600;
     height: 3.5rem;
-    margin: 5rem auto;
+    margin: 4.5rem auto 10rem;
     width: 11rem;
 }
