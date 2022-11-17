@@ -162,21 +162,21 @@ def cafe_bookmark(request, article_pk):
 
 @require_safe
 def cafe_search(request):
-    article = None
+    articles = None
     query = None
 
     if "q" in request.GET:
         query = request.GET.get("q")
-        article = Article.objects.order_by("-pk").filter(
+        articles = Article.objects.order_by("-pk").filter(
             Q(name__contains=query)
             | Q(address__contains=query)
             | Q(menu__contains=query)
         )
     context = {
-        "article": article,
+        "articles": articles,
         "query": query,
     }
-    return render(request, "cafes/cafe_search.html", context)
+    return render(request, "main.html", context)
 
 
 @login_required

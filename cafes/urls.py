@@ -12,7 +12,7 @@ urlpatterns = [
     path("<int:article_pk>/cafe_delete/", views.cafe_delete, name="cafe_delete"),
     path("<int:article_pk>/cafe_like/", views.cafe_like, name="cafe_like"),
     path("<int:article_pk>/cafe_bookmark/", views.cafe_bookmark, name="cafe_bookmark"),
-    # path("cafe_search/", views.cafe_search, name="cafe_search"),
+    path("cafe_search/", views.cafe_search, name="cafe_search"),
     path("<int:article_pk>/review_create/", views.review_create, name="review_create"),
     path(
         "<int:article_pk>/review_update/<int:review_pk>/",

@@ -1,16 +1,23 @@
 @charset "UTF-8";
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
 
 /* 배경 화면 */
 body {
-    background-color: #32502E;
+    /*background-image: url('../images/background.jpg');*/
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 0.95rem;
     width: 100%;
 }
 
 
 /* 전체 여백 */
 .container {
-    margin: auto;
-    width: 83%;
+    background-color: rgba(92, 92, 92, 0.5);
+    border-radius: 2rem;
+    padding: 3.5rem;
+    padding-bottom: 1rem;
+    margin: 5rem auto !important;
+    width: 50%;
 }
 
 
@@ -18,16 +25,16 @@ body {
 .personal-info {
     align-items: center;
     display: flex;
-    padding: 10rem 0 4rem;
+    padding: 3.5rem 0;
 }
 
 
 /* 개인정보 사진 */
 .personal-info img {
     border-radius: 50rem;
-    height: 8rem;
+    height: 5.5rem;
     object-fit: cover;
-    width: 8rem;
+    width: 5.5rem;
 }
 
 
@@ -35,7 +42,7 @@ body {
 .info-letter {
     display: flex;
     flex-direction: column;
-    margin-left: 3.5rem;
+    margin-left: 2.5rem;
 }
 
 .info-upper {
@@ -45,7 +52,7 @@ body {
 
 .info-upper p {
     color: #ffffff;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 600;
     margin: 0;
 }
@@ -58,11 +65,12 @@ body {
     color: #666666;
     cursor: pointer;
     display: flex;
+    font-size: 0.9rem;
     font-weight: 600;
     height: 2.5rem;
     justify-content: center;
-    margin-left: 4rem;
-    width: 9rem;
+    margin-left: 1rem;
+    width: 8.5rem;
 }
 
 .info-upper form {
@@ -77,11 +85,12 @@ body {
     color: #666666;
     cursor: pointer;
     display: flex;
+    font-size: 0.9rem;
     font-weight: 600;
     height: 2.5rem;
     justify-content: center;
-    margin-left: 4rem;
-    width: 9rem;
+    margin-left: 1rem;
+    width: 8.5rem;
 }
 
 
@@ -114,7 +123,7 @@ body {
     cursor: pointer;
     display: inline-block;
     margin: 0;
-    padding: 0.7rem 8.22rem;
+    padding: 0.7rem 0;
     position: relative;
 }
 
@@ -123,7 +132,6 @@ body {
 }
 
 .active {
-    border-bottom: 0.15rem solid #ECE7B4;
     color: #ECE7B4;
     font-weight: 600;
 }
@@ -135,12 +143,12 @@ body {
 }
 
 .tab-content {
-    padding: 1.5rem 0;
+    padding: 0.5rem 0;
 }
 
 .tab-content img {
     margin: 0.15rem 0;
-    width: 32.9%;
+    width: 32.8%;
 }
 
 
@@ -151,5 +159,5 @@ body {
     color: #ffffff;
     display: flex;
     justify-content: center;
-    margin: 1.5rem auto 10rem;
+    margin: 1.5rem auto 5rem;
 }

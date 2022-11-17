@@ -12,24 +12,24 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{% static 'image/carousel_1.png' %}" class="d-block w-100" alt="carousel_1">
+        <img src="{% static 'image/carousel_1.jpg' %}" class="d-block w-100" alt="carousel_1">
         <div class="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
+          <h5>안녕하세요, 별다방입니다</h5>
+          <p>카페 추천 서비스</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{% static 'image/carousel_2.png' %}" class="d-block w-100" alt="carousel_2">
+        <img src="{% static 'image/carousel_2.jpg' %}" class="d-block w-100" alt="carousel_2">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
+          <h5>테마별 추천</h5>
+          <p>가고싶은 카페를 테마별로 분류하여 추천해요</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{% static 'image/carousel_3.png' %}" class="d-block w-100" alt="carousel_3">
+        <img src="{% static 'image/carousel_3.jpg' %}" class="d-block w-100" alt="carousel_3">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
+          <h5>인기 카페</h5>
+          <p>인기가 많은 카페를 알 수 있어요</p>
         </div>
       </div>
     </div>
@@ -43,51 +43,48 @@
     </button>
   </div>
 
+  {% if request.resolver_match.url_name == 'main' %}
+
   <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'image/dummy_1.png' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+
+    {% for article in articles %}
+      <div class="col">
+        <div class="card">
+          <img src="{{ article.image.url }}" class="card-img-top" alt="article_image">
+          <div class="card-body">
+            <h5 class="card-title">{{ article.name }}</h5>
+            <p class="card-text">{{ article.address }}</p>
+            <a href="{% url 'cafes:cafe_detail' article.pk %}" class="card-text">자세히</a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'image/dummy_1.png' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'image/dummy_1.png' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'image/dummy_1.png' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'image/dummy_1.png' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
+    
   </div>
+
+  </div>
+
+  {% elif request.resolver_match.url_name == 'cafe_search' %}
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
+    
+    {% for article in articles %}
+      <div class="col">
+        <div class="card">
+          <img src="{{ article.image.url }}" class="card-img-top" alt="article_image">
+          <div class="card-body">
+            <h5 class="card-title">{{ article.name }}</h5>
+            <p class="card-text">{{ article.address }}</p>
+            <a href="{% url 'cafes:cafe_detail' article.pk %}" class="card-text">자세히</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    
+  </div>
+
+  </div>
+
+  {% endif %}
+
 {% endblock content %}
