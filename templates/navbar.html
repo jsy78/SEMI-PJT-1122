@@ -42,7 +42,7 @@
           <img src="https://hungrito.com/wp-content/uploads/2021/03/FEATURED-IMAGE.jpg" alt="기본 프로필 사진">
           {% endif %}
           <p class="offcanvas-title" id="offcanvasLightNavbarLabel">안녕하세요, <br>
-            <a href="{% url 'accounts:profile' user.username %}" class="name">{{request.user.first_name }}</a> 님!
+            <a href="{% url 'accounts:profile' user.username %}" class="name">{{request.user }}</a> 님!
           </p>
           {% else %}
           <!-- 로그인이 필요합니다. -->
