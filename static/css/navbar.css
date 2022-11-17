@@ -167,3 +167,9 @@
     color: #666666;
     text-decoration: none;
 }
+
+/* 사이드메뉴 순서 변경 */
+.content_block {
+    z-index: 99;
+    position: relative;
+  }
