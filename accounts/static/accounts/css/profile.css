@@ -3,7 +3,7 @@
 
 /* 배경 화면 */
 body {
-    /*background-image: url('../images/background.jpg');*/
+    background-image: url('../images/background.jpg');
     font-family: 'NanumSquare', sans-serif;
     font-size: 0.95rem;
     width: 100%;
