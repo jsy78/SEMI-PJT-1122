@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+.navbar {
+    background-color: rgba(38, 57, 35, 0.9) !important;
+    position: sticky;
+}
+
 /* 네비게이션 왼쪽 로고 */
 .logo img {
     height: 1.5rem;
@@ -86,7 +91,15 @@
 .name {
     color: #406343;
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.name:hover {
+    color: #406343;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-decoration: none;
 }
 
 
@@ -104,14 +117,14 @@
 
 .line-one a {
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 800;
 }
 
 
 /* 메뉴 */
 .cate-menu {
     list-style: none;
-    line-height: 2.5rem;
+    line-height: 3rem;
     margin-top: 2rem;
     padding-left: 0px;
 }
@@ -119,6 +132,44 @@
 
 /* 개인정보 관련 */
 .personal {
-    line-height: 2.2rem;
+    line-height: 3rem;
     margin-top: 4rem;
 }
+
+.logout {
+    color: #AA4A4A;
+    text-decoration: none;
+}
+
+.logout:hover {
+    color: #AA4A4A;
+    text-decoration: none;
+}
+
+.signups {
+    color: #32502E;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.signups:hover {
+    color: #32502E;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.faq {
+    color: #666666;
+    text-decoration: none;
+}
+
+.faq:hover {
+    color: #666666;
+    text-decoration: none;
+}
+
+/* 사이드메뉴 순서 변경 */
+.content_block {
+    z-index: 99;
+    position: relative;
+  }
