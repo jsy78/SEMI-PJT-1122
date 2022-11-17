@@ -14,12 +14,42 @@ urlpatterns = [
     path("<int:article_pk>/cafe_bookmark/", views.cafe_bookmark, name="cafe_bookmark"),
     path("cafe_search/", views.cafe_search, name="cafe_search"),
     path("<int:article_pk>/review_create/", views.review_create, name="review_create"),
-    # path("<int:article_pk>/review_update/<int:review_pk>/", views.review_update, name="review_update"),
-    # path("<int:article_pk>/review_delete/<int:review_pk>/", views.review_delete, name="review_delete"),
-    # path("<int:article_pk>/review_like/<int:review_pk>/", views.review_like, name="review_like"),
-    # path("<int:review_pk>/comment_create/", views.comment_create, name="comment_create"),
-    # path("<int:review_pk>/comment_update/<int:comment_pk>/", views.comment_update, name="comment_update"),
-    # path("<int:review_pk>/comment_delete/<int:comment_pk>/", views.comment_delete, name="comment_delete"),
-    # path("<int:review_pk>/comment_like/<int:comment_pk>/", views.comment_like, name="comment_like"),
-    # path("<int:review_pk>/reply_create/<int:comment_pk>/", views.reply_create, name="reply_create"),
+    path(
+        "<int:article_pk>/review_update/<int:review_pk>/",
+        views.review_update,
+        name="review_update",
+    ),
+    path(
+        "<int:article_pk>/review_delete/<int:review_pk>/",
+        views.review_delete,
+        name="review_delete",
+    ),
+    path(
+        "<int:article_pk>/review_like/<int:review_pk>/",
+        views.review_like,
+        name="review_like",
+    ),
+    path(
+        "<int:review_pk>/comment_create/", views.comment_create, name="comment_create"
+    ),
+    path(
+        "<int:review_pk>/comment_update/<int:comment_pk>/",
+        views.comment_update,
+        name="comment_update",
+    ),
+    path(
+        "<int:review_pk>/comment_delete/<int:comment_pk>/",
+        views.comment_delete,
+        name="comment_delete",
+    ),
+    path(
+        "<int:review_pk>/comment_like/<int:comment_pk>/",
+        views.comment_like,
+        name="comment_like",
+    ),
+    path(
+        "<int:review_pk>/reply_create/<int:comment_pk>/",
+        views.reply_create,
+        name="reply_create",
+    ),
 ]
