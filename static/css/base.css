@@ -3,6 +3,7 @@
 
 body {
   background-image: url("/static/image/background.jpg");
+  background-repeat: repeat;
   font-family: 'NanumSquare', sans-serif;
   width: 100%;
 }
