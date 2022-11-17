@@ -1,33 +1,42 @@
 @charset "UTF-8";
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
+
 
 /* 배경 사진 */
 body {
-    background-image: url('../images/background.jpg');
+    /*background-image: url('../images/background.jpg');*/
     background-size: 100%;
+    font-family: 'NanumSquare', sans-serif;
     width: 100%;
 }
 
-.bg-effect {
-    background-color: rgba(217, 217, 217, 0.28);
-    height: 100%;
-    padding-bottom: 12rem;
-    margin: auto;
-    width: 90%;
+.container {
+    margin-top: 0 !important;
+}
+
+.container {
+    background-color: rgba(92, 92, 92, 0.5);
+    border-radius: 2rem;
+    min-height: 71vh !important;
+    padding: 3.5rem;
+    padding-bottom: 1rem;
+    margin: 5rem auto !important;
+    width: 45%;
 }
 
 
 /* 폼 사이즈 조절 */
 .login-form {
     margin: auto;
-    padding-top: 22%;
-    width: 55%;
+    padding-top: 10%;
+    width: 70%;
 }
 
 
 /* 폼 조절 */
 .login-form .form-label {
     color: #ffffff;
-    margin-top: 1.5rem;
+    margin-top: 1.6rem;
 }
 
 .login-form .form-control {
@@ -64,6 +73,6 @@ body {
     font-weight: 600;
     height: 4rem;
     justify-content: center;
-    margin: 5rem auto;
+    margin: 4.5rem auto 10rem;
     width: 13rem;
 }
