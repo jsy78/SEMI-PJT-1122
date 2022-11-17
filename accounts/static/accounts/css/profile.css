@@ -146,9 +146,19 @@ body {
     padding: 0.5rem 0;
 }
 
+.tab-content ul {
+    padding-left: 0;
+}
+
+.tab-content li {
+    list-style: none;
+}
+
 .tab-content img {
     margin: 0.15rem 0;
-    width: 32.8%;
+    height: 17.2rem;
+    object-fit: cover;
+    width: 17.2rem;
 }
 
 
