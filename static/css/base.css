@@ -8,5 +8,6 @@
 
 body {
   background-image: url("/static/image/background.jpg");
-  font-family: 'NanumSquare', sans-serif
+  font-family: 'NanumSquare', sans-serif;
+  width: 100%;
 }

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .navbar {
-    background-color: rgba(50, 80, 46, 90%) !important;
+    background-color: rgba(38, 57, 35, 0.9) !important;
     position: sticky;
 }
 
@@ -98,7 +98,7 @@
 .name:hover {
     color: #406343;
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 800;
     text-decoration: none;
 }
 
