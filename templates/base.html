@@ -2,7 +2,6 @@
 
 <!DOCTYPE html>
 <html lang="ko">
-
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -46,51 +45,4 @@
     </script>
     {% endblock js %}
   </body>
-</html>
-=======
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cafe</title>
-  {% bootstrap_css %}
-  {% block css %}
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">{% endblock css %}
-</head>
-
-<body>
-  {% if messages %}
-  {% for message in messages %}
-  <div class="alert alert-{{ message.tags }} text-center">
-    {{ message }}
-  </div>
-  {% endfor %}
-  {% endif %}
-
-  <!-- navbar -->
-  {% include "navbar.html" %}
-
-  <div class="container" style="min-height: 100vh; margin-top: 5%;">
-    {% block content %}{% endblock content %}
-  </div>
-
-  <div class="text-end mx-5 my-5">
-    <img src="{% static 'image/top_button.png' %}" alt="top_button" width="70" height="70" style="cursor:pointer;"
-      onclick="window.scrollTo(0,0);">
-  </div>
-
-  <!-- footer -->
-  {% include "footer.html" %}
-
-  {% bootstrap_javascript %}
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  {% block js %}
-  <script type="text/javascript">
-    {% comment %} document.body.style.backgroundColor = "rgb(0, 0, 0)"; {% endcomment %}
-    {% comment %} document.body.style.backgroundImage = "url('')"; {% endcomment %}
-  </script>
-  {% endblock js %}
-</body>
-
 </html>
