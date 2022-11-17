@@ -63,30 +63,29 @@
   <!-- 메뉴 내용 -->
   <div class="tab-container">
     <div id="tab1" class="tab-content">
-      <img src="https://placeimg.com/363/363/animal" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+      <ul class="listwrap">
+        {% for cafe_info in user.article_set.all %}
+        <a href="{% url 'cafes:cafe_detail' cafe_info.pk %}">
+          <img src="{{ cafe_info.image.url }}" alt="작성한 글의 이미지">
+        </a>
+        {% endfor %}
+      </ul>
       <button type="" class="more">더보기</button>
     </div>
     <div id="tab2" class="tab-content">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+      {% for bookmark_article in bookmark_articles%}
+      <a href="{% url 'cafes:cafe_detail' bookmark_article.pk %}">
+        <img src="{{ bookmark_article.image.url }}" alt="북마크한 글의 이미지">
+      </a>
+      {% endfor %}
       <button type="" class="more">더보기</button>
     </div>
     <div id="tab3" class="tab-content">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
-      <img src="https://placeimg.com/363/363/any" alt="임시이미지">
+      {% for like_article in like_articles %}
+      <a href="{% url 'cafes:cafe_detail' like_article.pk %}">
+        <img src="{{ like_article.image.url }}" alt="좋아요한 글의 이미지">
+      </a>
+      {% endfor %}
       <button type="" class="more">더보기</button>
     </div>
   </div>

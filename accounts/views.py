@@ -56,8 +56,12 @@ def login(request):
 @require_safe
 def profile(request, username):
     user = get_object_or_404(get_user_model(), username=username)
+    like_articles = user.like_articles.all()
+    bookmark_articles = user.bookmark_articles.all()
     context = {
         "user": user,
+        "like_articles": like_articles,
+        "bookmark_articles": bookmark_articles,
     }
     return render(request, "accounts/profile.html", context)
 

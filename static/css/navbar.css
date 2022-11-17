@@ -2,7 +2,6 @@
 
 .navbar {
     background-color: rgba(38, 57, 35, 0.9) !important;
-    position: sticky;
 }
 
 /* 네비게이션 왼쪽 로고 */
@@ -171,5 +170,5 @@
 /* 사이드메뉴 순서 변경 */
 .content_block {
     z-index: 99;
-    position: relative;
-  }
+    /*position: relative; relative 때문에 navbar가 안 붙음*/
+}
