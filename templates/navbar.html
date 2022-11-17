@@ -31,7 +31,7 @@
     <!-- 사이드 메뉴 -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasLightNavbar"
       aria-labelledby="offcanvasLightNavbarLabel">
-      <div class="cate">
+      <div class="cafe">
         <div class="offcanvas-header">
           <!-- 안녕하세요, ( ) 님! -->
           {% if request.user.is_authenticated %}
@@ -89,11 +89,16 @@
                 {% else %}
                 <a href="{% url 'accounts:signup' %}" class="signups" aria-current="page">회원 가입</a>
                 {% endif %}
+              </li>
+              <!-- 시간 안 되면 없애기 -->
+              <li class="nav-item">
+                <a href="#" class="faq">FAQ</a>
+              </li>
             </div>
             </li>
           </ul>
         </div>
-      </div> <!-- cate 끝남 -->
+      </div> <!-- cafe 끝남 -->
     </div> <!-- side menu 끝남 -->
   </div> <!-- container-fluid 끝남 -->
 </div>
