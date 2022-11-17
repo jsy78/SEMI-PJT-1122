@@ -1,0 +1,71 @@
+@charset "UTF-8";
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
+
+/* 배경 화면 */
+body {
+    background-image: url('../images/background.jpg');
+    background-size: 100%;
+    font-family: 'NanumSquare', sans-serif;
+    width: 100%;
+}
+
+
+/* 전체 여백 */
+.container {
+    margin-top: 10rem !important;
+    width: 57%;
+}
+
+
+/* 카드 정렬 */
+.cafe-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+/* 카드 */
+.card {
+    background-color: #ffffff;
+    border: none;
+    margin: 0.6rem;
+    width: 31.52%;
+}
+
+.card-title {
+    color: #406343;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.card-title:hover {
+    color: #406343;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.cafe-address {
+    align-items: center;
+    display: flex;
+}
+
+.cafe-address img {
+    height: 0.8rem;
+    margin: 0.3rem 0.2rem 0 0;
+    opacity: 60%;
+    width: 0.8rem;
+}
+
+.card-text {
+    color: #666666;
+    font-size: 0.8rem;
+    margin-top: 0.4rem;
+}
+
+.sample {
+    color: #666666;
+    font-size: 0.8rem;
+    margin-top: 0.6rem;
+}

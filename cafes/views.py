@@ -176,7 +176,7 @@ def cafe_search(request):
         "articles": articles,
         "query": query,
     }
-    return render(request, "main.html", context)
+    return render(request, "cafes/cafe_search.html", context)
 
 
 @login_required

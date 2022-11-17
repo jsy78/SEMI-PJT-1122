@@ -4,85 +4,117 @@
 {% load static %}
 
 {% block content %}
-  <div id="carouselExampleCaptions" class="carousel slide my-5" data-bs-ride="false">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="{% static 'image/carousel_1.jpg' %}" class="d-block w-100" alt="carousel_1">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>안녕하세요, 별다방입니다</h5>
-          <p>카페 추천 서비스</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'image/carousel_2.jpg' %}" class="d-block w-100" alt="carousel_2">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>테마별 추천</h5>
-          <p>가고싶은 카페를 테마별로 분류하여 추천해요</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'image/carousel_3.jpg' %}" class="d-block w-100" alt="carousel_3">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>인기 카페</h5>
-          <p>인기가 많은 카페를 알 수 있어요</p>
-        </div>
+<div id="carouselExampleCaptions" class="carousel slide my-5" data-bs-ride="false">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+      aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'image/carousel_1.jpg' %}" class="d-block w-100" alt="carousel_1">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>안녕하세요, 별다방입니다</h5>
+        <p>카페 추천 서비스</p>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-
-  {% if request.resolver_match.url_name == 'main' %}
-
-  <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
-
-    {% for article in articles %}
-      <div class="col">
-        <div class="card">
-          <img src="{{ article.image.url }}" class="card-img-top" alt="article_image">
-          <div class="card-body">
-            <h5 class="card-title">{{ article.name }}</h5>
-            <p class="card-text">{{ article.address }}</p>
-            <a href="{% url 'cafes:cafe_detail' article.pk %}" class="card-text">자세히</a>
-          </div>
-        </div>
+    <div class="carousel-item">
+      <img src="{% static 'image/carousel_2.jpg' %}" class="d-block w-100" alt="carousel_2">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>테마별 추천</h5>
+        <p>가고싶은 카페를 테마별로 분류하여 추천해요</p>
       </div>
-    {% endfor %}
-    
-  </div>
-
-  {% elif request.resolver_match.url_name == 'cafe_search' %}
-
-  <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
-    
-    {% for article in articles %}
-      <div class="col">
-        <div class="card">
-          <img src="{{ article.image.url }}" class="card-img-top" alt="article_image">
-          <div class="card-body">
-            <h5 class="card-title">{{ article.name }}</h5>
-            <p class="card-text">{{ article.address }}</p>
-            <a href="{% url 'cafes:cafe_detail' article.pk %}" class="card-text">자세히</a>
-          </div>
-        </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'image/carousel_3.jpg' %}" class="d-block w-100" alt="carousel_3">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>인기 카페</h5>
+        <p>인기가 많은 카페를 알 수 있어요</p>
       </div>
-    {% endfor %}
-    
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+{% if request.resolver_match.url_name == 'main' %}
+
+<div class="infinite-container row row-cols-1 row-cols-md-3 g-4 my-3">
+
+  {% for article in page_obj %}
+  <div class="col infinite-item">
+    <div class="card">
+      <img src="{{ article.image.url }}" class="card-img-top" alt="article_image">
+      <div class="card-body">
+        <h5 class="card-title">{{ article.name }}</h5>
+        <p class="card-text">{{ article.address }}</p>
+        <a href="{% url 'cafes:cafe_detail' article.pk %}" class="card-text">자세히</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <div class="row">
+    <div class="col-3">
+      {% if page_obj.has_next %}
+      <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">next</a>
+      {% endif %}
+    </div>
   </div>
 
-  {% endif %}
+</div>
+
+
+<!--{% elif request.resolver_match.url_name == 'cafe_search' %}
+
+<div class="infinite-container row row-cols-1 row-cols-md-3 g-4 my-3">
+
+  {% for article in page_obj %}
+  <div class="col infinite-item">
+    <div class="card">
+      <img src="{{ article.image.url }}" class="card-img-top" alt="article_image">
+      <div class="card-body">
+        <h5 class="card-title">{{ article.name }}</h5>
+        <p class="card-text">{{ article.address }}</p>
+        <a href="{% url 'cafes:cafe_detail' article.pk %}" class="card-text">자세히</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <div class="row">
+    <div class="col-3">
+      {% if page_obj.has_next %}
+      <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">next</a>
+      {% endif %}
+    </div>
+  </div>
+
+</div>-->
+
+{% endif %}
 
 </div>
 
 {% endblock content %}
+
+{% block js %}
+<!-- 무한 스크롤 -->
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+<script>
+  var infinite = new Waypoint.Infinite({
+    element: $('.infinite-container')[0],
+    offset: 'bottom-in-view',
+    onBeforePageLoad: () => { },
+    onAfterPageLoad: () => { }
+  })
+</script>
+{% endblock js %}
