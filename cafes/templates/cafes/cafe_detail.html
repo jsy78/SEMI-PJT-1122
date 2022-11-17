@@ -13,51 +13,73 @@
     <div class="cafe-left">
       <!-- 카페 이름, 평점 -->
       <div class="cafe-upper">
-        <p class="cafe-name">{{article.name}}</p>
+        <p class="cafe-name">{{ article.name }}</p>
         <!-- 평점 구현 필요 -->
         <p class="rate-number">평점</p>
       </div>
 
       <!-- 조회수, 좋아요, 북마크, 공유 -->
       <div class="cafe-lower">
-        <div class="views">
-          <img src="https://cdn-icons-png.flaticon.com/512/159/159604.png" alt="조회수 아이콘">
-          <p>조회수 {{ article.hit_counter }}</p>
+        <!-- 조회수 -->
+        <div class="views me-1">
+          <button class="btn btn-secondary disabled">
+            <img src="https://cdn-icons-png.flaticon.com/512/159/159604.png" alt="조회수 아이콘">
+            <span class="ms-1">{{ article.hits }}</span>
+          </button>
         </div>
-       
-        <!-- 좋아요 구현 필요 -->
-        <div class="like">
-          <form action ="{% url 'cafes:cafe_like' article.pk %}" method ="POST" >
+        <!-- 좋아요 -->
+        <div class="like me-1">
+          <form action="{% url 'cafes:cafe_like' article.pk %}" method="POST">
             {% csrf_token %}
-          <button type = 'submit'> <img src="https://cdn-icons-png.flaticon.com/512/5881/5881205.png" alt="좋아요 아이콘"></button>
-            좋아요
-            <span id="like_count">{{article.like_users.count}}</span> 
-          
-    
-            <span class="small">
-              {% if user_likes %}
-              {{ user }} 님 외 {{ article.like_users.count }}명이 이 게시물을 좋아합니다
-              {% else %}
-              {{ article.like_user_set.first.user }} 님 외 {{ article.like_users.count }}명이 이 게시물을 좋아합니다
-              {% endif %}
-            </span>
+            <button class="btn btn-danger" type='submit'>
+              <img src="https://cdn-icons-png.flaticon.com/512/5881/5881205.png" alt="좋아요 아이콘">
+              <span id="like_count" class="ms-1">{{ article.like_users.count }}</span>
+            </button>
           </form>
-          
         </div>
-        <!-- 북마크 구현 필요 -->
-        <div class="bookmark"><img src="https://cdn-icons-png.flaticon.com/512/3303/3303088.png" alt="북마크 아이콘">
+        <!-- 북마크 -->
+        <div class="bookmark me-1">
+          <form action="{% url 'cafes:cafe_bookmark' article.pk %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-success" type='submit'>
+              <img src="https://cdn-icons-png.flaticon.com/512/3303/3303088.png" alt="북마크 아이콘">
+              <span id="bookmark_count" class="ms-1">{{ article.bookmark_users.count }}</span>
+            </button>
+          </form>
         </div>
-        <!-- 공유 구현 필요 -->
-        <div class="share"><img src="https://cdn-icons-png.flaticon.com/512/1330/1330134.png" alt="공유 아이콘"></div>
+        <!-- 공유 -->
+        <div class="share">
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#shareModal">
+            <img src="https://cdn-icons-png.flaticon.com/512/1330/1330134.png" alt="공유 아이콘">
+            <span class="ms-1">공유</span>
+          </button>
+        </div>
+
+        <!-- 공유 Modal -->
+        <div class="modal fade" id="shareModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content" style="background-color: #61764B;">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">공유하기</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>다음 링크를 복사해주세요.</p>
+                <p>{{ request.build_absolute_uri }}</p>
+                <!-- 절대 링크 -->
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- 수정 버튼 -->
     <div class="cafe-right">
       {% if request.user == article.user %}
-        <button type="button" class="edit-button" onclick="location.href='{% url 'cafes:cafe_update' article.pk %}'">
+        <a class="edit-button" href="{% url 'cafes:cafe_update' article.pk %}">
           <img src="https://cdn-icons-png.flaticon.com/512/1014/1014883.png" alt="수정 아이콘">
           <p>수정</p>
-        </button>
+        </a>
       {% endif %}
     </div>
   </div>
@@ -67,13 +89,13 @@
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="w-100 height=400px' "/>
+        <img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="d-block w-100 rounded" alt="..."/>
       </div>
       <div class="carousel-item">
-        <img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="d-block w-100 " alt="..."/>
+        <img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="d-block w-100 rounded" alt="..."/>
       </div>
       <div class="carousel-item">
-        <img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="d-block w-100" alt="..."/>
+        <img src="https://img.vogue.co.kr/vogue/2019/08/style_5d5ac2ceddc7f-1400x788.jpg" class="d-block w-100 rounded" alt="..."/>
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -87,152 +109,153 @@
   </div>
 
   <!-- 가게 상세 -->
-  <div class="row mt-5 container">
-    <div class="row col-sm-9">
+  <div class="row mt-5 g-4">
+    <div class="col-sm-12 col-lg-9">
       <div class="card">
         <div class="card-body">
           <p>
-            주소
-            {{article.address}}
-          </p>
-          <div id="map" style="width:100%;height:350px;"></div>
-          <p>
-            전화번호
-            {{article.number}}
+            주소 :
+            <span id="cafe-address">{{ article.address }}</span>
           </p>
           <p>
-            영업 시간
-            {{article.opening_hour}}
+            <div id="map" class="rounded" style="width:100%; height:350px;"></div>
           </p>
           <p>
-            휴일
-            {{article.dayoff}}
+            전화번호 :
+            {{ article.number }}
           </p>
           <p>
-            주차
-            {{article.parking}}
+            영업 시간 :
+            {{ article.opening_hour }}
           </p>
           <p>
-            메뉴
-            {{article.menu|safe}}
+            휴일 :
+            {{ article.dayoff }}
           </p>
           <p>
-            포털검색
+            주차 :
+            {{ article.parking }}
+          </p>
+          <p>
+            {{ article.menu|safe }}
           </p>
         </div>
       </div>
     </div>
-    <div class="col-8 col-md-3 ms-4">
+    <div class="col-sm-12 col-lg-3">
       <div class="card">
-        <div class="card-body opacity-20">
+        <div class="card-body opacity-20 text-center">
           <p>
             이 매장이 소개된 테마
           </p>
           <p>
-            {{article.cafeType}}
             <img src="https://dummyimage.com/200x200" alt="">
           </p>
           <p>
-            브런치가 맛있는 카페
+            {{ article.cafeType }}
           </p>
         </div>
       </div>
     </div>
     <hr>
-    <h2>
-      {{article.name}}
-      후기
-      <div class="dropdown text-end">
-        <select class="down" onchange="if(this.value) location.href=(this.value);">
-          <option value="" disabled="disabled" selected="selected">정렬 선택</option>
-          <option value="/new">최신순</option>
-          <option value="/good">좋아요순</option>
-        </select>
-        <a class="btn btn-primary" href="{% url 'cafes:review_create' article.pk %}" role="button" aria-expanded="false">
-          후기작성</a>
+    <div class="d-flex justify-content-between align-items-center">
+      <h2 class="bg-white my-auto p-1 rounded">
+        {{ article.name }}
+        후기
+      </h2>
+      <div class="d-flex">
+        <div class="dropdown text-end">
+          <select class="down form-select" onchange="if(this.value) location.href=(this.value);">
+            <option value="" disabled="disabled" selected="selected">정렬 선택</option>
+            <option value="/new">최신순</option>
+            <option value="/good">좋아요순</option>
+          </select>
+        </div>
+        <a class="btn btn-primary ms-1 my-auto" href="{% url 'cafes:review_create' article.pk %}">작성</a>
       </div>
-    </h2>
+    </div>
     <div class="card w-100">
       <div class="card-body">
         <div class="container">
           <div class="personal-info">
-          {% if user.image %}
-            <img src="{{ .user.image.url }}" alt="설정해둔 프로필 사진">
-          {% else %}
-            <img class="" src="https://dummyimage.com/100x100" alt="기본 프로필 사진">
-          {% endif %}
-          <p>
-            {{article.user}}
-          </p>
-          <p>
-            평점
-          </p>
-          <form name="reviewform" class="reviewform" method="post" action="/save">
-            <input type="hidden" name="rate" id="rate" value="0"/>
-            <div class="review_rating">
-              <div class="warning_msg"></div>
-              <div class="rating">
-                <input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
-                <label for="rating1"></label>
-                <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio" title="2점">
-                <label for="rating2"></label>
-                <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점">
-                <label for="rating3"></label>
-                <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
-                <label for="rating4"></label>
-                <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
-                <label for="rating5"></label>
+            {% if user.image %}
+              <img src="{{ .user.image.url }}" alt="설정해둔 프로필 사진">
+            {% else %}
+              <img class="" src="https://dummyimage.com/100x100" alt="기본 프로필 사진">
+            {% endif %}
+            <p>
+              {{article.user}}
+            </p>
+            <p>
+              평점
+            </p>
+            <form name="reviewform" class="reviewform" method="post" action="/save">
+              <input type="hidden" name="rate" id="rate" value="0"/>
+              <div class="review_rating">
+                <div class="warning_msg"></div>
+                <div class="rating">
+                  <input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
+                  <label for="rating1"></label>
+                  <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio" title="2점">
+                  <label for="rating2"></label>
+                  <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점">
+                  <label for="rating3"></label>
+                  <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
+                  <label for="rating4"></label>
+                  <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
+                  <label for="rating5"></label>
+                </div>
               </div>
-            </div>
-          </form>
-          <textarea class="replyContent" placeholder="댓글 입력" name="" id="" cols="100"></textarea>
-          <p>
-            작성글
+            </form>
+            <textarea class="replyContent" placeholder="댓글 입력" name="" id="" cols="100"></textarea>
+            <p>
+              작성글
+            </p>
+            <i class="bi bi-heart-fill">좋아요</i>
+            <p>
+              {{review.rate}}
+              평점
+              {{review.content|safe}}
+              내용
+              {{review.image}}
+              이미지
+              <form action="{% url 'cafes:review_create' user.id %}" method="POST" enctype="multipart/form-data"></form>
+              {% csrf_token %}
+              <input type="submit" value="등록">
+            </form>
           </p>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <p>
+      달린 댓글
+    </p>
+    <div class="card w-100">
+      <div class="card-body">
+
+        <a href="{% url 'accounts:profile' user %}" class="card-link">{{article.user}}</a>
+        <a href="#" class="card-link">{{review.rate}}별점</a>
+        {{review.rate}}
+        평점
+        {{review.content}}
+        내용
+        {{review.image}}
+        이미지
+        <p>
+          <img src="https://dummyimage.com/200x200" alt="">
+          <img src="https://dummyimage.com/200x200" alt="">
+          <img src="https://dummyimage.com/200x200" alt="">
+          <br>
           <i class="bi bi-heart-fill">좋아요</i>
-          <p>
-            {{review.rate}}
-            평점
-            {{review.content|safe}}
-            내용
-            {{review.image}}
-            이미지
-            <form action="{% url 'cafes:review_create' user.id %}" method="POST" enctype="multipart/form-data"></form>
-            {% csrf_token %}
-            <input type="submit" value="등록">
-          </form>
+          <i class="bi bi-chat-left-dots fs-4"></i>
         </p>
       </div>
     </div>
   </div>
-  <hr>
-  <p>
-    달린 댓글
-  </p>
-  <div class="card w-100">
-    <div class="card-body">
-
-      <a href="{% url 'accounts:profile' user %}" class="card-link">{{article.user}}</a>
-      <a href="#" class="card-link">{{review.rate}}별점</a>
-      {{review.rate}}
-      평점
-      {{review.content}}
-      내용
-      {{review.image}}
-      이미지
-      <p>
-        <img src="https://dummyimage.com/200x200" alt="">
-        <img src="https://dummyimage.com/200x200" alt="">
-        <img src="https://dummyimage.com/200x200" alt="">
-        <br>
-        <i class="bi bi-heart-fill">좋아요</i>
-        <i class="bi bi-chat-left-dots fs-4"></i>
-      </p>
-    </div>
-  </div>
 {% endblock content %}
 {% block js %}
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1c71e5e49c9371b541c377c8e93cf1d6&libraries=services"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={% include 'cafes/appkey.txt' %}&libraries=services"></script>
   <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
       mapOption = {
@@ -254,7 +277,7 @@
       .Geocoder();
 
     // 주소로 좌표를 검색합니다
-    geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function (result, status) {
+    geocoder.addressSearch(document.querySelector('#cafe-address').innerText, function (result, status) {
 
       // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
@@ -271,7 +294,7 @@
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao
           .maps
-          .InfoWindow({content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'});
+          .InfoWindow({content: '<div style="width:150px;text-align:center;padding:6px 0;">HERE</div>'});
         infowindow.open(map, marker);
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
@@ -279,84 +302,5 @@
 
       }
     });
-  </script>
-  <script>
-    function Rating() {};
-    Rating.prototype.rate = 0;
-    Rating.prototype.setRate = function (newrate) {
-      this.rate = newrate;
-      let items = document.querySelectorAll('.rate_radio');
-      items.forEach(function (item, idx) {
-        if (idx < newrate) {
-          item.checked = true;
-        } else {
-          item.checked = false;
-        }
-      })
-    }
-  </script>
-  <script>
-    let rating = new Rating();
-    document.addEventListener('DOMContentLoaded', function () {
-      document
-        .querySelector('.rating')
-        .addEventListener('click', function (e) {
-          let elem = e.target;
-          if (elem.classList.contains('rate_radio')) {
-            rating.setRate(parseInt(elem.value));
-          }
-        })
-    });
-    document
-      .querySelector('.review_textarea')
-      .addEventListener('keydown', function () {
-        let review = document.querySelector('.review_textarea');
-        let lengthCheckEx = /^.{400,}$/;
-        if (lengthCheckEx.test(review.value)) {
-          review.value = review
-            .value
-            .substr(0, 400);
-        }
-      });
-    document
-      .querySelector('#save')
-      .addEventListener('click', function (e) {
-        if (rating.rate == 0) {
-          rating.showMessage('rate');
-          return false;
-        }
-        if (document.querySelector('.review_textarea').value.length < 5) {
-          rating.showMessage('review');
-          return false;
-        }
-      });
-    Rating.prototype.showMessage = function (type) {
-      switch (type) {
-        case 'rate':
-          document
-            .querySelector('.review_rating .warning_msg')
-            .style
-            .display = 'block';
-          setTimeout(function () {
-            document
-              .querySelector('.review_rating .warning_msg')
-              .style
-              .display = 'none';
-          }, 1000);
-          break;
-        case 'review':
-          document
-            .querySelector('.review_contents .warning_msg')
-            .style
-            .display = 'block';
-          setTimeout(function () {
-            document
-              .querySelector('.review_contents .warning_msg')
-              .style
-              .display = 'none';
-          }, 1000);
-          break;
-      }
-    }
   </script>
 {% endblock js %}
