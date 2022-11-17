@@ -43,9 +43,9 @@
     </button>
   </div>
 
-  
+  {% if request.resolver_match.url_name == 'main' %}
 
-    <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
+  <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
 
     {% for article in articles %}
       <div class="col">
@@ -58,8 +58,33 @@
           </div>
         </div>
       </div>
-      {% endfor %}
-    </div>
+    {% endfor %}
+    
+  </div>
 
   </div>
+
+  {% elif request.resolver_match.url_name == 'cafe_search' %}
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
+    
+    {% for article in articles %}
+      <div class="col">
+        <div class="card">
+          <img src="{{ article.image.url }}" class="card-img-top" alt="article_image">
+          <div class="card-body">
+            <h5 class="card-title">{{ article.name }}</h5>
+            <p class="card-text">{{ article.address }}</p>
+            <a href="{% url 'cafes:cafe_detail' article.pk %}" class="card-text">자세히</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    
+  </div>
+
+  </div>
+
+  {% endif %}
+
 {% endblock content %}

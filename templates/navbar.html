@@ -12,8 +12,8 @@
     </a>
 
     <!-- 검색창 -->
-    <form role="search" class="search">
-      <input type="search" placeholder="카페 탐색하기" aria-label="Search">
+    <form role="search" class="search" action="{% url 'cafes:cafe_search' %}">
+      <input name="q" type="search" placeholder="카페 탐색하기" aria-label="Search">
       <!-- 검색창 작동 안 함(이동 X) -->
       <button type="submit" class="search-button">
         <img src="https://cdn-icons-png.flaticon.com/512/16/16492.png" alt="검색 아이콘">
