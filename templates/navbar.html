@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 {% endblock css %}
 
-
 <div class="navbar navbar-light bg-dark fixed-top content_block">
   <div class="container-fluid">
 
@@ -16,11 +15,11 @@
     <form role="search" class="search">
       <input type="search" placeholder="카페 탐색하기" aria-label="Search">
       <!-- 검색창 작동 안 함(이동 X) -->
-      <!-- 아이콘이 자꾸 움직여요. . . -->
       <button type="submit" class="search-button">
         <img src="https://cdn-icons-png.flaticon.com/512/16/16492.png" alt="검색 아이콘">
       </button>
     </form>
+
 
     <!-- 햄버거 -->
     <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLightNavbar"
@@ -42,7 +41,7 @@
           <img src="https://hungrito.com/wp-content/uploads/2021/03/FEATURED-IMAGE.jpg" alt="기본 프로필 사진">
           {% endif %}
           <p class="offcanvas-title" id="offcanvasLightNavbarLabel">안녕하세요, <br>
-            <span class="name">{{request.user }}</span> 님!
+            <a href="{% url 'accounts:profile' user.username %}" class="name">{{request.user }}</a> 님!
           </p>
           {% else %}
           <!-- 로그인이 필요합니다. -->
@@ -86,22 +85,15 @@
             <div class="personal">
               <li class="nav-item">
                 {% if request.user.is_authenticated %}
-                <a class="nav-link active" aria-current="page" href="{% url 'accounts:signup' %}">회원 가입</a>
+                <a href="{% url 'accounts:logout' %}" class="logout">로그아웃</a>
                 {% else %}
-                <a class="nav-link active" aria-current="page" href="{% url 'accounts:profile' user.username %}">회원
-                  정보</a>
-                {% endif %}
-              </li>
-              <li class="nav-item">
-                {% if request.user.is_authenticated %}
-                <a class="nav-link" href="{% url 'accounts:logout' %}">로그아웃</a>
-                {% else %}
+                <a href="{% url 'accounts:signup' %}" class="signups" aria-current="page">회원 가입</a>
                 {% endif %}
             </div>
             </li>
           </ul>
         </div>
-      </div>
-    </div>
-  </div>
+      </div> <!-- cate 끝남 -->
+    </div> <!-- side menu 끝남 -->
+  </div> <!-- container-fluid 끝남 -->
 </div>
