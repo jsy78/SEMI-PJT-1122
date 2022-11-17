@@ -10,7 +10,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("cafes/", include("cafes.urls")),
     path("froala_editor/", include("froala_editor.urls")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 if settings.DEBUG:
     import debug_toolbar, mimetypes
@@ -20,3 +20,4 @@ if settings.DEBUG:
     urlpatterns += [
         path("__debug__/", include(debug_toolbar.urls)),
     ]
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
