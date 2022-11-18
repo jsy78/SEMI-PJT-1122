@@ -4,107 +4,123 @@
 {% load static %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}">
 {% endblock css %}
 
 {% block content %}
-  <div class="real_container">
-    <!-- 메뉴 위 상단 부분 -->
-    <div class="personal-info">
-      <!-- 프로필 사진이 설정되어 있으면 프로필 사진을 띄움 -->
-      {% if user.profile %}
-        <img src="{{ user.profile.url }}" alt="직접 설정해둔 프로필 사진">
-      {% else %}
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Roasted_coffee_beans.jpg/1200px-Roasted_coffee_beans.jpg" alt="기본 프로필 사진">
-      {% endif %}
-      <div class="info-letter">
-        <div class="info-upper">
-          <p>{{ user }}</p>
-          <!-- 로그인 했을 경우 버튼이 뜸-->
-          {% if request.user.is_authenticated %}
-            <!-- 회원정보 수정 -->
-            {% if user == request.user %}
-              <button type="submit" class="edit-button" onclick="location.href='{% url 'accounts:update' %}'">
-                회원정보 수정
-              </button>
-            {% else %}
-              <!-- 팔로우 버튼 -->
-              {% if request.user != user %}
-                <form id="follow-form" data-user-name="{{ user.username }}">
-                  {% csrf_token %}
-                  {% if request.user in user.followers.all %}
-                    <input type="submit" value='팔로우 취소' class="follow-button">
-                  {% else %}
-                    <input type="submit" value='팔로우' class="follow-button">
-                  {% endif %}
-                </form>
-              {% endif %}
-            {% endif %}
+<div class="real_container">
+  <!-- 메뉴 위 상단 부분 -->
+  <div class="personal-info">
+    <!-- 프로필 사진이 설정되어 있으면 프로필 사진을 띄움 -->
+    {% if user.profile %}
+    <img src="{{ user.profile.url }}" alt="직접 설정해둔 프로필 사진">
+    {% else %}
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Roasted_coffee_beans.jpg/1200px-Roasted_coffee_beans.jpg"
+      alt="기본 프로필 사진">
+    {% endif %}
+    <div class="info-letter">
+      <div class="info-upper">
+        <p>{{ user }}</p>
+        <!-- 로그인 했을 경우 버튼이 뜸-->
+        {% if request.user.is_authenticated %}
+        <!-- 회원정보 수정 -->
+        {% if user == request.user %}
+        <button type="submit" class="edit-button" onclick="location.href='{% url 'accounts:update' %}'">
+          회원정보 수정
+        </button>
+        {% else %}
+        <!-- 팔로우 버튼 -->
+        {% if request.user != user %}
+        <form id="follow-form" data-user-name="{{ user.username }}">
+          {% csrf_token %}
+          {% if request.user in user.followers.all %}
+          <input type="submit" value='팔로우 취소' class="follow-button">
+          {% else %}
+          <input type="submit" value='팔로우' class="follow-button">
           {% endif %}
-        </div>
-        <div class="info-lower">
-          <p id="followeings-count" class="follow">팔로우
-            {{ user.followings.count }}</p>
-          <p id="followers-count" class="follower">팔로워
-            {{ user.followers.all|length }}</p>
-        </div>
+        </form>
+        {% endif %}
+        {% endif %}
+        {% endif %}
       </div>
-    </div>
-
-    <!-- 메뉴 -->
-    <ul class="personal-tabs">
-      <li class="active" rel="tab1">작성한 글</li>
-      <li class="li" rel="tab2">즐겨찾기한 글</li>
-      <li class="li" rel="tab3">좋아요한 글</li>
-    </ul>
-
-    <!-- 메뉴 내용 -->
-    <div class="tab-container">
-      <div id="tab1" class="tab-content">
-        <ul class="listwrap">
-          {% for cafe_info in user.article_set.all %}
-            <a href="{% url 'cafes:cafe_detail' cafe_info.pk %}">
-              <img src="{{ cafe_info.image1.url }}" alt="작성한 글의 이미지">
-            </a>
-          {% endfor %}
-        </ul>
-        <button type="" class="more">더보기</button>
-      </div>
-      <div id="tab2" class="tab-content">
-        {% for bookmark_article in bookmark_articles%}
-          <a href="{% url 'cafes:cafe_detail' bookmark_article.pk %}">
-            <img src="{{ bookmark_article.image1.url }}" alt="북마크한 글의 이미지">
-          </a>
-        {% endfor %}
-        <button type="" class="more">더보기</button>
-      </div>
-      <div id="tab3" class="tab-content">
-        {% for like_article in like_articles %}
-          <a href="{% url 'cafes:cafe_detail' like_article.pk %}">
-            <img src="{{ like_article.image1.url }}" alt="좋아요한 글의 이미지">
-          </a>
-        {% endfor %}
-        <button type="" class="more">더보기</button>
+      <div class="info-lower">
+        <p id="followeings-count" class="follow">팔로우
+          {{ user.followings.count }}</p>
+        <p id="followers-count" class="follower">팔로워
+          {{ user.followers.all|length }}</p>
       </div>
     </div>
   </div>
+
+  <!-- 메뉴 -->
+  <ul class="personal-tabs">
+    <li class="active" rel="tab1">작성한 글</li>
+    <li class="li" rel="tab2">즐겨찾기한 글</li>
+    <li class="li" rel="tab3">좋아요한 글</li>
+  </ul>
+
+  <!-- 메뉴 내용 -->
+  <div class="tab-container">
+    <div id="tab1" class="tab-content">
+      <ul class="listwrap">
+        {% for cafe_info in user.article_set.all %}
+        <a href="{% url 'cafes:cafe_detail' cafe_info.pk %}">
+          <img src="{{ cafe_info.image1.url }}" alt="작성한 글의 이미지">
+        </a>
+        {% endfor %}
+      </ul>
+      {% if user.article_set.all %}
+      <button type="" class="more">더보기</button>
+      {% else %}
+      <p class="no-contents">작성한 글이 없습니다.<br>카페 탐색을 시작해보세요!</p>
+
+      {% endif %}
+    </div>
+    <div id="tab2" class="tab-content">
+      {% for bookmark_article in bookmark_articles%}
+      <a href="{% url 'cafes:cafe_detail' bookmark_article.pk %}">
+        <img src="{{ bookmark_article.image1.url }}" alt="북마크한 글의 이미지">
+      </a>
+      {% endfor %}
+      {% if bookmark_articles %}
+      <button type="" class="more">더보기</button>
+      {% else %}
+      <p class="no-contents">북마크한 글이 없습니다.<br>카페 탐색을 시작해보세요!</p>
+
+      {% endif %}
+    </div>
+    <div id="tab3" class="tab-content">
+      {% for like_article in like_articles %}
+      <a href="{% url 'cafes:cafe_detail' like_article.pk %}">
+        <img src="{{ like_article.image1.url }}" alt="좋아요한 글의 이미지">
+      </a>
+      {% endfor %}
+      {% if like_articles %}
+      <button type="" class="more">더보기</button>
+      {% else %}
+      <p class="no-contents">좋아요한 글이 없습니다.<br>카페 탐색을 시작해보세요!</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
 {% endblock content %}
 
 {% block js %}
-  <script src="http://code.jquery.com/jquery-latest.js"></script>
-  <script src="{% static 'accounts/js/profile.js' %}"></script>
-  <script>
-    const form = document.querySelector('#follow-form')
-    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
-      
-    form.addEventListener('submit', function (event) {
-      event.preventDefault()
-      const username = event.target.dataset.userName
-      axios({
-        method: 'post',
-        url: `/accounts/follow/${username}/`,
-        headers: {'X-CSRFToken': csrftoken}
-      })
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="{% static 'accounts/js/profile.js' %}"></script>
+<script>
+  const form = document.querySelector('#follow-form')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault()
+    const username = event.target.dataset.userName
+    axios({
+      method: 'post',
+      url: `/accounts/follow/${username}/`,
+      headers: { 'X-CSRFToken': csrftoken }
+    })
       .then(response => {
         const isFollowed = response.data.is_followed
         const followBtn = document.querySelector('#follow-form > input[type=submit]')
@@ -123,6 +139,6 @@
       .catch((error) => {
         console.log("error : ", error.response)
       })
-    })
-  </script>
+  })
+</script>
 {% endblock js %}

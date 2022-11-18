@@ -171,3 +171,11 @@ body {
     justify-content: center;
     margin: 1.5rem auto 5rem;
 }
+
+
+/* 메뉴 안에 내용이 없을 경우 */
+.no-contents {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 5rem;
+}
