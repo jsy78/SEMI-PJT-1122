@@ -32,7 +32,7 @@
         {% else %}
         <!-- 팔로우 버튼 -->
         {% if request.user != user %}
-        <form action="{% url 'accounts:follow' user.username %}" method='POST'>
+        <form id="follow-form" data-user-name="{{ user.username }}">
           {% csrf_token %}
           {% if request.user in user.followers.all %}
           <input type="submit" value='팔로우 취소' class="follow-button">
@@ -40,14 +40,14 @@
           <input type="submit" value='팔로우' class="follow-button">
           {% endif %}
         </form>
-        {% endif %}
-        {% endif %}
+          {% endif %}
+          {% endif %}
         {% endif %}
       </div>
       <div class="info-lower">
-        <p class="follow">팔로우
+        <p id="followeings-count" class="follow">팔로우
           {{ user.followings.count }}</p>
-        <p class="follower">팔로워
+        <p id="followers-count" class="follower">팔로워
           {{ user.followers.all|length }}</p>
       </div>
     </div>
@@ -93,6 +93,39 @@
 {% endblock content %}
 
 {% block js %}
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="{% static 'accounts/js/profile.js' %}"></script>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="{% static 'accounts/js/profile.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const form = document.querySelector('#follow-form')
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+    form.addEventListener('submit', function(event) {
+      event.preventDefault()
+      const username = event.target.dataset.userName
+      axios({
+        method: 'post',
+        url: `/accounts/follow/${username}/`,
+        headers: {'X-CSRFToken': csrftoken,}
+      })
+      .then(response => {
+        const isFollowed = response.data.is_followed
+        const followBtn = document.querySelector('#follow-form > input[type=submit]')
+        if (isFollowed === true) {
+          followBtn.value = '팔로우 취소'
+        }
+        else {
+          followBtn.value = '팔로우'
+        }
+        const followersCountTag = document.querySelector('#followers-count')
+        const followingsCountTag = document.querySelector('#followings-count')
+        const followersCount = response.data.followersCount
+        const followingsCount = response.data.followingsCount
+        followersCountTag.innerText = "팔로워 " + followersCount
+        followingsCountTag.innerText = "팔로우 " + followingsCount
+      })
+      .catch((error) => {
+        console.log("error : ", error.response)
+      })
+    })
+  </script>
 {% endblock js %}
