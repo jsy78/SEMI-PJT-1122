@@ -11,6 +11,7 @@ from django.db.models import Prefetch, Q
 from datetime import date, datetime, timedelta, timezone
 from .models import Article, Review, Comment
 from .forms import ArticleForm, ReviewForm, CommentForm, ReplyForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 @require_safe
@@ -164,6 +165,7 @@ def cafe_bookmark(request, article_pk):
 def cafe_search(request):
     articles = None
     query = None
+    page_obj = None
 
     if "q" in request.GET:
         query = request.GET.get("q")
@@ -172,9 +174,15 @@ def cafe_search(request):
             | Q(address__contains=query)
             | Q(menu__contains=query)
         )
+
+        page = request.GET.get("page", "1")
+        paginator = Paginator(articles, 6)
+        page_obj = paginator.get_page(page)
+
     context = {
         "articles": articles,
         "query": query,
+        "page_obj": page_obj,
     }
     return render(request, "cafes/cafe_search.html", context)
 
