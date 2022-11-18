@@ -77,24 +77,24 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = get_user_model()
         fields = (
+            "last_name",
+            "first_name",
+            "profile",
             "address",
             "sido",
             "sigungu",
             "roadname",
             "email",
-            "profile",
-            "first_name",
-            "last_name",
         )
         labels = {
+            "last_name": "성",
+            "first_name": "이름",
+            "profile": "프로필 이미지",
             "address": "주소",
             "sido": "시/도",
             "sigungu": "시/군/구",
             "roadname": "도로명",
             "email": "이메일",
-            "profile": "프로필 이미지",
-            "first_name": "이름",
-            "last_name": "성",
         }
         widgets = {
             "address": forms.TextInput(

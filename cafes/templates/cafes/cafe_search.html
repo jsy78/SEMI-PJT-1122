@@ -8,9 +8,9 @@
 {% endblock css %}
 
 {% block content %}
-<div class="infinite-container cafe-list">
+<div class="cafe-list infinite-container">
     {% for article in page_obj %}
-    <div class="infinite-item card">
+    <div class="card infinite-item">
         <img src="{{ article.image.url }}" class="card-img-top" alt="카페 이미지">
         <div class="card-body">
             <a href="{% url 'cafes:cafe_detail' article.pk %}" class="card-title">{{ article.name }}</a>
@@ -36,14 +36,14 @@
 <!-- 무한 스크롤 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
     crossorigin="anonymous"></script>
-<script src="{% static 'cafes/js/jquery.waypoints.min.js' %}"></script>
-<script src="{% static 'cafes/js/infinite.min.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
 <script>
     var infinite = new Waypoint.Infinite({
         element: $('.infinite-container')[0],
         offset: 'bottom-in-view',
         onBeforePageLoad: () => { },
         onAfterPageLoad: () => { }
-    })
+    });
 </script>
 {% endblock js %}
