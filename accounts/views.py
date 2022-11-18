@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -56,8 +57,12 @@ def login(request):
 @require_safe
 def profile(request, username):
     user = get_object_or_404(get_user_model(), username=username)
+    like_articles = user.like_articles.all()
+    bookmark_articles = user.bookmark_articles.all()
     context = {
         "user": user,
+        "like_articles": like_articles,
+        "bookmark_articles": bookmark_articles,
     }
     return render(request, "accounts/profile.html", context)
 
@@ -72,8 +77,16 @@ def follow(request, username):
     if user != request.user:
         if user.followers.filter(username=request.user.username).exists():
             user.followers.remove(request.user)
+            is_followed = False
         else:
             user.followers.add(request.user)
+            is_followed = True
+        context = {
+            "is_followed": is_followed,
+            "followersCount": user.followers.all().count(),
+            "followingsCount": user.followings.all().count(),
+        }
+        return JsonResponse(context)
     return redirect("accounts:profile", user.username)
 
 

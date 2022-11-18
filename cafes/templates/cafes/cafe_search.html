@@ -4,10 +4,46 @@
 {% load static %}
 
 {% block css %}
+<link rel="stylesheet" href="{% static 'cafes/css/cafe_search.css' %}">
 {% endblock css %}
 
 {% block content %}
+<div class="infinite-container cafe-list">
+    {% for article in page_obj %}
+    <div class="infinite-item card">
+        <img src="{{ article.image.url }}" class="card-img-top" alt="카페 이미지">
+        <div class="card-body">
+            <a href="{% url 'cafes:cafe_detail' article.pk %}" class="card-title">{{ article.name }}</a>
+            <div class="cafe-address">
+                <img src="https://cdn-icons-png.flaticon.com/512/67/67872.png" alt="위치 아이콘">
+                <p class="card-text">{{ article.address }}</p>
+            </div>
+            <p class="sample">뭔가 더 써야 보기에 좋을듯 근데 뭐 쓰지</p>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-3">
+            {% if page_obj.has_next %}
+            <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock content %}
 
 {% block js %}
+<!-- 무한 스크롤 -->
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+<script src="{% static 'cafes/js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'cafes/js/infinite.min.js' %}"></script>
+<script>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+        offset: 'bottom-in-view',
+        onBeforePageLoad: () => { },
+        onAfterPageLoad: () => { }
+    })
+</script>
 {% endblock js %}

@@ -2,13 +2,26 @@
 
 .navbar {
     background-color: rgba(38, 57, 35, 0.9) !important;
-    position: sticky;
 }
 
 /* 네비게이션 왼쪽 로고 */
 .logo img {
-    height: 1.5rem;
-    margin: 0 1.3rem;
+    height: 1.9rem;
+    margin: 0;
+    margin-left: 1.3rem;
+}
+
+.logo img:hover {
+    animation: rotate_image 0.2s linear;
+    filter: brightness(115%);
+    transform-origin: 50% 50%;
+    transform: scale(1.1);
+}
+
+@keyframes rotate_image {
+    100% {
+        transform: rotate(720deg);
+    }
 }
 
 
@@ -28,6 +41,30 @@
     width: 25rem;
 }
 
+.search input:focus {
+    outline: none;
+}
+
+.search input:-webkit-autofill,
+.search input:-webkit-autofill:hover,
+.search input:-webkit-autofill:focus,
+.search input:-webkit-autofill:active {
+    -webkit-text-fill-color: #ffffff;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.0) inset !important;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.search input:autofill,
+.search input:autofill:hover,
+.search input:autofill:focus,
+.search input:autofill:active {
+    -webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 .search ::-webkit-input-placeholder {
     color: #ffffff;
     font-size: 0.9rem;
@@ -38,7 +75,7 @@
     background-color: transparent;
     border: none;
     position: absolute;
-    left: 59.5%;
+    left: 58.5%;
     top: 23%;
     width: 2%;
 }
@@ -171,5 +208,5 @@
 /* 사이드메뉴 순서 변경 */
 .content_block {
     z-index: 99;
-    position: relative;
-  }
+    /*position: relative; relative 때문에 navbar가 안 붙음*/
+}

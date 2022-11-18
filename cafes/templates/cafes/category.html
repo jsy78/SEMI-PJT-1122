@@ -3,52 +3,27 @@
 {% load django_bootstrap5 %}
 {% load static %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'cafes/css/category.css' %}">
+{% endblock css %}
+
 {% block content %}
-  <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'image/dummy_1.png' %}" class="card-img-top" alt="...">
+<div class="cafe-list">
+    {% for article in articles %}
+    <div class="card">
+        <img src="{{ article.image.url }}" class="card-img-top" alt="카페 이미지">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <a href="{% url 'cafes:cafe_detail' article.pk %}" class="card-title">{{ article.name }}</a>
+            <div class="cafe-address">
+                <img src="https://cdn-icons-png.flaticon.com/512/67/67872.png" alt="위치 아이콘">
+                <p class="card-text">{{ article.address }}</p>
+            </div>
+            <p class="sample">뭔가 더 써야 보기에 좋을듯 근데 뭐 쓰지</p>
         </div>
-      </div>
     </div>
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'image/dummy_1.png' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'image/dummy_1.png' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'image/dummy_1.png' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'image/dummy_1.png' %}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+    {% endfor %}
+</div>
 {% endblock content %}
+
+{% block js %}
+{% endblock js %}
