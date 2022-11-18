@@ -36,15 +36,41 @@ class Article(models.Model):
         ("이색적인", "이색적인"),
     )
     cafeType = models.CharField(max_length=20, choices=category, null=True)
-    image = ProcessedImageField(
+    image1 = ProcessedImageField(
         upload_to="images/cafe",
         blank=False,
-        processors=[ResizeToFill(1200, 960)],
+        processors=[ResizeToFill(1200, 760)],
         format="JPEG",
-        options={"quality": 80},
+        options={"quality": 95},
     )
-    thumbnail = ImageSpecField(
-        source="image",
+    image2 = ProcessedImageField(
+        upload_to="images/cafe",
+        blank=False,
+        processors=[ResizeToFill(1200, 760)],
+        format="JPEG",
+        options={"quality": 95},
+        default="default.jpg",
+    )
+    image3 = ProcessedImageField(
+        upload_to="images/cafe",
+        blank=False,
+        processors=[ResizeToFill(1200, 760)],
+        format="JPEG",
+        options={"quality": 95},
+        default="default.jpg",
+    )
+    thumbnail1 = ImageSpecField(
+        source="image1",
+        processors=[ResizeToFill(120, 120)],
+        format="JPEG",
+    )
+    thumbnail2 = ImageSpecField(
+        source="image2",
+        processors=[ResizeToFill(120, 120)],
+        format="JPEG",
+    )
+    thumbnail3 = ImageSpecField(
+        source="image3",
         processors=[ResizeToFill(120, 120)],
         format="JPEG",
     )
@@ -89,18 +115,6 @@ class Review(models.Model):
     rate = models.FloatField(
         default=0.0,
         validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],
-    )
-    image = ProcessedImageField(
-        upload_to="images/review",
-        blank=False,
-        processors=[ResizeToFill(1200, 960)],
-        format="JPEG",
-        options={"quality": 80},
-    )
-    thumbnail = ImageSpecField(
-        source="image",
-        processors=[ResizeToFill(120, 120)],
-        format="JPEG",
     )
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)

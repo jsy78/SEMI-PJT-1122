@@ -28,7 +28,9 @@ class ArticleForm(forms.ModelForm):
             "parking",
             "dayoff",
             "cafeType",
-            "image",
+            "image1",
+            "image2",
+            "image3",
         ]
         labels = {
             "name": "가게 이름",
@@ -42,7 +44,9 @@ class ArticleForm(forms.ModelForm):
             "parking": "주차",
             "dayoff": "휴일",
             "cafeType": "분류",
-            "image": "사진",
+            "image1": "사진 1",
+            "image2": "사진 2",
+            "image3": "사진 3",
         }
         widgets = {
             "address": forms.TextInput(
@@ -83,15 +87,13 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = [
             "title",
-            "content",
             "rate",
-            "image",
+            "content",
         ]
         labels = {
             "title": "제목",
-            "content": "내용",
             "rate": "평점",
-            "image": "사진",
+            "content": "내용",
         }
         widgets = {
             "rate": forms.NumberInput(

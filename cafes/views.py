@@ -7,7 +7,8 @@ from django.views.decorators.http import (
     require_safe,
     require_http_methods,
 )
-from django.db.models import Prefetch, Q
+from django.db.models import Prefetch, Q, Count, Avg
+from django.http import JsonResponse
 from datetime import date, datetime, timedelta, timezone
 from .models import Article, Review, Comment
 from .forms import ArticleForm, ReviewForm, CommentForm, ReplyForm
@@ -43,15 +44,18 @@ def cafe_detail(request, article_pk):
 
     context = {
         "article": article,
-        "reviews": Review.objects.prefetch_related(
+        "reviews": Review.objects.select_related("user")
+        .prefetch_related(
             Prefetch(
                 "comment_set",
                 queryset=Comment.objects.select_related("user").filter(parent=None),
                 to_attr="root_comments",
             )
-        ).filter(cafe=article),
-        "comment_form": CommentForm(),
-        "reply_form": ReplyForm(),
+        )
+        .filter(cafe=article),
+        "rate_avg": Review.objects.filter(cafe=article)
+        .aggregate(Avg("rate"))
+        .get("rate__avg"),
     }
     response = render(request, "cafes/cafe_detail.html", context)
 
@@ -66,6 +70,53 @@ def cafe_detail(request, article_pk):
         response.set_cookie("hits", value=cookie_value, max_age=max_age, httponly=True)
 
     return response
+
+
+@require_safe
+def cafe_detail_new(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+
+    context = {
+        "article": article,
+        "reviews": Review.objects.select_related("user")
+        .prefetch_related(
+            Prefetch(
+                "comment_set",
+                queryset=Comment.objects.select_related("user").filter(parent=None),
+                to_attr="root_comments",
+            )
+        )
+        .filter(cafe=article)
+        .order_by("-pk"),
+        "rate_avg": Review.objects.filter(cafe=article)
+        .aggregate(Avg("rate"))
+        .get("rate__avg"),
+    }
+    return render(request, "cafes/cafe_detail.html", context)
+
+
+@require_safe
+def cafe_detail_good(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+
+    context = {
+        "article": article,
+        "reviews": Review.objects.select_related("user")
+        .prefetch_related(
+            Prefetch(
+                "comment_set",
+                queryset=Comment.objects.select_related("user").filter(parent=None),
+                to_attr="root_comments",
+            )
+        )
+        .filter(cafe=article)
+        .annotate(Count("like_users"))
+        .order_by("-like_users__count"),
+        "rate_avg": Review.objects.filter(cafe=article)
+        .aggregate(Avg("rate"))
+        .get("rate__avg"),
+    }
+    return render(request, "cafes/cafe_detail.html", context)
 
 
 @login_required
@@ -143,7 +194,11 @@ def cafe_like(request, article_pk):
         article.like_users.remove(request.user)
     else:
         article.like_users.add(request.user)
-    return redirect("cafes:cafe_detail", article_pk)
+    context = {
+        "like_count": article.like_users.count(),
+    }
+    return JsonResponse(context)
+    # return redirect("cafes:cafe_detail", article_pk)
 
 
 @require_POST
@@ -158,7 +213,11 @@ def cafe_bookmark(request, article_pk):
         article.bookmark_users.remove(request.user)
     else:
         article.bookmark_users.add(request.user)
-    return redirect("cafes:cafe_detail", article_pk)
+    context = {
+        "bookmark_count": article.bookmark_users.count(),
+    }
+    return JsonResponse(context)
+    # return redirect("cafes:cafe_detail", article_pk)
 
 
 @require_safe
@@ -266,9 +325,16 @@ def review_like(request, article_pk, review_pk):
 
     if review.like_users.filter(pk=request.user.pk).exists():
         review.like_users.remove(request.user)
+        is_review_liked = False
     else:
         review.like_users.add(request.user)
-    return redirect("cafes:cafe_detail", article_pk)
+        is_review_liked = True
+    context = {
+        "is_review_liked": is_review_liked,
+        "review_like_count": review.like_users.count(),
+    }
+    return JsonResponse(context)
+    # return redirect("cafes:cafe_detail", article_pk)
 
 
 @require_POST
@@ -285,10 +351,47 @@ def comment_create(request, review_pk):
         comment.user = request.user
         comment.review = review
         comment.save()
-        messages.success(request, "댓글 작성이 완료되었습니다.")
+
+        queryset = Comment.objects.select_related("user").filter(review=review)
+        queryset_list = list()
+        for query in queryset:
+            if query.parent == None:
+                queryset_list.append(
+                    {
+                        "pk": query.pk,
+                        "parent": None,
+                        "content": query.content,
+                        "is_liked": request.user in query.like_users.all(),
+                        "like_count": query.like_users.count(),
+                        "reply_count": query.reply_set.count(),
+                        "profile": query.user.profile.url,
+                        "username": query.user.username,
+                    }
+                )
+            else:
+                queryset_list.append(
+                    {
+                        "pk": query.pk,
+                        "parent": query.parent.pk,
+                        "content": query.content,
+                        "is_liked": request.user in query.like_users.all(),
+                        "like_count": query.like_users.count(),
+                        "reply_count": query.reply_set.count(),
+                        "profile": query.user.profile.url,
+                        "username": query.user.username,
+                    }
+                )
+        context = {
+            "comments_count": queryset.count(),
+            "comments": queryset_list,
+            "review_pk": review.pk,
+            "request_is_authenticated": request.user.is_authenticated,
+            "request_username": request.user.username,
+        }
+        return JsonResponse(context)
     else:
         messages.warning(request, "양식이 유효하지 않습니다.")
-    return redirect("cafes:cafe_detail", review.cafe.pk)
+        return redirect("cafes:cafe_detail", review.cafe.pk)
 
 
 @require_POST
@@ -307,7 +410,10 @@ def comment_update(request, review_pk, comment_pk):
     form = CommentForm(request.POST, instance=comment)
     if form.is_valid():
         form.save()
-        messages.success(request, "댓글 수정이 완료되었습니다.")
+        context = {
+            "content": comment.content,
+        }
+        return JsonResponse(context)
     else:
         messages.warning(request, "양식이 유효하지 않습니다.")
     return redirect("cafes:cafe_detail", review.cafe.pk)
@@ -324,10 +430,47 @@ def comment_delete(request, review_pk, comment_pk):
 
     if request.user != comment.user:
         messages.warning(request, "댓글 작성자만 삭제가 가능합니다.")
+        return redirect("cafes:cafe_detail", review.cafe.pk)
     else:
         comment.delete()
-        messages.success(request, "성공적으로 삭제되었습니다.")
-    return redirect("cafes:cafe_detail", review.cafe.pk)
+
+        queryset = Comment.objects.select_related("user").filter(review=review)
+        queryset_list = list()
+        for query in queryset:
+            if query.parent == None:
+                queryset_list.append(
+                    {
+                        "pk": query.pk,
+                        "parent": None,
+                        "content": query.content,
+                        "is_liked": request.user in query.like_users.all(),
+                        "like_count": query.like_users.count(),
+                        "reply_count": query.reply_set.count(),
+                        "profile": query.user.profile.url,
+                        "username": query.user.username,
+                    }
+                )
+            else:
+                queryset_list.append(
+                    {
+                        "pk": query.pk,
+                        "parent": query.parent.pk,
+                        "content": query.content,
+                        "is_liked": request.user in query.like_users.all(),
+                        "like_count": query.like_users.count(),
+                        "reply_count": query.reply_set.count(),
+                        "profile": query.user.profile.url,
+                        "username": query.user.username,
+                    }
+                )
+        context = {
+            "comments_count": queryset.count(),
+            "comments": queryset_list,
+            "review_pk": review.pk,
+            "request_is_authenticated": request.user.is_authenticated,
+            "request_username": request.user.username,
+        }
+        return JsonResponse(context)
 
 
 @require_POST
@@ -341,9 +484,16 @@ def comment_like(request, review_pk, comment_pk):
 
     if comment.like_users.filter(pk=request.user.pk).exists():
         comment.like_users.remove(request.user)
+        is_comment_liked = False
     else:
         comment.like_users.add(request.user)
-    return redirect("cafes:cafe_detail", review.cafe.pk)
+        is_comment_liked = True
+    context = {
+        "is_comment_liked": is_comment_liked,
+        "comment_like_count": comment.like_users.count(),
+    }
+    return JsonResponse(context)
+    # return redirect("cafes:cafe_detail", review.cafe.pk)
 
 
 @require_POST
@@ -362,7 +512,44 @@ def reply_create(request, review_pk, comment_pk):
         reply.review = review
         reply.parent = parent_comment
         reply.save()
-        messages.success(request, "대댓글 작성이 완료되었습니다.")
+
+        queryset = Comment.objects.select_related("user").filter(review=review)
+        queryset_list = list()
+        for query in queryset:
+            if query.parent == None:
+                queryset_list.append(
+                    {
+                        "pk": query.pk,
+                        "parent": None,
+                        "content": query.content,
+                        "is_liked": request.user in query.like_users.all(),
+                        "like_count": query.like_users.count(),
+                        "reply_count": query.reply_set.count(),
+                        "profile": query.user.profile.url,
+                        "username": query.user.username,
+                    }
+                )
+            else:
+                queryset_list.append(
+                    {
+                        "pk": query.pk,
+                        "parent": query.parent.pk,
+                        "content": query.content,
+                        "is_liked": request.user in query.like_users.all(),
+                        "like_count": query.like_users.count(),
+                        "reply_count": query.reply_set.count(),
+                        "profile": query.user.profile.url,
+                        "username": query.user.username,
+                    }
+                )
+        context = {
+            "comments_count": queryset.count(),
+            "comments": queryset_list,
+            "review_pk": review.pk,
+            "request_is_authenticated": request.user.is_authenticated,
+            "request_username": request.user.username,
+        }
+        return JsonResponse(context)
     else:
         messages.warning(request, "양식이 유효하지 않습니다.")
-    return redirect("cafes:cafe_detail", review.cafe.pk)
+        return redirect("cafes:cafe_detail", review.cafe.pk)
