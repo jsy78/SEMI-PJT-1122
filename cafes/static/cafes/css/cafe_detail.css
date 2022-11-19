@@ -15,6 +15,11 @@ body {
   height: 1px;
   background: rgb(255, 196, 0);
 }
+.my-hr2 {
+  border: 0;
+  height: 1px;
+  background: rgb(0, 16, 237);
+}
 
 .my-hr3 {
   border: 0;
@@ -330,7 +335,7 @@ body {
 	border-radius:16px;
 	border:1px solid #406343;
 
-  opacity:85%;
+  /* opacity:85%; */
 }
 
 .headmenu { 
@@ -347,7 +352,7 @@ body {
 	font-weight:bold;
 	padding:7px 30px;
 	text-decoration:none;
-  opacity:85%;
+  /* opacity:85%; */
 }
 
 .introduce_tema
@@ -360,7 +365,7 @@ body {
 	font-weight:bold;
 	padding:7px 30px;
 	text-decoration:none;
-  opacity:85%;
+  /* opacity:85%; */
 }
 
 .review_reply {
