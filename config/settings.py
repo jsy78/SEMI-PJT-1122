@@ -31,7 +31,7 @@ DEBUG = os.getenv("DEBUG") == "True"
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
-    "*.elasticbeanstalk.com",
+    "semipjt1122-env.eba-apivr4wu.ap-northeast-2.elasticbeanstalk.com",
 ]
 
 
