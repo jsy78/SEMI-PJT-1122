@@ -302,7 +302,7 @@
         <div class="d-flex justify-content-between">
           <div class="d-flex">
             <button class="btn btn-sm border-0 text-secondary comment-btn" data-review-id="{{ review.pk }}">
-              <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+              <i class="bi bi-chat-left-dots yellow fs-5"></i>
               <span class="ms-2 comment-{{ review.pk }}-count yellow">{{ review.comment_set.count }}</span>
             </button>
             {% if request.user.is_authenticated %}
@@ -383,7 +383,7 @@
                 {% if request.user.is_authenticated %}
                   <div class="d-flex">
                     <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="{{ comment.pk }}">
-                      <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                      <i class="bi bi-chat-left-dots yellow fs-5"></i>
                       <span class="ms-2 reply-count yellow">{{ comment.reply_set.count }}</span>
                     </button>
                     <form class="comment-like-form" data-review-id="{{ review.pk }}" data-comment-id="{{ comment.pk }}">
@@ -727,7 +727,7 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <i class="bi bi-chat-left-dots yellow fs-5"></i>
                           <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
@@ -744,7 +744,7 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <i class="bi bi-chat-left-dots yellow fs-5"></i>
                           <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
@@ -796,7 +796,7 @@
               else {
                 dom.querySelector(`#comment-${comments[i].parent}`).insertAdjacentHTML('beforeend', `
                   <div class="d-flex">
-                    <a href="#comment-${comments[i].parent}" class="m-2"><i class="bi bi-arrow-return-right"></i></a>
+                    <a href="#comment-${comments[i].parent}" class="m-2"><i class="bi bi-arrow-return-right fs-5"></i></a>
                     <div class="flex-fill">
                       <div id="comment-${comments[i].pk}">
                         <div id="comment-${comments[i].pk}-block" class="d-flex mb-1 d-block">
@@ -855,7 +855,7 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <i class="bi bi-chat-left-dots yellow fs-5"></i>
                           <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
@@ -872,7 +872,7 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <i class="bi bi-chat-left-dots yellow fs-5"></i>
                           <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
@@ -1040,7 +1040,7 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <i class="bi bi-chat-left-dots yellow fs-5"></i>
                           <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
@@ -1057,7 +1057,7 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <i class="bi bi-chat-left-dots yellow fs-5"></i>
                           <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
@@ -1109,7 +1109,7 @@
               else {
                 dom.querySelector(`#comment-${comments[i].parent}`).insertAdjacentHTML('beforeend', `
                   <div class="d-flex">
-                    <a href="#comment-${comments[i].parent}" class="m-2"><i class="bi bi-arrow-return-right"></i></a>
+                    <a href="#comment-${comments[i].parent}" class="m-2"><i class="bi bi-arrow-return-right fs-5"></i></a>
                     <div class="flex-fill">
                       <div id="comment-${comments[i].pk}">
                         <div id="comment-${comments[i].pk}-block" class="d-flex mb-1 d-block">
@@ -1169,7 +1169,7 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <i class="bi bi-chat-left-dots yellow fs-5"></i>
                           <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
@@ -1186,7 +1186,7 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <i class="bi bi-chat-left-dots yellow fs-5"></i>
                           <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
@@ -1353,7 +1353,7 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <i class="bi bi-chat-left-dots yellow fs-5"></i>
                           <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
@@ -1422,7 +1422,7 @@
               else {
                 dom.querySelector(`#comment-${comments[i].parent}`).insertAdjacentHTML('beforeend', `
                   <div class="d-flex">
-                    <a href="#comment-${comments[i].parent}" class="m-2"><i class="bi bi-arrow-return-right"></i></a>
+                    <a href="#comment-${comments[i].parent}" class="m-2"><i class="bi bi-arrow-return-right fs-5"></i></a>
                     <div class="flex-fill">
                       <div id="comment-${comments[i].pk}">
                         <div id="comment-${comments[i].pk}-block" class="d-flex mb-1 d-block">
@@ -1482,7 +1482,7 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <i class="bi bi-chat-left-dots yellow fs-5"></i>
                           <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
@@ -1499,7 +1499,7 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <i class="bi bi-chat-left-dots yellow fs-5"></i>
                           <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
