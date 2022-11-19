@@ -6,30 +6,47 @@
 {% block css %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
   <link rel="stylesheet" href="{% static 'cafes/css/cafe_detail.css' %}">
+  
 {% endblock css %}
 
 {% block content %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Jua&family=Lilita+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+  </head>
+
+</html>
   <!-- 최상단 정보 -->
-  <div class="titles">
-    <div class="cafe-left">
+  <div>
+      <div>
+          <div class="card text introduce_info mb-5">
+            <div class="card-body">
       <!-- 카페 이름, 평점 -->
       <div class="cafe-upper">
         <p class="cafe-name">{{ article.name }}</p>
         <!-- 평점 -->
-        <p class="rate-number">{{ rate_avg }}</p>
+        <p class="rate-number store-rate">{{ rate_avg }}</p>
       </div>
 
       <!-- 조회수, 좋아요, 북마크, 공유 -->
-      <div class="cafe-lower">
+      <div class="cafe-lower headmenu">
         <!-- 조회수 -->
-        <div class="views me-1">
+        <div class="views me-3">
           <button class="btn btn-secondary disabled">
             <img src="https://cdn-icons-png.flaticon.com/512/159/159604.png" alt="조회수 아이콘">
             <span class="ms-1">{{ article.hits }}</span>
           </button>
         </div>
         <!-- 좋아요 -->
-        <div class="like me-1">
+        <div class="like">
           {% if request.user.is_authenticated %}
             <form id="cafe-like-form" data-article-id="{{ article.pk }}">
               {% csrf_token %}
@@ -46,7 +63,7 @@
           {% endif %}
         </div>
         <!-- 북마크 -->
-        <div class="bookmark me-1">
+        <div class="bookmark ms-3">
           {% if request.user.is_authenticated %}
             <form id="cafe-bookmark-form" data-article-id="{{ article.pk }}">
               {% csrf_token %}
@@ -63,7 +80,7 @@
           {% endif %}
         </div>
         <!-- 공유 -->
-        <div class="share">
+        <div class="share  ms-3">
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#shareModal">
             <img src="https://cdn-icons-png.flaticon.com/512/1330/1330134.png" alt="공유 아이콘">
             <span class="ms-1">공유</span>
@@ -86,19 +103,20 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
+
     <!-- 수정 버튼 -->
-    <div class="cafe-right">
+    <div class="cafe-right  ms-auto p-2">
       {% if request.user == article.user %}
         <a class="edit-button" href="{% url 'cafes:cafe_update' article.pk %}">
           <img src="https://cdn-icons-png.flaticon.com/512/1014/1014883.png" alt="수정 아이콘">
           <p>수정</p>
         </a>
       {% endif %}
+      </div>
+      </div>
     </div>
   </div>
-
+</div>
   <!-- 이미지/캐러셀 -->
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
@@ -122,43 +140,55 @@
     </button>
   </div>
 
-  <!-- 가게 상세 -->
+
   <div class="row mt-5 g-4">
     <div class="col-sm-12 col-lg-9">
-      <div class="card">
-        <div class="card-body">
-          <p>
-            주소 :
+      <div class="card text introduce_info">
+        <div class="card-body fs-5">
+          <p><i class="bi bi-house"></i>
+           &nbsp 주소 :
             <span id="cafe-address">{{ article.address }}</span>
           </p>
+          <hr class="my-hr1">
           <p>
             <div id="map" class="rounded" style="width: 100%; height: 350px;"></div>
           </p>
+          <hr class="my-hr1">
           <p>
-            전화번호 :
+            <i class="bi bi-telephone-forward-fill"></i>
+					&nbsp	전화번호 :
             {{ article.number }}
           </p>
+          <hr class="my-hr1">
           <p>
-            영업 시간 :
+						<i class="bi bi-clock"></i>
+          &nbsp  영업 시간 :
             {{ article.opening_hour }}
           </p>
+          <hr class="my-hr1">
           <p>
-            휴일 :
+						<i class="bi bi-calendar-check"></i>
+          &nbsp  휴일 :
             {{ article.dayoff }}
           </p>
+          <hr class="my-hr1">
           <p>
-            주차 :
+						<i class="bi bi-p-square"></i>
+          &nbsp  주차 :
             {{ article.parking }}
           </p>
+          <hr class="my-hr1">
           <p>
-            {{ article.menu|safe }}
+						<i class="bi bi-list"></i>
+          &nbsp  메뉴{{ article.menu|safe }}
           </p>
+          <hr class="my-hr1">
         </div>
       </div>
     </div>
     <div class="col-sm-12 col-lg-3">
-      <div class="card">
-        <div class="card-body opacity-20 text-center">
+      <div class="card introduce_tema">
+        <div class="card-body opacity-20 text-center fs-5">
           <p>
             이 매장이 소개된 테마
           </p>
@@ -175,23 +205,23 @@
       <h2 class="my-auto fw-bold text-white">후기</h2>
       <div class="d-flex">
         <div class="dropdown text-end">
-          <select class="down form-select" onchange="if(this.value) location.href=(this.value);">
+          <select class="down form-select review_create" onchange="if(this.value) location.href=(this.value);">
             <option value="" disabled="disabled" selected="selected">정렬 선택</option>
             <option value="{% url 'cafes:cafe_detail_new' article.pk %}">최신순</option>
             <option value="{% url 'cafes:cafe_detail_good' article.pk %}">좋아요순</option>
           </select>
         </div>
         {% if request.user.is_authenticated %}
-          <a class="btn btn-primary ms-1 my-auto" href="{% url 'cafes:review_create' article.pk %}">후기 작성</a>
+          <a class=" review_create btn btn-primary ms-1 my-auto ms-3" href="{% url 'cafes:review_create' article.pk  %}">후기 작성</a>
         {% else %}
-          <a class="btn btn-primary ms-1 my-auto disabled">후기 작성</a>
+          <a class="btn btn-primary ms-1 my-auto disabled ">후기 작성</a>
         {% endif %}
       </div>
     </div>
     {% for review in reviews %}
-      <div id="review-{{ review.pk }}" class="card w-100 review-area">
+      <div id="review-{{ review.pk }}" class="card w-100 review-area review_reply">
         <div class="card-body">
-          <div class="d-flex mb-1">
+          <div class="d-flex mb-1 fs-5">
             {% if review.user.profile %}
               <img class="rounded" src="{{ review.user.profile.url }}" alt="기본 프로필 사진" style="max-height: 100px">
             {% else %}
@@ -199,7 +229,7 @@
             {% endif %}
             <div class="ms-4 flex-fill">
               <div class="mb-1">
-                <a href="{% url 'accounts:profile' review.user.username %}">{{ review.user }}</a>
+                <a href ="{% url 'accounts:profile' review.user.username %}" class="detail_name">{{ review.user }}</a>
               </div>
               <div class="mb-1">
                 <div class="d-flex">
@@ -280,17 +310,17 @@
           <div class="d-flex justify-content-between">
             <div class="d-flex">
               <button class="btn btn-sm border-0 text-secondary comment-btn" data-review-id="{{ review.pk }}">
-                <i class="bi bi-chat-left-dots"></i>
-                <span class="ms-2 comment-{{ review.pk }}-count">{{ review.comment_set.count }}</span>
+                <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                <span class="ms-2 comment-{{ review.pk }}-count yellow">{{ review.comment_set.count }}</span>
               </button>
               {% if request.user.is_authenticated %}
                 <form class="review-like-form" data-article-id="{{ article.pk }}" data-review-id="{{ review.pk }}">
                   {% csrf_token %}
                   <button class="btn btn-sm border-0 text-danger" type="submit">
                     {% if request.user in review.like_users.all %}
-                      <i class="bi bi-heart-fill review-like-icon"></i>
+                      <i class="bi bi-heart-fill fs-5 review-like-icon"></i>
                     {% else %}
-                      <i class="bi bi-heart review-like-icon"></i>
+                      <i class="bi bi-heart fs-5 review-like-icon"></i>
                     {% endif %}
                     <span class="ms-2 review-like-count">{{ review.like_users.count }}</span>
                   </button>
@@ -300,18 +330,18 @@
             {% if request.user == review.user %}
               <div class="d-flex">
                 <a class="btn btn-sm border-0 text-black" href="{% url 'cafes:review_update' article.pk review.pk %}">
-                  <i class="bi bi-pencil"></i>
+                  <i class="bi bi-pencil yellow fs-5"></i>
                 </a>
                 <form action="{% url 'cafes:review_delete' article.pk review.pk %}" method="POST">
                   {% csrf_token %}
                   <button class="btn btn-sm border-0 text-danger" type="submit">
-                    <i class="bi bi-trash"></i>
+                    <i class="bi bi-trash fs-5"></i>
                   </button>
                 </form>
               </div>
             {% endif %}
           </div>
-          <hr>
+          <hr class="my-hr3">
           <div id="comment-area-{{ review.pk }}" class="d-none">
             {% if request.user.is_authenticated %}
               <form class="comment-create-form" data-review-id="{{ review.pk }}">
@@ -321,11 +351,11 @@
                     <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true">
                   </div>
                   <div>
-                    <input class="btn btn-primary" type="submit" value="작성">
+                    <input class="btn btn-primary review_create" type="submit" value="작성">
                   </div>
                 </div>
               </form>
-              <hr>
+              <hr class="my-hr3">
             {% endif %}
             {% for comment in review.root_comments %}
               <div id="comment-{{ comment.pk }}">
@@ -337,7 +367,7 @@
                   {% endif %}
                   <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                     <div class="my-2">
-                      <a href="{% url 'accounts:profile' comment.user.username %}">{{ comment.user }}</a>
+                      <a href="{% url 'accounts:profile' comment.user.username %}" class="detail_name">{{ comment.user }}</a>
                     </div>
                     <div id="comment-{{ comment.pk }}-content" class="my-2">{{ comment.content }}</div>
                   </div>
@@ -361,16 +391,16 @@
                   {% if request.user.is_authenticated %}
                     <div class="d-flex">
                       <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="{{ comment.pk }}">
-                        <i class="bi bi-chat-left-dots"></i>
-                        <span class="ms-2 reply-count">{{ comment.reply_set.count }}</span>
+                        <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                        <span class="ms-2 reply-count yellow">{{ comment.reply_set.count }}</span>
                       </button>
                       <form class="comment-like-form" data-review-id="{{ review.pk }}" data-comment-id="{{ comment.pk }}">
                         {% csrf_token %}
                         <button class="btn btn-sm border-0 text-danger" type="submit">
                           {% if request.user in comment.like_users.all %}
-                            <i class="bi bi-heart-fill"></i>
+                            <i class="bi bi-heart-fill fs-5"></i>
                           {% else %}
-                            <i class="bi bi-heart"></i>
+                            <i class="bi bi-heart fs-5"></i>
                           {% endif %}
                           <span class="ms-2 comment-like-count">{{ comment.like_users.count }}</span>
                         </button>
@@ -380,12 +410,12 @@
                   {% if request.user == review.user %}
                     <div class="d-flex">
                       <button class="btn btn-sm border-0 text-black comment-update-btn" data-review-id="{{ review.pk }}" data-comment-id="{{ comment.pk }}">
-                        <i class="bi bi-pencil"></i>
+                        <i class="bi bi-pencil yellow fs-5"></i>
                       </button>
                       <form class="comment-delete-form" data-review-id="{{ review.pk }}" data-comment-id="{{ comment.pk }}">
                         {% csrf_token %}
                         <button class="btn btn-sm border-0 text-danger" type="submit">
-                          <i class="bi bi-trash"></i>
+                          <i class="bi bi-trash fs-5"></i>
                         </button>
                       </form>
                     </div>
@@ -393,7 +423,7 @@
                 </div>
                 <div id="reply-form-{{ comment.pk }}" class="d-none">
                   {% if request.user.is_authenticated %}
-                    <hr>
+                    <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="{{ review.pk }}" data-comment-id="{{ comment.pk }}">
                       {% csrf_token %}
                       <div class="d-flex justify-content-between align-items-center">
@@ -401,28 +431,28 @@
                           <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
                         </div>
                         <div>
-                          <input class="btn btn-primary" type="submit" value="작성">
+                          <input class="btn btn-primary review_create" type="submit" value="작성">
                         </div>
                       </div>
                     </form>
-                    <hr>
+                    <hr class="my-hr3 ">
                   {% endif %}
                 </div>
                 {% with parent=comment reply_list=comment.reply_set.all %}
                   {% include 'cafes/reply.html' %}
                 {% endwith %}
               </div>
-              <hr>
+              <hr class="my-hr3">
             {% endfor %}
           </div>
         </div>
       </div>
     {% endfor %}
-    <hr>
   </div>
 {% endblock content %}
 {% block js %}
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={% include 'cafes/appkey.txt' %}&libraries=services"></script>
+  
   <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
       mapOption = {
@@ -518,10 +548,10 @@
         .then(response => {
           if (response.data.is_review_liked) {
             reviewLikeForm.querySelector('.review-like-icon').classList.remove('bi-heart')
-            reviewLikeForm.querySelector('.review-like-icon').classList.add('bi-heart-fill')
+            reviewLikeForm.querySelector('.review-like-icon').classList.add('bi-heart-fill fs-5')
           }
           else {
-            reviewLikeForm.querySelector('.review-like-icon').classList.remove('bi-heart-fill')
+            reviewLikeForm.querySelector('.review-like-icon').classList.remove('bi-heart-fill fs-5')
             reviewLikeForm.querySelector('.review-like-icon').classList.add('bi-heart')
           }
           reviewLikeForm.querySelector('.review-like-count').innerText = response.data.review_like_count
@@ -580,12 +610,12 @@
           })
           .then(response => {
             if (response.data.is_comment_liked) {
-              commentLikeForm.querySelector('.bi').classList.add('bi-heart-fill')
+              commentLikeForm.querySelector('.bi').classList.add('bi-heart-fill fs-5')
               commentLikeForm.querySelector('.bi').classList.remove('bi-heart')
             }
             else {
               commentLikeForm.querySelector('.bi').classList.add('bi-heart')
-              commentLikeForm.querySelector('.bi').classList.remove('bi-heart-fill')
+              commentLikeForm.querySelector('.bi').classList.remove('bi-heart-fill fs-5')
             }
             commentLikeForm.querySelector('.comment-like-count').innerText = response.data.comment_like_count
           })
@@ -649,11 +679,11 @@
                       <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true">
                     </div>
                     <div>
-                      <input class="btn btn-primary" type="submit" value="작성">
+                      <input class="btn btn-primary review_create" type="submit" value="작성">
                     </div>
                   </div>
                 </form>
-                <hr>
+                <hr class="my-hr3">
               `)
             }
 
@@ -670,14 +700,15 @@
                     <div id="reply-form-${comments[i].pk}" class="d-none">
                     </div>
                   </div>
-                  <hr>
+                  <hr class="my-hr3">
                 `)
                 if (comments[i].profile == null) {
                   dom.querySelector(`#comment-${comments[i].pk}-block`).insertAdjacentHTML('beforeend', `
                     <img class="rounded" src="https://dummyimage.com/100x100" alt="기본 프로필 사진" style="max-height: 100px">
                     <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                       <div class="my-2">
-                        <a href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
+                        
+                        <a class = "name" href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
                       </div>
                       <div id="comment-${comments[i].pk}-content" class="my-2">${comments[i].content}</div>
                     </div>
@@ -688,7 +719,7 @@
                     <img class="rounded" src="${comments[i].profile}" alt="기본 프로필 사진" style="max-height: 100px">
                     <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                       <div class="my-2">
-                        <a href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
+                        <a class = "name" href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
                       </div>
                       <div id="comment-${comments[i].pk}-content" class="my-2">${comments[i].content}</div>
                     </div>
@@ -716,13 +747,13 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots"></i>
-                          <span class="ms-2 reply-count">${comments[i].reply_count}</span>
+                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart-fill"></i>
+                            <i class="bi bi-heart-fill fs-5"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -733,13 +764,13 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots"></i>
-                          <span class="ms-2 reply-count">${comments[i].reply_count}</span>
+                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart"></i>
+                            <i class="bi bi-heart fs-5"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -752,12 +783,12 @@
                   dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                     <div class="d-flex">
                       <button class="btn btn-sm border-0 text-black comment-update-btn" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
-                        <i class="bi bi-pencil"></i>
+                        <i class="bi bi-pencil yellow fs-5"></i>
                       </button>
                       <form class="comment-delete-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                         <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                         <button class="btn btn-sm border-0 text-danger" type="submit">
-                          <i class="bi bi-trash"></i>
+                          <i class="bi bi-trash fs-5"></i>
                         </button>
                       </form>
                     </div>
@@ -766,7 +797,7 @@
 
                 if (response.data.request_is_authenticated) {
                   dom.querySelector(`#reply-form-${comments[i].pk}`).insertAdjacentHTML('beforeend', `
-                    <hr>
+                    <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                       <div class="d-flex justify-content-between align-items-center">
@@ -774,18 +805,18 @@
                           <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
                         </div>
                         <div>
-                          <input class="btn btn-primary" type="submit" value="작성">
+                          <input class="btn btn-primary review_create" type="submit" value="작성">
                         </div>
                       </div>
                     </form>
-                    <hr>
+                    <hr class="my-hr3">
                   `)
                 }
               }
               else {
                 dom.querySelector(`#comment-${comments[i].parent}`).insertAdjacentHTML('beforeend', `
                   <div class="d-flex">
-                    <a href="#comment-${comments[i].parent}" class="m-2"><i class="bi bi-arrow-return-right"></i></a>
+                    <a class = "name" href="#comment-${comments[i].parent}" class="m-2"><i class="bi bi-arrow-return-right"></i></a>
                     <div class="flex-fill">
                       <div id="comment-${comments[i].pk}">
                         <div id="comment-${comments[i].pk}-block" class="d-flex mb-1 d-block">
@@ -805,7 +836,7 @@
                     <img class="rounded" src="https://dummyimage.com/100x100" alt="기본 프로필 사진" style="max-height: 100px">
                     <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                       <div class="my-2">
-                        <a href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
+                        <a class = "name" href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
                       </div>
                       <div id="comment-${comments[i].pk}-content" class="my-2">${comments[i].content}</div>
                     </div>
@@ -816,7 +847,7 @@
                     <img class="rounded" src="${comments[i].profile}" alt="기본 프로필 사진" style="max-height: 100px">
                     <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                       <div class="my-2">
-                        <a href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
+                        <a class = "name" href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
                       </div>
                       <div id="comment-${comments[i].pk}-content" class="my-2">${comments[i].content}</div>
                     </div>
@@ -844,13 +875,13 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots"></i>
-                          <span class="ms-2 reply-count">${comments[i].reply_count}</span>
+                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart-fill"></i>
+                            <i class="bi bi-heart-fill fs-5"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -861,13 +892,13 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots"></i>
-                          <span class="ms-2 reply-count">${comments[i].reply_count}</span>
+                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart"></i>
+                            <i class="bi bi-heart fs-5"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -880,12 +911,12 @@
                   dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                     <div class="d-flex">
                       <button class="btn btn-sm border-0 text-black comment-update-btn" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
-                        <i class="bi bi-pencil"></i>
+                        <i class="bi bi-pencil yellow fs-5"></i>
                       </button>
                       <form class="comment-delete-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                         <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                         <button class="btn btn-sm border-0 text-danger" type="submit">
-                          <i class="bi bi-trash"></i>
+                          <i class="bi bi-trash fs-5"></i>
                         </button>
                       </form>
                     </div>
@@ -894,7 +925,7 @@
 
                 if (response.data.request_is_authenticated) {
                   dom.querySelector(`#reply-form-${comments[i].pk}`).insertAdjacentHTML('beforeend', `
-                    <hr>
+                    <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                       <div class="d-flex justify-content-between align-items-center">
@@ -902,11 +933,11 @@
                           <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
                         </div>
                         <div>
-                          <input class="btn btn-primary" type="submit" value="작성">
+                          <input class="btn btn-primary review_create" type="submit" value="작성">
                         </div>
                       </div>
                     </form>
-                    <hr>
+                    <hr class="my-hr3">
                   `)
                 }
               }
@@ -959,11 +990,11 @@
                       <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true">
                     </div>
                     <div>
-                      <input class="btn btn-primary" type="submit" value="작성">
+                      <input class="btn btn-primary review_create" type="submit" value="작성">
                     </div>
                   </div>
                 </form>
-                <hr>
+                <hr class="my-hr3">
               `)
             }
 
@@ -980,14 +1011,14 @@
                     <div id="reply-form-${comments[i].pk}" class="d-none">
                     </div>
                   </div>
-                  <hr>
+                  <hr class="my-hr3">
                 `)
                 if (comments[i].profile == null) {
                   dom.querySelector(`#comment-${comments[i].pk}-block`).insertAdjacentHTML('beforeend', `
                     <img class="rounded" src="https://dummyimage.com/100x100" alt="기본 프로필 사진" style="max-height: 100px">
                     <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                       <div class="my-2">
-                        <a href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
+                        <a class = "name" href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
                       </div>
                       <div id="comment-${comments[i].pk}-content" class="my-2">${comments[i].content}</div>
                     </div>
@@ -998,7 +1029,7 @@
                     <img class="rounded" src="${comments[i].profile}" alt="기본 프로필 사진" style="max-height: 100px">
                     <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                       <div class="my-2">
-                        <a href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
+                        <a class = "name" href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
                       </div>
                       <div id="comment-${comments[i].pk}-content" class="my-2">${comments[i].content}</div>
                     </div>
@@ -1026,13 +1057,13 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots"></i>
-                          <span class="ms-2 reply-count">${comments[i].reply_count}</span>
+                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart-fill"></i>
+                            <i class="bi bi-heart-fill fs-5"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -1043,13 +1074,13 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots"></i>
-                          <span class="ms-2 reply-count">${comments[i].reply_count}</span>
+                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart"></i>
+                            <i class="bi bi-heart fs-5"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -1062,12 +1093,12 @@
                   dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                     <div class="d-flex">
                       <button class="btn btn-sm border-0 text-black comment-update-btn" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
-                        <i class="bi bi-pencil"></i>
+                        <i class="bi bi-pencil yellow fs-5"></i>
                       </button>
                       <form class="comment-delete-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                         <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                         <button class="btn btn-sm border-0 text-danger" type="submit">
-                          <i class="bi bi-trash"></i>
+                          <i class="bi bi-trash fs-5"></i>
                         </button>
                       </form>
                     </div>
@@ -1076,7 +1107,7 @@
 
                 if (response.data.request_is_authenticated) {
                   dom.querySelector(`#reply-form-${comments[i].pk}`).insertAdjacentHTML('beforeend', `
-                    <hr>
+                    <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                       <div class="d-flex justify-content-between align-items-center">
@@ -1084,18 +1115,18 @@
                           <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
                         </div>
                         <div>
-                          <input class="btn btn-primary" type="submit" value="작성">
+                          <input class="btn btn-primary review_create" type="submit" value="작성">
                         </div>
                       </div>
                     </form>
-                    <hr>
+                    <hr class="my-hr3">
                   `)
                 }
               }
               else {
                 dom.querySelector(`#comment-${comments[i].parent}`).insertAdjacentHTML('beforeend', `
                   <div class="d-flex">
-                    <a href="#comment-${comments[i].parent}" class="m-2"><i class="bi bi-arrow-return-right"></i></a>
+                    <a class = "name" href="#comment-${comments[i].parent}" class="m-2"><i class="bi bi-arrow-return-right"></i></a>
                     <div class="flex-fill">
                       <div id="comment-${comments[i].pk}">
                         <div id="comment-${comments[i].pk}-block" class="d-flex mb-1 d-block">
@@ -1115,7 +1146,7 @@
                     <img class="rounded" src="https://dummyimage.com/100x100" alt="기본 프로필 사진" style="max-height: 100px">
                     <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                       <div class="my-2">
-                        <a href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
+                        <a class = "name" href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
                       </div>
                       <div id="comment-${comments[i].pk}-content" class="my-2">${comments[i].content}</div>
                     </div>
@@ -1126,7 +1157,7 @@
                     <img class="rounded" src="${comments[i].profile}" alt="기본 프로필 사진" style="max-height: 100px">
                     <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                       <div class="my-2">
-                        <a href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
+                        <a class = "name" href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
                       </div>
                       <div id="comment-${comments[i].pk}-content" class="my-2">${comments[i].content}</div>
                     </div>
@@ -1154,13 +1185,13 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots"></i>
-                          <span class="ms-2 reply-count">${comments[i].reply_count}</span>
+                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart-fill"></i>
+                            <i class="bi bi-heart-fill fs-5"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -1171,13 +1202,13 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots"></i>
-                          <span class="ms-2 reply-count">${comments[i].reply_count}</span>
+                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart"></i>
+                            <i class="bi bi-heart fs-5"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -1190,12 +1221,12 @@
                   dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                     <div class="d-flex">
                       <button class="btn btn-sm border-0 text-black comment-update-btn" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
-                        <i class="bi bi-pencil"></i>
+                        <i class="bi bi-pencil yellow fs-5"></i>
                       </button>
                       <form class="comment-delete-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                         <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                         <button class="btn btn-sm border-0 text-danger" type="submit">
-                          <i class="bi bi-trash"></i>
+                          <i class="bi bi-trash fs-5"></i>
                         </button>
                       </form>
                     </div>
@@ -1204,7 +1235,7 @@
 
                 if (response.data.request_is_authenticated) {
                   dom.querySelector(`#reply-form-${comments[i].pk}`).insertAdjacentHTML('beforeend', `
-                    <hr>
+                    <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                       <div class="d-flex justify-content-between align-items-center">
@@ -1212,11 +1243,11 @@
                           <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
                         </div>
                         <div>
-                          <input class="btn btn-primary" type="submit" value="작성">
+                          <input class="btn btn-primary review_create" type="submit" value="작성">
                         </div>
                       </div>
                     </form>
-                    <hr>
+                    <hr class="my-hr3">
                   `)
                 }
               }
@@ -1268,11 +1299,11 @@
                       <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true">
                     </div>
                     <div>
-                      <input class="btn btn-primary" type="submit" value="작성">
+                      <input class="btn btn-primary review_create" type="submit" value="작성">
                     </div>
                   </div>
                 </form>
-                <hr>
+                <hr class="my-hr3">
               `)
             }
 
@@ -1289,14 +1320,14 @@
                     <div id="reply-form-${comments[i].pk}" class="d-none">
                     </div>
                   </div>
-                  <hr>
+                  <hr class="my-hr3">
                 `)
                 if (comments[i].profile == null) {
                   dom.querySelector(`#comment-${comments[i].pk}-block`).insertAdjacentHTML('beforeend', `
                     <img class="rounded" src="https://dummyimage.com/100x100" alt="기본 프로필 사진" style="max-height: 100px">
                     <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                       <div class="my-2">
-                        <a href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
+                        <a class = "name" href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
                       </div>
                       <div id="comment-${comments[i].pk}-content" class="my-2">${comments[i].content}</div>
                     </div>
@@ -1307,7 +1338,7 @@
                     <img class="rounded" src="${comments[i].profile}" alt="기본 프로필 사진" style="max-height: 100px">
                     <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                       <div class="my-2">
-                        <a href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
+                        <a class = "name" href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
                       </div>
                       <div id="comment-${comments[i].pk}-content" class="my-2">${comments[i].content}</div>
                     </div>
@@ -1335,13 +1366,13 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots"></i>
-                          <span class="ms-2 reply-count">${comments[i].reply_count}</span>
+                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart-fill"></i>
+                            <i class="bi bi-heart-fill fs-5"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -1352,13 +1383,13 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots"></i>
-                          <span class="ms-2 reply-count">${comments[i].reply_count}</span>
+                          <i class="bi bi-chat-left-dots yellow fs-5"></i>
+                          <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart"></i>
+                            <i class="bi bi-heart fs-5"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -1371,12 +1402,12 @@
                   dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                     <div class="d-flex">
                       <button class="btn btn-sm border-0 text-black comment-update-btn" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
-                        <i class="bi bi-pencil"></i>
+                        <i class="bi bi-pencil yellow fs-5"></i>
                       </button>
                       <form class="comment-delete-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                         <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                         <button class="btn btn-sm border-0 text-danger" type="submit">
-                          <i class="bi bi-trash"></i>
+                          <i class="bi bi-trash fs-5"></i>
                         </button>
                       </form>
                     </div>
@@ -1385,7 +1416,7 @@
 
                 if (response.data.request_is_authenticated) {
                   dom.querySelector(`#reply-form-${comments[i].pk}`).insertAdjacentHTML('beforeend', `
-                    <hr>
+                    <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                       <div class="d-flex justify-content-between align-items-center">
@@ -1393,18 +1424,18 @@
                           <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
                         </div>
                         <div>
-                          <input class="btn btn-primary" type="submit" value="작성">
+                          <input class="btn btn-primary review_create" type="submit" value="작성">
                         </div>
                       </div>
                     </form>
-                    <hr>
+                    <hr class="my-hr3">
                   `)
                 }
               }
               else {
                 dom.querySelector(`#comment-${comments[i].parent}`).insertAdjacentHTML('beforeend', `
                   <div class="d-flex">
-                    <a href="#comment-${comments[i].parent}" class="m-2"><i class="bi bi-arrow-return-right"></i></a>
+                    <a class = "name" href="#comment-${comments[i].parent}" class="m-2"><i class="bi bi-arrow-return-right"></i></a>
                     <div class="flex-fill">
                       <div id="comment-${comments[i].pk}">
                         <div id="comment-${comments[i].pk}-block" class="d-flex mb-1 d-block">
@@ -1424,7 +1455,7 @@
                     <img class="rounded" src="https://dummyimage.com/100x100" alt="기본 프로필 사진" style="max-height: 100px">
                     <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                       <div class="my-2">
-                        <a href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
+                        <a class = "name" href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
                       </div>
                       <div id="comment-${comments[i].pk}-content" class="my-2">${comments[i].content}</div>
                     </div>
@@ -1435,7 +1466,7 @@
                     <img class="rounded" src="${comments[i].profile}" alt="기본 프로필 사진" style="max-height: 100px">
                     <div class="ms-4 flex-fill d-flex flex-column justify-content-between">
                       <div class="my-2">
-                        <a href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
+                        <a class = "name" href="/accounts/profile/${comments[i].username}/">${comments[i].username}</a>
                       </div>
                       <div id="comment-${comments[i].pk}-content" class="my-2">${comments[i].content}</div>
                     </div>
@@ -1463,13 +1494,13 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots"></i>
-                          <span class="ms-2 reply-count">${comments[i].reply_count}</span>
+                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart-fill"></i>
+                            <i class="bi bi-heart-fill fs-5"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -1480,13 +1511,13 @@
                     dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                       <div class="d-flex">
                         <button class="btn btn-sm border-0 text-secondary reply-btn" data-comment-id="${comments[i].pk}">
-                          <i class="bi bi-chat-left-dots"></i>
-                          <span class="ms-2 reply-count">${comments[i].reply_count}</span>
+                          <i class="bi bi-chat-left-dots yellow  fs-5"></i>
+                          <span class="ms-2 reply-count yellow">${comments[i].reply_count}</span>
                         </button>
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart"></i>
+                            <i class="bi bi-heart fs-5"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -1499,12 +1530,12 @@
                   dom.querySelector(`#comment-${comments[i].pk}-btn`).insertAdjacentHTML('beforeend', `
                     <div class="d-flex">
                       <button class="btn btn-sm border-0 text-black comment-update-btn" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
-                        <i class="bi bi-pencil"></i>
+                        <i class="bi bi-pencil yellow fs-5"></i>
                       </button>
                       <form class="comment-delete-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                         <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                         <button class="btn btn-sm border-0 text-danger" type="submit">
-                          <i class="bi bi-trash"></i>
+                          <i class="bi bi-trash fs-5"></i>
                         </button>
                       </form>
                     </div>
@@ -1513,7 +1544,7 @@
 
                 if (response.data.request_is_authenticated) {
                   dom.querySelector(`#reply-form-${comments[i].pk}`).insertAdjacentHTML('beforeend', `
-                    <hr>
+                    <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                       <div class="d-flex justify-content-between align-items-center">
@@ -1521,7 +1552,7 @@
                           <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
                         </div>
                         <div>
-                          <input class="btn btn-primary" type="submit" value="작성">
+                          <input class="btn btn-primary review_create" type="submit" value="작성">
                         </div>
                       </div>
                     </form>
