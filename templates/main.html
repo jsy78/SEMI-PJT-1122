@@ -52,7 +52,7 @@
           <div class="card" style="border: none;">
             <img src="{{ article.image1.url }}" class="card-img-top" alt="article_image">
             <div class="card-body">
-              <h5 class="card-title">{{ article.name }} | 평점{{ article.average_rate }}</h5>
+              <h5 class="card-title">{{ article.name }} | {{ article.reviews_count }}개 리뷰의 평점{{ article.average_rate }}</h5>
               <p class="card-text">{{ article.address }}</p>
               <a href="{% url 'cafes:cafe_detail' article.pk %}" class="card-text">자세히</a>
             </div>
