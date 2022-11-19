@@ -218,8 +218,9 @@
         {% endif %}
       </div>
     </div>
+    <hr class="my-hr3">
     {% for review in reviews %}
-      <div id="review-{{ review.pk }}" class="card w-100 review-area review_reply">
+      <div id="review-{{ review.pk }}" class="card w-100 review-area review_reply mb-5">
         <div class="card-body">
           <div class="d-flex mb-1 fs-5">
             {% if review.user.profile %}
