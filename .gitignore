@@ -260,4 +260,3 @@ secrets.json
 
 # Django settings.py SECRET_KEY file
 secrets.json
-appkey.txt
