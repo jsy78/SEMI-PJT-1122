@@ -555,7 +555,7 @@
           dom.querySelector(`#comment-${commentId}-block`).classList.toggle('d-block')
           dom.querySelector(`#comment-${commentId}-update`).classList.toggle('d-block')
           dom.querySelector(`#comment-${commentId}-update`).classList.toggle('d-none')
-          dom.querySelector(`#comment-${commentId}-update .form-control`).value = commentUpdateBtn.offsetParent.querySelector(`#comment-${commentId}-content`).innerText
+          dom.querySelector(`#comment-${commentId}-update .form-control`).value = dom.querySelector(`#comment-${commentId}-content`).innerText
         })
       })
     }
@@ -619,7 +619,8 @@
             dom.querySelector(`#comment-${commentId}-block`).classList.add('d-block')
             dom.querySelector(`#comment-${commentId}-update`).classList.remove('d-block')
             dom.querySelector(`#comment-${commentId}-update`).classList.add('d-none')
-            dom.querySelector(`#comment-${commentId}-update .form-control`).value = response.data.contentdom.querySelector(`#comment-${commentId}-content`).innerText = response.data.content
+            dom.querySelector(`#comment-${commentId}-update .form-control`).value = response.data.content
+            dom.querySelector(`#comment-${commentId}-content`).innerText = response.data.content
           })
         })
       })
