@@ -85,6 +85,11 @@ body {
     font-size: 0.9rem;
 }
 
+#id_profile {
+    color: #757575;
+    font-size: 0.9rem;
+}
+
 
 /* 현재 이미지 경로 */
 .col-auto {
