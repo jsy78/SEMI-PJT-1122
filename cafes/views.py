@@ -346,7 +346,9 @@ def comment_create(request, review_pk):
         comment.review = review
         comment.save()
 
-        queryset = Comment.objects.select_related("user").filter(review=review)
+        queryset = (
+            Comment.objects.select_related("user").filter(review=review).order_by("pk")
+        )
         queryset_list = list()
         for query in queryset:
             if query.parent == None:
@@ -428,7 +430,9 @@ def comment_delete(request, review_pk, comment_pk):
     else:
         comment.delete()
 
-        queryset = Comment.objects.select_related("user").filter(review=review)
+        queryset = (
+            Comment.objects.select_related("user").filter(review=review).order_by("pk")
+        )
         queryset_list = list()
         for query in queryset:
             if query.parent == None:
@@ -507,7 +511,9 @@ def reply_create(request, review_pk, comment_pk):
         reply.parent = parent_comment
         reply.save()
 
-        queryset = Comment.objects.select_related("user").filter(review=review)
+        queryset = (
+            Comment.objects.select_related("user").filter(review=review).order_by("pk")
+        )
         queryset_list = list()
         for query in queryset:
             if query.parent == None:
