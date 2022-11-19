@@ -12,7 +12,6 @@ from django.http import JsonResponse
 from datetime import date, datetime, timedelta, timezone
 from .models import Article, Review, Comment
 from .forms import ArticleForm, ReviewForm, CommentForm, ReplyForm
-from django.core.paginator import Paginator
 
 # Create your views here.
 @require_safe
@@ -234,14 +233,9 @@ def cafe_search(request):
             | Q(menu__contains=query)
         )
 
-        page = request.GET.get("page", "1")
-        paginator = Paginator(articles, 6)
-        page_obj = paginator.get_page(page)
-
     context = {
         "articles": articles,
         "query": query,
-        "page_obj": page_obj,
     }
     return render(request, "cafes/cafe_search.html", context)
 

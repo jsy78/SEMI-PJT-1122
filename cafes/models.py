@@ -113,7 +113,7 @@ class Review(models.Model):
         }
     )
     rate = models.FloatField(
-        default=0.0,
+        default=3.0,
         validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],
     )
     created_time = models.DateTimeField(auto_now_add=True)

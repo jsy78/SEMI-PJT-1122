@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="cafe-list infinite-container">
-    {% for article in page_obj %}
+    {% for article in articles %}
     <div class="card infinite-item">
         <img src="{{ article.image.url }}" class="card-img-top" alt="카페 이미지">
         <div class="card-body">
@@ -22,28 +22,8 @@
         </div>
     </div>
     {% endfor %}
-    <div class="row">
-        <div class="col-3">
-            {% if page_obj.has_next %}
-            <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">next</a>
-            {% endif %}
-        </div>
-    </div>
 </div>
 {% endblock content %}
 
 {% block js %}
-<!-- 무한 스크롤 -->
-<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-    crossorigin="anonymous"></script>
-<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-<script src="{% static 'js/infinite.min.js' %}"></script>
-<script>
-    var infinite = new Waypoint.Infinite({
-        element: $('.infinite-container')[0],
-        offset: 'bottom-in-view',
-        onBeforePageLoad: () => { },
-        onAfterPageLoad: () => { }
-    });
-</script>
 {% endblock js %}

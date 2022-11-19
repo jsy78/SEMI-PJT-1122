@@ -69,6 +69,16 @@ class ArticleForm(forms.ModelForm):
                     "readonly": "True",
                 }
             ),
+            "parking": forms.TextInput(
+                attrs={
+                    "placeholder": "예) 주차 공간 없음 / 무료 주차 가능 / ○시간 내 무료 주차 가능 / 유료 주차 가능",
+                }
+            ),
+            "dayoff": forms.TextInput(
+                attrs={
+                    "placeholder": "예) 없음 / 일요일 / 토요일~일요일 / 화요일, 금요일",
+                }
+            ),
         }
 
 
@@ -86,13 +96,13 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = [
-            "title",
+            # "title",
             "rate",
             "content",
         ]
         labels = {
-            "title": "제목",
-            "rate": "평점",
+            # "title": "제목",
+            "rate": "별점",
             "content": "내용",
         }
         widgets = {
