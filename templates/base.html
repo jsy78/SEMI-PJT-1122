@@ -25,10 +25,11 @@
     {% block content %}{% endblock content %}
   </div>
 
-  <div class="text-end mx-5 my-5">
-    <img src="{% static 'image/top_button.png' %}" alt="top_button" width="70" height="70" style="cursor: pointer"
-      onclick="window.scrollTo(0,0);" />
-  </div>
+  <div style="position:fixed; bottom:125px; right:450px; z-index:44;"> 
+    <a href="#doz_header">
+      <img src="{% static 'image/top_button.png' %}" style="width:120px"> 
+    </a>
+    </div>
 
   <!-- footer -->
   {% include "footer.html" %} {% bootstrap_javascript %}
