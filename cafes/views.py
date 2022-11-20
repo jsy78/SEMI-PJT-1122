@@ -25,7 +25,12 @@ def index(request):
 
 @require_safe
 def category(request, article_category):
-    articles = Article.objects.filter(cafeType=article_category).order_by("-pk")
+    articles = (
+        Article.objects.filter(cafeType=article_category)
+        .order_by("-pk")
+        .annotate(average_rate=Avg("review__rate"))
+    )
+
     context = {
         "articles": articles,
     }

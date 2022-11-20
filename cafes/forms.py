@@ -39,7 +39,7 @@ class ArticleForm(forms.ModelForm):
             "sigungu": "시/군/구",
             "roadname": "도로명",
             "number": "전화번호",
-            "opening_hour": "개점 시간",
+            "opening_hour": "영업 시간",
             "menu": "메뉴",
             "parking": "주차",
             "dayoff": "휴일",
@@ -67,6 +67,11 @@ class ArticleForm(forms.ModelForm):
             "roadname": forms.HiddenInput(
                 attrs={
                     "readonly": "True",
+                }
+            ),
+            "opening_hour": forms.TextInput(
+                attrs={
+                    "placeholder": "예) 오전 9시~오후 6시, 오후 8시~오전 2시",
                 }
             ),
             "parking": forms.TextInput(
