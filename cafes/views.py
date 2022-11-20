@@ -12,8 +12,9 @@ from django.http import JsonResponse
 from datetime import date, datetime, timedelta, timezone
 from .models import Article, Review, Comment
 from .forms import ArticleForm, ReviewForm, CommentForm, ReplyForm
+from django.core.paginator import Paginator
 
-# Create your views here.
+
 @require_safe
 def index(request):
     articles = Article.objects.order_by("-pk")
@@ -31,9 +32,14 @@ def category(request, article_category):
         .annotate(average_rate=Avg("review__rate"))
     )
 
+    page = request.GET.get("page", "1")
+    paginator = Paginator(articles, 9)
+    page_obj = paginator.get_page(page)
+
     context = {
         "articles": articles,
         "articleCategory": article_category,
+        "page_obj": page_obj,
     }
     return render(request, "cafes/category.html", context)
 
@@ -229,19 +235,23 @@ def cafe_bookmark(request, article_pk):
 def cafe_search(request):
     articles = None
     query = None
-    page_obj = None
 
     if "q" in request.GET:
         query = request.GET.get("q")
+        query = query.split("&")[0]
         articles = Article.objects.order_by("-pk").filter(
             Q(name__contains=query)
             | Q(address__contains=query)
             | Q(menu__contains=query)
         )
+    page = request.GET.get("page", "1")
+    paginator = Paginator(articles, 9)
+    page_obj = paginator.get_page(page)
 
     context = {
         "articles": articles,
         "query": query,
+        "page_obj": page_obj,
     }
     return render(request, "cafes/cafe_search.html", context)
 
