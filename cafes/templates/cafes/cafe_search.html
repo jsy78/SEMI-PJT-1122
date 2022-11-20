@@ -11,14 +11,14 @@
 <div class="cafe-list infinite-container">
     {% for article in articles %}
     <div class="card infinite-item">
-        <img src="{{ article.image.url }}" class="card-img-top" alt="카페 이미지">
+        <img src="{{ article.image1.url }}" class="card-img-top" alt="카페 이미지">
         <div class="card-body">
             <a href="{% url 'cafes:cafe_detail' article.pk %}" class="card-title">{{ article.name }}</a>
             <div class="cafe-address">
                 <img src="https://cdn-icons-png.flaticon.com/512/67/67872.png" alt="위치 아이콘">
                 <p class="card-text">{{ article.address }}</p>
             </div>
-            <p class="sample">뭔가 더 써야 보기에 좋을듯 근데 뭐 쓰지</p>
+            <p class="sample">{{ article.cafeType }}</p>
         </div>
     </div>
     {% endfor %}
