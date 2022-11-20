@@ -1,55 +1,37 @@
 {% load static %}
 
-<!-- Footer -->
-<footer class="">
-  <nav class="navbar navbar-expand-lg bg-dark opacity-75">
-    <div class="container-fluid">
-      <a class="navbar-brand text-white">만든 사람 성윤, 나현, 서림, 세철, 희동 <br> K-DIGITAL TRAINING 1기 <br> (C) ByeolDaBang, 2022.All Right Not ;) Reserved</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+{% endblock css %}
 
+<div class="footer">
+  <div class="real-container">
+    <!-- 글자 -->
+    <p class="footer-text">만든 사람 <span class="bold">성윤, 나현, 서림, 세철, 희동</span><br>
+      K-DIGITAL TRAINING 1기<br>
+      (C) ByeolDaBang, 2022.All Right Not ;) Reserved</p>
 
-      <div class="justify-content-center" id="navbarNav">
-        <ul class="navbar-nav">
-          <a class="navbar-item mx-3" href="https://github.com/jsy78">
-            <img src="https://avatars.githubusercontent.com/u/63091836?v=4" alt="insta" width="55" height="55">
-          </a>
-          <a class="navbar-item mx-3" href="https://github.com/nahkim">
-            <img src="https://avatars.githubusercontent.com/u/48798620?v=4" alt="kakao" width="55" height="55">
-          </a>
-          <a class="navbar-item mx-3" href="https://github.com/baeseorim">
-            <img src="https://avatars.githubusercontent.com/u/108659274?v=4" alt="youtube" width="55" height="55">
-          </a>
-          <a class="navbar-item mx-3" href="https://github.com/chul1631">
-            <img src="https://avatars.githubusercontent.com/u/108647398?v=4" alt="twitter" width="55" height="55">
-          </a>
-          <a class="navbar-item mx-3" href="https://github.com/KIMHEEKIMHEE">
-            <img src="https://avatars.githubusercontent.com/u/108660653?v=4" alt="twitter" width="55" height="55">
-          </a>
-        </ul>
-      </div>
-
-
-      <div class="justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <a class="navbar-item mx-3" href="https://www.instagram.com/">
-            <img src="{% static 'image/insta_logo.png' %}" alt="insta" width="55" height="55">
-          </a>
-          <a class="navbar-item mx-3" href="https://www.kakaocorp.com/page/">
-            <img src="{% static 'image/kakao_logo.png' %}" alt="kakao" width="55" height="55">
-          </a>
-          <a class="navbar-item mx-3" href="https://www.youtube.com/">
-            <img src="{% static 'image/youtube_logo.png' %}" alt="youtube" width="55" height="55">
-          </a>
-          <a class="navbar-item mx-3" href="https://twitter.com/">
-            <img src="{% static 'image/twitter_logo.png' %}" alt="twitter" width="55" height="55">
-          </a>
-          <a class="navbar-item mx-3" href="https://facebook.com/">
-            <img src="{% static 'image/facebook_logo.png' %}" alt="twitter" width="55" height="55">
-          </a>
-        </ul>
-      </div>
+    <!-- follow 깃허브 주소 -->
+    <div class="follow-us">
+      <p class="follow-us-text">Follow us</p>
+      <div class="follow-us-img">
+        <a href="https://github.com/jsy78">
+          <img src="https://avatars.githubusercontent.com/u/63091836?v=4" alt="조성윤">
+        </a>
+        <a href="https://github.com/nahkim">
+          <img src="https://avatars.githubusercontent.com/u/48798620?v=4" alt="김나현">
+        </a>
+        <a href="https://github.com/baeseorim">
+          <img src="https://avatars.githubusercontent.com/u/108659274?v=4" alt="배서림">
+        </a>
+        <a href="https://github.com/chul1631">
+          <img src="https://avatars.githubusercontent.com/u/108647398?v=4" alt="손세철">
+        </a>
+        <a href="https://github.com/KIMHEEKIMHEE">
+          <img src="https://avatars.githubusercontent.com/u/108660653?v=4" alt="김희동">
+        </a>
+      </div> <!-- follow-us-img 끝남 -->
     </div>
-  </nav>
-</footer>
+    <!--follow-us 끝남 -->
+  </div> <!-- real-container 끝남 -->
+</div> <!-- footer 끝남 -->

@@ -19,13 +19,11 @@
       </button>
     </form>
 
-
     <!-- 햄버거 -->
     <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLightNavbar"
       aria-controls="offcanvasLightNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
-
 
     <!-- 사이드 메뉴 -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasLightNavbar"
@@ -45,15 +43,13 @@
             <a href="{% url 'accounts:profile' user.username %}" class="name">{{request.user }}</a> 님!
           </p>
           {% else %}
+
           <!-- 로그인이 필요합니다. -->
           <div class="login-letter">
             <p class="line-one"><a href="{% url 'accounts:login' %} " class="nav-link">로그인</a>이</p>
             <p class="line-two">필요합니다.</p>
           </div>
           {% endif %}
-          <!-- 닫기 버튼 없어도 될 것 같아서 없앰
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-            aria-label="Close"></button>-->
         </div>
 
         <!-- 카테고리 부분 -->
@@ -73,8 +69,7 @@
                 <li><a class="dropdown-item" href="{% url 'cafes:category' '커피가 저렴한' %}">커피가 저렴한</a></li>
                 <li><a class="dropdown-item" href="{% url 'cafes:category' '이색적인' %}">이색적인</a></li>
               </ul>
-            </li>-->
-            <!-- 시간 내로 카페 db에 못채울 거 같으면 카테고리 줄이는 게 좋을듯 -->
+              </li>-->
             <ul class="cate-menu">
               <li><a class="dropdown-item" href="{% url 'cafes:category' '분위기가 좋은' %}">분위기가 좋은</a></li>
               <li><a class="dropdown-item" href="{% url 'cafes:category' '디저트가 맛있는' %}">디저트가 맛있는</a></li>
@@ -95,11 +90,12 @@
               <li class="nav-item">
                 <a href="#" class="faq">FAQ</a>
               </li>
-            </div>
-            </li>
-          </ul>
+
+            </div> <!-- personal 끝남 -->
+          </ul> <!-- navbar-nav 끝남 -->
         </div>
+        <!--offcanvas-body 끝남 -->
       </div> <!-- cafe 끝남 -->
     </div> <!-- side menu 끝남 -->
   </div> <!-- container-fluid 끝남 -->
-</div>
+</div> <!-- navbar 끝남 -->
