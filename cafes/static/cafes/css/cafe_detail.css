@@ -1,20 +1,11 @@
 @charset "UTF-8";
 
-/* 배경 화면 */
-body {
-  background-image: url("/static/cafes/images/background.jpg");
-  background-repeat: repeat;
-  font-family: 'Jua', sans-serif;
-  width: 100%;
-  background-size: cover;
-}
-
-
 .my-hr1 {
   border: 0;
   height: 1px;
   background: rgb(255, 196, 0);
 }
+
 .my-hr2 {
   border: 0;
   height: 1px;
@@ -35,15 +26,16 @@ body {
   justify-content: space-between;
   margin: 15% 0 4rem 0;
 }
-.slider{
+
+.slider {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+
 }
 
-.slider-item{
+.slider-item {
   height: 400px;
   width: 100%;
   text-align: center;
@@ -53,46 +45,50 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color:white;
+  color: white;
   top: 0;
   position: absolute;
   z-index: 0;
   opacity: 0;
-  transition:all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   transform: scale(0.9);
 }
 
-.showing{
+.showing {
   z-index: 1;
   opacity: 1;
   transform: none;
 }
 
-.slider-item:nth-child(1){
+.slider-item:nth-child(1) {
   background-color: #30A9DE;
   justify-self: center;
 }
-.slider-item:nth-child(2){
+
+.slider-item:nth-child(2) {
   background-color: #EFDC05;
 }
-.slider-item:nth-child(3){
+
+.slider-item:nth-child(3) {
   background-color: #E53A40;
 }
-.slider-item:nth-child(4){
+
+.slider-item:nth-child(4) {
   background-color: #2EC4B6;
 }
-.slider-item:nth-child(5){
+
+.slider-item:nth-child(5) {
   background-color: #EFFFE9;
-  color:black;
+  color: black;
 }
 
-.fas{
+.fas {
   font-size: 28px;
   z-index: 1;
   position: relative;
 }
 
-.arrow{
+.arrow {
   width: 95%;
   margin: auto;
   height: 400px;
@@ -285,24 +281,26 @@ body {
 
 
 .review_create {
-	background-color:#ECE7B4;
-	border-radius:16px;
-	border:1px solid #ECE7B4;
-	display:inline-block;
-	cursor:pointer;
-	color:#0b0b0b;
-	font-size:17px;
-	font-weight:bold;
-	padding:7px 30px;
-	text-decoration:none;
-	text-shadow:0px 0px 0px #ffffff;
+  background-color: #ECE7B4;
+  border-radius: 16px;
+  border: 1px solid #ECE7B4;
+  display: inline-block;
+  cursor: pointer;
+  color: #0b0b0b;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 7px 30px;
+  text-decoration: none;
+  text-shadow: 0px 0px 0px #ffffff;
 }
+
 .review_create:hover {
-	background-color:#ece8b6;
+  background-color: #ece8b6;
 }
+
 .review_create:active {
-	position:relative;
-	top:1px;
+  position: relative;
+  top: 1px;
 }
 
 
@@ -324,61 +322,60 @@ body {
   border: none;
   clip: rect(0, 0, 0, 0);
 }
- 
-          
-.store-rate{
+
+
+.store-rate {
   color: rgb(255, 242, 0);
 }
 
-.headcard{
-  background-color:#406343;
-	border-radius:16px;
-	border:1px solid #406343;
+.headcard {
+  background-color: #406343;
+  border-radius: 16px;
+  border: 1px solid #406343;
 
   /* opacity:85%; */
 }
 
-.headmenu { 
+.headmenu {
   display: flex;
   align-items: center;
 }
 
 .introduce_info {
-	background-color:#406343;
-	border-radius:16px;
-	border:1px solid #406343;
-	color:#0b0b0b;
-	font-size:17px;
-	font-weight:bold;
-	padding:7px 30px;
-	text-decoration:none;
+  background-color: #406343;
+  border-radius: 16px;
+  border: 1px solid #406343;
+  color: #0b0b0b;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 7px 30px;
+  text-decoration: none;
   /* opacity:85%; */
 }
 
-.introduce_tema
-{
-	background-color:#406343;
-	border-radius:16px;
-	border:1px solid #406343;
-	color:#0b0b0b;
-	font-size:17px;
-	font-weight:bold;
-	padding:7px 30px;
-	text-decoration:none;
+.introduce_tema {
+  background-color: #406343;
+  border-radius: 16px;
+  border: 1px solid #406343;
+  color: #0b0b0b;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 7px 30px;
+  text-decoration: none;
   /* opacity:85%; */
 }
 
 .review_reply {
-	background-color:#406343;
-	border-radius:16px;
-	border:1px solid #406343;
-	display:inline-block;
-	color:#0b0b0b;
-	font-size:17px;
-	font-weight:bold;
-	padding:7px 30px;
-	text-decoration:none;
-	text-shadow:0px 0px 0px #406343;
+  background-color: #406343;
+  border-radius: 16px;
+  border: 1px solid #406343;
+  display: inline-block;
+  color: #0b0b0b;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 7px 30px;
+  text-decoration: none;
+  text-shadow: 0px 0px 0px #406343;
 }
 
 .detail_name {

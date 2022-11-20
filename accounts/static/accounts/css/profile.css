@@ -1,14 +1,4 @@
 @charset "UTF-8";
-@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
-
-/* 배경 화면 */
-body {
-    background-image: url('../images/background.jpg');
-    font-family: 'NanumSquare', sans-serif;
-    font-size: 0.95rem;
-    width: 100%;
-}
-
 
 /* 전체 여백 */
 .container {

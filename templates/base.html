@@ -1,4 +1,5 @@
-{% load django_bootstrap5 %} {% load static %}
+{% load django_bootstrap5 %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -8,31 +9,74 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cafe</title>
-  {% bootstrap_css %} {% block css %}
+  {% bootstrap_css %}
+  {% block css %}
   <link rel="stylesheet" href="{% static 'css/base.css' %}" />
   {% endblock css %}
+  <!-- 따로 css 파일 만들면 상속이 안 돼서 여기다 만듦 -->
+  <style>
+    @charset "UTF-8";
+    @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
+
+    /* 배경 화면 */
+    body {
+      background-image: url("/static/image/background.jpg");
+      background-repeat: repeat;
+      font-family: 'NanumSquare', sans-serif;
+      width: 100%;
+    }
+
+
+    /* 위로 버튼 */
+    .to-the-top {
+      bottom: 5%;
+      cursor: pointer;
+      position: fixed;
+      right: 3%;
+      z-index: 40;
+    }
+
+    .top-button img {
+      filter: invert(95%) sepia(76%) saturate(312%) hue-rotate(319deg) brightness(104%) contrast(91%);
+      height: 1.6rem;
+      width: 1.6rem;
+    }
+
+    .top-button img:hover {
+      filter: invert(95%) sepia(76%) saturate(312%) hue-rotate(319deg) brightness(104%) contrast(91%);
+    }
+  </style>
 </head>
 
 <body>
-  {% if messages %} {% for message in messages %}
+  <!-- 메시지 -->
+  {% if messages %}
+  {% for message in messages %}
   <div class="alert alert-{{ message.tags }} text-center">{{ message }}</div>
-  {% endfor %} {% endif %}
+  {% endfor %}
+  {% endif %}
 
   <!-- navbar -->
   {% include "navbar.html" %}
 
+  <!-- body -->
   <div class="container" style="min-height: 100vh; margin-top: 5%">
-    {% block content %}{% endblock content %}
+    {% block content %}
+    {% endblock content %}
   </div>
 
-  <div style="position:fixed; bottom:15%; right:8%; z-index:40; cursor:pointer;" onclick="window.scrollTo(0,0);"> 
-    <a href="#doz_header">
-      <img src="{% static 'image/top_button.png' %}" style="width:120px"> 
+  <!-- 맨위로 -->
+  <div class="to-the-top" onclick="window.scrollTo(0,0);">
+    <a href="#doz_header" class="top-button">
+      <img src="https://cdn-icons-png.flaticon.com/512/72/72436.png" alt="맨위로">
     </a>
-    </div>
+  </div>
 
   <!-- footer -->
-  {% include "footer.html" %} {% bootstrap_javascript %}
+  {% include "footer.html" %}
+
+  <!-- 자바스크립트 -->
+  {% bootstrap_javascript %}
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   {% block js %}
   <script type="text/javascript">

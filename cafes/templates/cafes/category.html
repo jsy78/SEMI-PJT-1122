@@ -8,7 +8,7 @@
 {% endblock css %}
 
 {% block content %}
-<p class="result-text">{{ article.cafeType }} 카페</p>
+<p class="result-text">{{ articles.cafeType }} 카페</p>
 <div class="cafe-list">
   {% for article in articles %}
   <div class="a-cafe">
@@ -106,10 +106,10 @@
             <button type="submit" class="a-hash">
               {% if article.sido == '서울' %}
               <p>#{{ article.sido }} {{ article.sigungu }}</p>
-              <input type="button" value="{{ article.sigungu }}" name="button" class="category-value" />
+              <input type="search" value="{{ article.sigungu }}" name="button" class="category-value" />
               {% else %}
               <p>#{{ article.sigungu }}</p>
-              <input type="button" value="{{ article.sigungu }}" name="button" class="category-value" />
+              <input type="search" value="{{ article.sigungu }}" name="button" class="category-value" />
               {% endif %}
             </button>
           </form>
