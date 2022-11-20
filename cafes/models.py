@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 from datetime import datetime, timedelta
 from django.utils import timezone
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
@@ -17,7 +18,7 @@ class Article(models.Model):
     sido = models.CharField(max_length=20)
     sigungu = models.CharField(max_length=30)
     roadname = models.CharField(max_length=20)
-    number = models.CharField(max_length=20)
+    number = PhoneNumberField(blank=True)
     opening_hour = models.CharField(max_length=40)
     menu = FroalaField(
         options={
