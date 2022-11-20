@@ -59,6 +59,7 @@
 
   <!-- 메뉴 내용 -->
   <div class="tab-container">
+    <!-- 작성한 글 -->
     <div id="tab1" class="tab-content">
       <ul class="listwrap">
         {% for cafe_info in user.article_set.all %}
@@ -76,6 +77,7 @@
 
       {% endif %}
     </div>
+    <!-- 즐겨찾기한 글 -->
     <div id="tab2" class="tab-content">
       {% for bookmark_article in bookmark_articles%}
       <a href="{% url 'cafes:cafe_detail' bookmark_article.pk %}">
@@ -93,6 +95,7 @@
 
       {% endif %}
     </div>
+    <!-- 좋아요한 글 -->
     <div id="tab3" class="tab-content">
       {% for like_article in like_articles %}
       <a href="{% url 'cafes:cafe_detail' like_article.pk %}">
@@ -108,7 +111,9 @@
     </div>
   </div>
 </div>
-{% endblock content %} {% block js %}
+{% endblock content %}
+
+{% block js %}
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="{% static 'accounts/js/profile.js' %}"></script>
 <script>
