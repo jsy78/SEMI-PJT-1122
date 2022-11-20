@@ -74,16 +74,20 @@
     font-size: 0.9rem;
     opacity: 60%;
 }
+/* 검색창 css */
+
+.search-bar {
+    position: relative;
+}
 
 
-/* 검색창 버튼 */
+/* 검색창 버튼 css*/
 .search-button {
     background-color: transparent;
     border: none;
     position: absolute;
-    left: 58.5%;
-    top: 23%;
-    width: 2%;
+    left: 359px;
+    top: 6px;
 }
 
 .search-button img {
@@ -221,4 +225,8 @@
 .content_block {
     z-index: 99;
     /*position: relative; relative 때문에 navbar가 안 붙음*/
+}
+
+.messages.success {
+    color: green;
 }
