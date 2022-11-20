@@ -33,6 +33,7 @@ def category(request, article_category):
 
     context = {
         "articles": articles,
+        "articleCategory": article_category,
     }
     return render(request, "cafes/category.html", context)
 
