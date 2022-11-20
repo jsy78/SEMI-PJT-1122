@@ -21,7 +21,11 @@
     {% csrf_token %}
     {% bootstrap_form form %}</div>
   <div class="buttons">
+    {% if request.resolver_match.url_name == "cafe_create" %}
     <button type="submit" class="c-create-button">작성</button>
+    {% elif request.resolver_match.url_name == "cafe_update" %}
+    <button type="submit" class="c-create-button">수정</button>
+    {% endif %}
     {% if request.resolver_match.url_name == "cafe_create" %}
     <button type="button" class="back-button" onclick="location.href='{% url 'main' %}'">취소</button>
     {% elif request.resolver_match.url_name == "cafe_update" %}
