@@ -44,6 +44,7 @@
   </div>
 
   {% if request.resolver_match.url_name == 'main' %}
+  <a href="{% url 'cafes:cafe_create' %}">카페 추가</a>
 
     <div class="infinite-container row row-cols-1 row-cols-md-3 g-4 my-3">
 
