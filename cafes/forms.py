@@ -1,6 +1,7 @@
 from django import forms
 from froala_editor.widgets import FroalaEditor
 from .models import Article, Review, Comment
+from phonenumber_field.formfields import PhoneNumberField
 
 
 class ArticleForm(forms.ModelForm):
@@ -12,6 +13,12 @@ class ArticleForm(forms.ModelForm):
                 "heightMin": 200,
             }
         ),
+    )
+
+    number = PhoneNumberField(
+        label="전화번호",
+        region="KR",
+        required=False,
     )
 
     class Meta:
