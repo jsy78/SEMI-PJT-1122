@@ -32,9 +32,14 @@ def category(request, article_category):
         .annotate(average_rate=Avg("review__rate"))
     )
 
+    page = request.GET.get("page", "1")
+    paginator = Paginator(articles, 9)
+    page_obj = paginator.get_page(page)
+
     context = {
         "articles": articles,
         "articleCategory": article_category,
+        "page_obj": page_obj,
     }
     return render(request, "cafes/category.html", context)
 
@@ -240,7 +245,7 @@ def cafe_search(request):
             | Q(menu__contains=query)
         )
     page = request.GET.get("page", "1")
-    paginator = Paginator(articles, 6)
+    paginator = Paginator(articles, 9)
     page_obj = paginator.get_page(page)
 
     context = {

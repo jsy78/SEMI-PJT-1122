@@ -9,9 +9,9 @@
 
 {% block content %}
 <p class="result-text">{{ articleCategory }} 카페</p>
-<div class="cafe-list">
-  {% for article in articles %}
-  <div class="a-cafe">
+<div class="cafe-list infinite-container">
+  {% for article in page_obj %}
+  <div class="a-cafe infinite-item">
     <!-- 카페 위치 -->
     <div class="cafe-address">
       <img src="https://cdn-icons-png.flaticon.com/512/67/67872.png" alt="위치 아이콘">
@@ -118,8 +118,24 @@
     </div>
   </div>
   {% endfor %}
+  {% if page_obj.has_next %}
+  <!-- 확인 -->
+    <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
+  {% endif %}
 </div>
 {% endblock content %}
 
 {% block js %}
+<!-- 무한 스크롤 -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+<script>
+  let infinite = new Waypoint.Infinite({
+    element: $('.infinite-container')[0],
+    offset: 'bottom-in-view',
+    onBeforePageLoad: () => {},
+    onAfterPageLoad: () => {}
+  })
+</script>
 {% endblock js %}
