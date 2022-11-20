@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
   <link rel="stylesheet" href="{% static 'cafes/css/cafe_detail.css' %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Jua&family=Lilita+One&display=swap">
 {% endblock css %}
 
 {% block content %}
@@ -19,7 +17,7 @@
       <div class="cafe-upper">
         <p class="cafe-name">{{ article.name }}</p>
         <!-- 평점 -->
-        <p class="rate-number store-rate">{{ rate_avg }}</p>
+        <p class="rate-number store-rate">{{ rate_avg|floatformat }}</p>
       </div>
 
       <!-- 조회수, 좋아요, 북마크, 공유 -->
