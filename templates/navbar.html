@@ -52,20 +52,17 @@
       <div class="cafe">
         <div class="offcanvas-header">
           <!-- 안녕하세요, ( ) 님! -->
-          {% if request.user.is_authenticated %} {% if user.profile %}
-          <img src="{{ user.profile.url }}" alt="직접 설정해둔 프로필 사진" />
+          {% if request.user.is_authenticated %}
+          {% if request.user.profile %}
+          <img src="{{ request.user.profile.url }}" alt="직접 설정해둔 프로필 사진">
           {% else %}
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Roasted_coffee_beans.jpg/1200px-Roasted_coffee_beans.jpg"
             alt="기본 프로필 사진"
           />
           {% endif %}
-          <p class="offcanvas-title" id="offcanvasLightNavbarLabel">
-            안녕하세요, <br />
-            <a href="{% url 'accounts:profile' user.username %}" class="name"
-              >{{request.user }}</a
-            >
-            님!
+          <p class="offcanvas-title" id="offcanvasLightNavbarLabel">안녕하세요, <br>
+            <a href="{% url 'accounts:profile' request.user.username %}" class="name">{{ request.user }}</a> 님!
           </p>
           {% else %}
 
