@@ -97,13 +97,12 @@
           <img src="https://cdn-icons-png.flaticon.com/512/1014/1014883.png" alt="수정 아이콘"/>
           <p>수정</p>
         </a>
-    <!-- 삭제 버튼 -->
-      <div class="cafe-right">
-        <a class="edit-button" href="{% url 'cafes:cafe_delete' article.pk %}">
-          <img src="https://cdn-icons-png.flaticon.com/512/3096/3096673.png" alt="삭제 아이콘"/>
-          <p>삭제</p>
-        </a>
-      </div>
+        <form action="{% url 'cafes:cafe_delete' article.pk %}" method="POST">
+          <button class="edit-button" type="submit">
+            <img src="https://cdn-icons-png.flaticon.com/512/3096/3096673.png" alt="삭제 아이콘"/>
+            <p>삭제</p>
+          </button>
+        </form>
       {% endif %}
     </div>
   </div>
