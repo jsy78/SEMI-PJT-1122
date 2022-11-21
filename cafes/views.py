@@ -192,7 +192,7 @@ def cafe_delete(request, article_pk):
 
     article.delete()
     messages.success(request, "성공적으로 삭제되었습니다.")
-    return redirect("cafes:index")
+    return redirect("main")
 
 
 @require_POST
