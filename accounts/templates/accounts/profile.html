@@ -10,8 +10,7 @@
     {% else %}
     <img
       src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Roasted_coffee_beans.jpg/1200px-Roasted_coffee_beans.jpg"
-      alt="기본 프로필 사진"
-    />
+      alt="기본 프로필 사진" />
     {% endif %}
     <div class="info-letter">
       <div class="info-upper">
@@ -20,11 +19,7 @@
         {% if request.user.is_authenticated %}
         <!-- 회원정보 수정 -->
         {% if user == request.user %}
-        <button
-          type="submit"
-          class="edit-button"
-          onclick="location.href='{% url 'accounts:update' %}'"
-        >
+        <button type="submit" class="edit-button" onclick="location.href='{% url 'accounts:update' %}'">
           회원정보 수정
         </button>
         {% else %}
@@ -61,6 +56,7 @@
   <div class="tab-container">
     <!-- 작성한 글 -->
     <div id="tab1" class="tab-content">
+      {% if user.article_set.all %}
       <ul class="listwrap">
         {% for cafe_info in user.article_set.all %}
         <a href="{% url 'cafes:cafe_detail' cafe_info.pk %}">
@@ -68,8 +64,6 @@
         </a>
         {% endfor %}
       </ul>
-      {% if user.article_set.all %}
-      <button type="" class="more">더보기</button>
       {% else %}
       <p class="no-contents">
         작성한 글이 없습니다.<br />카페 탐색을 시작해보세요!
@@ -79,15 +73,12 @@
     </div>
     <!-- 즐겨찾기한 글 -->
     <div id="tab2" class="tab-content">
+      {% if bookmark_articles %}
       {% for bookmark_article in bookmark_articles%}
       <a href="{% url 'cafes:cafe_detail' bookmark_article.pk %}">
-        <img
-          src="{{ bookmark_article.image1.url }}"
-          alt="북마크한 글의 이미지"
-        />
+        <img src="{{ bookmark_article.image1.url }}" alt="북마크한 글의 이미지" />
       </a>
-      {% endfor %} {% if bookmark_articles %}
-      <button type="" class="more">더보기</button>
+      {% endfor %}
       {% else %}
       <p class="no-contents">
         북마크한 글이 없습니다.<br />카페 탐색을 시작해보세요!
@@ -97,12 +88,12 @@
     </div>
     <!-- 좋아요한 글 -->
     <div id="tab3" class="tab-content">
+      {% if like_articles %}
       {% for like_article in like_articles %}
       <a href="{% url 'cafes:cafe_detail' like_article.pk %}">
         <img src="{{ like_article.image1.url }}" alt="좋아요한 글의 이미지" />
       </a>
-      {% endfor %} {% if like_articles %}
-      <button type="" class="more">더보기</button>
+      {% endfor %}
       {% else %}
       <p class="no-contents">
         좋아요한 글이 없습니다.<br />카페 탐색을 시작해보세요!
