@@ -15,6 +15,10 @@
     margin-left: 0.6rem;
 }
 
+.cate-title {
+    color: #F3EFCC;
+}
+
 
 /* 카드 정렬 */
 .cafe-list {
@@ -67,15 +71,6 @@
 }
 
 
-/* 평점 */
-.rate {
-    color: #F3EFCC;
-    font-size: 0.83rem;
-    font-weight: 700;
-    margin-bottom: -0.5rem;
-}
-
-
 /* 카페 이름 + 해시 */
 .name-hash {
     margin: -0.1rem;
@@ -88,6 +83,14 @@
     color: #ffffff;
     font-size: 1.5rem;
     font-weight: 500;
+    margin: 0;
+    text-decoration: none;
+}
+
+.name p:hover {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 800;
     margin: 0;
     text-decoration: none;
 }
