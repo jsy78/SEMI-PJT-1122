@@ -38,7 +38,7 @@
     height: 2.3rem;
     padding: 0.5rem;
     position: relative;
-    width: 25rem;
+    width: 27rem;
 }
 
 .search input:focus {
@@ -74,6 +74,7 @@
     font-size: 0.9rem;
     opacity: 60%;
 }
+
 /* 검색창 css */
 
 .search-bar {
@@ -81,13 +82,13 @@
 }
 
 
-/* 검색창 버튼 css*/
+/* 검색창 버튼 css */
 .search-button {
     background-color: transparent;
     border: none;
     position: absolute;
-    left: 450px;
-    top: 6px;
+    left: 24.7rem;
+    top: 0.24rem;
 }
 
 .search-button img {
@@ -210,13 +211,14 @@
     text-decoration: none;
 }
 
-.faq {
-    color: #666666;
+.cafe-create {
+    color: #406343;
     text-decoration: none;
 }
 
-.faq:hover {
-    color: #666666;
+.cafe-create:hover {
+    color: #406343;
+    font-weight: 700;
     text-decoration: none;
 }
 
