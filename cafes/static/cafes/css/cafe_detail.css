@@ -12,7 +12,7 @@
   align-items: baseline;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.2rem;
+  margin-bottom: 1.5rem;
 }
 
 
@@ -215,6 +215,15 @@ td {
   margin-top: 0.3rem;
 }
 
+.menu-img img {
+  display: flex;
+  height: 16rem;
+  flex-direction: column;
+  margin: 0.2rem 0;
+  object-fit: cover;
+  width: 16rem !important;
+}
+
 
 /* 이 매장이 소개된 테마 */
 .introduce-theme {
@@ -252,7 +261,7 @@ td {
 /* 리뷰 시작 구분선 */
 .review-start {
   background-color: #F3EFCC;
-  height: 0.1rem;
+  height: 0.11rem;
   margin-top: 6rem;
   opacity: 100;
 }
@@ -370,6 +379,7 @@ td {
 /* 별점 */
 .rate-star i {
   color: #ECE7B4;
+  font-size: 1.6rem;
 }
 
 
@@ -378,37 +388,66 @@ td {
   display: flex;
 }
 
-.edit-btn p {
+
+/* 수정 버튼 */
+.edit-button {
   border: none;
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 300;
-  margin: 0;
+  margin: 0.13rem 0.7rem;
   padding: 0;
+  text-decoration: none;
 }
 
-.delete-btn p {
+.edit-button:hover {
+  border: none;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 300;
+  margin: 0.13rem 0.7rem;
+  padding: 0;
+  text-decoration: none;
+}
+
+
+/* 삭제 버튼 */
+.delete-btn {
+  background-color: transparent;
   border: none;
   color: #d74a4a;
   font-size: 0.9rem;
   font-weight: 300;
   margin: 0;
   padding: 0;
+  text-decoration: none;
+}
+
+.delete-btn:hover {
+  background-color: transparent;
+  border: none;
+  color: #d74a4a;
+  font-size: 0.9rem;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
 }
 
 
 /* 리뷰 내용물 */
 .review-text p {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   font-weight: 300;
   margin-top: 0.5rem;
 }
 
 .review-text img {
-  height: 17rem;
+  height: 16rem;
+  margin: 0.2rem 0;
   object-fit: cover;
-  width: 13rem;
+  width: 16rem !important;
 }
 
 
@@ -474,64 +513,33 @@ td {
 }
 
 
-/* 리뷰 각각 구분선 */
-.review-divider {
-  background-color: #F3EFCC;
-  height: 0.1rem;
-  opacity: 100;
-}
-
-
-/* 대댓글 생성 폼 */
+/* 댓글 등록창 */
 .comment-create {
-  align-items: center;
   display: flex;
   justify-content: space-between;
+  margin: 0;
 }
 
-.form-control {
-  border: none;
-  border-radius: 0.3rem 0 0 0.3rem;
-  margin-top: 0.2rem;
+.comment-create .form-control {
+  border: 0;
+  border-radius: 0.2rem 0 0 0.2rem;
 }
 
-.form-control::placeholder {
+.comment-create .form-control::placeholder {
   font-size: 0.9rem;
+  font-weight: 400;
 }
 
 
-/* 대댓글 생성 버튼 */
+/* 댓글 등록 버튼 */
 .comment-create-button {
-  align-items: center;
   background-color: #ECE7B4;
   border: none;
-  border-radius: 0 0.3rem 0.3rem 0;
+  border-radius: 0 0.2rem 0.2rem 0;
   color: #666666;
-  display: flex;
-  font-size: 0.9rem;
-  font-weight: 500;
-  height: 2.3rem;
-  justify-content: center;
-  margin-top: 0.2rem;
-  padding: 0;
-  width: 8rem;
+  padding: 0.5rem 2rem;
 }
 
-.comment-create-button:hover {
-  align-items: center;
-  background-color: #ECE7B4;
-  border: none;
-  border-radius: 0 0.3rem 0.3rem 0;
-  color: #666666;
-  display: flex;
-  font-size: 0.9rem;
-  font-weight: 500;
-  height: 2.3rem;
-  justify-content: center;
-  margin-top: 0.2rem;
-  padding: 0;
-  width: 8rem;
-}
 
 
 /* 대댓글 프로필 사진 */
@@ -586,6 +594,13 @@ td {
   margin-top: 0.2rem;
   padding: 0;
   width: 8rem;
+
+/* 리뷰 각각 구분선 */
+.review-divider {
+  background-color: #F3EFCC;
+  height: 0.13rem;
+  opacity: 100;
+
 }
 
 

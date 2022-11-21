@@ -15,6 +15,7 @@
         <p class="rate-number">{{ rate_avg|floatformat }}</p>
       </div>
 
+
       <!-- 조회수, 좋아요, 북마크, 공유 -->
       <div class="cafe-lower">
         <!-- 조회수 -->
@@ -22,6 +23,7 @@
           <img src="https://cdn-icons-png.flaticon.com/512/159/159604.png" alt="조회수 아이콘"/>
           <p class="views-count">{{ article.hits }}</p>
         </div>
+
 
         <!-- 좋아요 -->
         <div class="like">
@@ -98,6 +100,7 @@
       {% endif %}
     </div>
   </div>
+  
   <!-- titles 끝남 -->
 
   <!-- 이미지/캐러셀 -->
@@ -121,6 +124,7 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
+
   </div>
 
   <!-- 카페 정보 -->
@@ -347,6 +351,8 @@
           <!-- review-icons 끝남 -->
 
           <div id="comment-area-{{ review.pk }}" class="d-none">
+
+
             {% if request.user.is_authenticated %}
               <!-- 댓글 작성 폼 -->
               <form class="comment-create-form" data-review-id="{{ review.pk }}">
@@ -423,6 +429,7 @@
                       </form>
                     </div>
                   {% endif %}
+
                 </div>
                 <div id="reply-form-{{ comment.pk }}" class="d-none">
                   {% if request.user.is_authenticated %}
@@ -477,6 +484,7 @@
     var geocoder = new kakao.maps.services.Geocoder();
     // 주소로 좌표를 검색합니다
     geocoder.addressSearch(document.querySelector("#cafe-address").innerText, function (result, status) {
+
       // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -744,7 +752,7 @@
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart-fill fs-5"></i>
+                            <i class="bi bi-heart-fill"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -869,7 +877,7 @@
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart-fill fs-5"></i>
+                            <i class="bi bi-heart-fill"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -1046,7 +1054,7 @@
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart-fill fs-5"></i>
+                            <i class="bi bi-heart-fill"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -1171,7 +1179,7 @@
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart-fill fs-5"></i>
+                            <i class="bi bi-heart-fill"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -1347,7 +1355,7 @@
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart-fill fs-5"></i>
+                            <i class="bi bi-heart-fill"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
@@ -1472,7 +1480,7 @@
                         <form class="comment-like-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                           <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                           <button class="btn btn-sm border-0 text-danger" type="submit">
-                            <i class="bi bi-heart-fill fs-5"></i>
+                            <i class="bi bi-heart-fill"></i>
                             <span class="ms-2 comment-like-count">${comments[i].like_count}</span>
                           </button>
                         </form>
