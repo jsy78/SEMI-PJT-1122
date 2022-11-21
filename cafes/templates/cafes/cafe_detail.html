@@ -354,8 +354,8 @@
               <form class="comment-create-form" data-review-id="{{ review.pk }}">
                 {% csrf_token %}
                 <div class="comment-create">
-                  <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true"/>
-                  <input class="comment-create-button btn btn-primary" type="submit" value="등록"/>
+                  <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true">
+                  <input class="comment-create-button btn btn-primary" type="submit" value="등록">
                 </div>
               </form>
               <hr>
@@ -384,7 +384,7 @@
                     <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="{{ comment.pk }}">
                       {% csrf_token %}
                       <div class="comment-update">
-                        <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true" value="{{ comment.content }}"/>
+                        <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true" value="{{ comment.content }}">
                         <input class="comment-update-button btn btn-primary" type="submit" value="수정">
                       </div>
                     </form>
@@ -430,13 +430,9 @@
                     <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="{{ review.pk }}" data-comment-id="{{ comment.pk }}">
                       {% csrf_token %}
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="flex-fill me-2">
-                          <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true"/>
-                        </div>
-                        <div>
-                          <input class="btn btn-primary review_create" type="submit" value="작성"/>
-                        </div>
+                      <div class="comment-create">
+                        <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
+                        <input class="comment-create-button btn btn-primary" type="submit" value="등록">
                       </div>
                     </form>
                     <hr class="my-hr3">
@@ -793,13 +789,9 @@
                     <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="flex-fill me-2">
-                          <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
-                        </div>
-                        <div>
-                          <input class="btn btn-primary review_create" type="submit" value="작성">
-                        </div>
+                      <div class="comment-create">
+                        <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
+                        <input class="comment-create-button btn btn-primary" type="submit" value="등록">
                       </div>
                     </form>
                     <hr class="my-hr3">
@@ -918,13 +910,9 @@
                     <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="flex-fill me-2">
-                          <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
-                        </div>
-                        <div>
-                          <input class="btn btn-primary review_create" type="submit" value="작성">
-                        </div>
+                      <div class="comment-create">
+                        <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
+                        <input class="comment-create-button btn btn-primary" type="submit" value="등록">
                       </div>
                     </form>
                     <hr class="my-hr3">
@@ -1095,13 +1083,9 @@
                     <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="flex-fill me-2">
-                          <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
-                        </div>
-                        <div>
-                          <input class="btn btn-primary review_create" type="submit" value="작성">
-                        </div>
+                      <div class="comment-create">
+                        <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
+                        <input class="comment-create-button btn btn-primary" type="submit" value="등록">
                       </div>
                     </form>
                     <hr class="my-hr3">
@@ -1220,13 +1204,9 @@
                     <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="flex-fill me-2">
-                          <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
-                        </div>
-                        <div>
-                          <input class="btn btn-primary review_create" type="submit" value="작성">
-                        </div>
+                      <div class="comment-create">
+                        <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
+                        <input class="comment-create-button btn btn-primary" type="submit" value="등록">
                       </div>
                     </form>
                     <hr class="my-hr3">
@@ -1396,13 +1376,9 @@
                     <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="flex-fill me-2">
-                          <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
-                        </div>
-                        <div>
-                          <input class="btn btn-primary review_create" type="submit" value="작성">
-                        </div>
+                      <div class="comment-create">
+                        <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
+                        <input class="comment-create-button btn btn-primary" type="submit" value="등록">
                       </div>
                     </form>
                     <hr class="my-hr3">
@@ -1521,13 +1497,9 @@
                     <hr class="my-hr3">
                     <form class="reply-create-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="flex-fill me-2">
-                          <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
-                        </div>
-                        <div>
-                          <input class="btn btn-primary review_create" type="submit" value="작성">
-                        </div>
+                      <div class="comment-create">
+                        <input type="text" name="content" placeholder="대댓글을 남겨보세요 💬" class="form-control" required="true">
+                        <input class="comment-create-button btn btn-primary" type="submit" value="등록">
                       </div>
                     </form>
                     <hr class="my-hr3">
