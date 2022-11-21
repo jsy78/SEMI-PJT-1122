@@ -552,6 +552,22 @@ td {
   width: 8rem;
 }
 
+.comment-create-button:hover {
+  align-items: center;
+  background-color: #ECE7B4;
+  border: none;
+  border-radius: 0 0.3rem 0.3rem 0;
+  color: #666666;
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: 500;
+  height: 2.3rem;
+  justify-content: center;
+  margin-top: 0.2rem;
+  padding: 0;
+  width: 8rem;
+}
+
 
 
 /* 대댓글 프로필 사진 */

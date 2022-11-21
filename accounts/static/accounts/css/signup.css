@@ -44,6 +44,20 @@
 }
 
 
+/* 이미 회원이신가요? */
+.signup-form .go-login {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.signup-form .go-login a {
+    color: #cccccc;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+
 /* 회원가입 버튼 */
 .signup-form .signup-button {
     align-items: center;
