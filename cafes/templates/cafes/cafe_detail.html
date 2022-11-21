@@ -101,6 +101,7 @@
         </div>
         <div style="width: 50px;">
           <form action="{% url 'cafes:cafe_delete' article.pk %}" method="POST">
+            {% csrf_token %}
             <button class="edit-button" type="submit">
               <img src="https://cdn-icons-png.flaticon.com/512/3096/3096673.png" alt="삭제 아이콘"/>
               <p>삭제</p>
