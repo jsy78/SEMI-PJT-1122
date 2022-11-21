@@ -96,6 +96,48 @@
 }
 
 
+/* 모달창 */
+.modal-content {
+    border-radius: 0.5rem;
+    background-color: #406343;
+}
+
+.modal-title {
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.modal-header .btn-close {
+    filter: invert(100%) sepia(1%) saturate(0%) hue-rotate(112deg) brightness(106%) contrast(100%);
+}
+
+.modal-body {
+    border-radius: 0 0 0.4rem 0.4rem;
+    padding-top: 2rem;
+}
+
+.profile-img {
+    border-radius: 20rem;
+    margin-right: 0.4rem;
+    width: 2.6rem;
+}
+
+.detail_name {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.detail_name:hover {
+    color: #ECE7B4;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.no-follow {
+    color: #ffffff;
+}
+
+
 /* 메뉴 */
 .personal-tabs {
     align-items: center;
