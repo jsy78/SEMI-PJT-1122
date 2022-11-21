@@ -326,9 +326,7 @@
               <!-- 댓글 아이콘 -->
               <button class="comment-btn" data-review-id="{{ review.pk }}">
                 <img src="https://cdn-icons-png.flaticon.com/512/2769/2769104.png" alt="댓글 아이콘"/>
-                <p class="comment-{{ review.pk }}-count">
-                  {{ review.comment_set.count }}
-                </p>
+                <p class="comment-{{ review.pk }}-count">{{ review.comment_set.count }}</p>
               </button>
 
               <!-- 좋아요 아이콘 -->
@@ -351,8 +349,6 @@
           <!-- review-icons 끝남 -->
 
           <div id="comment-area-{{ review.pk }}" class="d-none">
-
-
             {% if request.user.is_authenticated %}
               <!-- 댓글 작성 폼 -->
               <form class="comment-create-form" data-review-id="{{ review.pk }}">
@@ -369,8 +365,8 @@
               <div id="comment-{{ comment.pk }}">
                 <div id="comment-{{ comment.pk }}-block" class="d-flex mb-1 d-block">
                   <!-- 프로필 사진 -->
-                  {% if review.user.profile %}
-                    <img src="{{ review.user.profile.url }}" class="sub-profile-img" alt="자신의 프로필 사진"/>
+                  {% if comment.user.profile %}
+                    <img src="{{ comment.user.profile.url }}" class="sub-profile-img" alt="자신의 프로필 사진"/>
                   {% else %}
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Roasted_coffee_beans.jpg/1200px-Roasted_coffee_beans.jpg" class="profile-img" alt="기본 프로필 사진"/>
                   {% endif %}
@@ -378,15 +374,13 @@
                   <div class="comment-contents">
                     <div class="name-and-contents">
                       <a href="{% url 'accounts:profile' comment.user.username %}" class="detail_name">{{ comment.user }}</a>
-                      <div id="comment-{{ comment.pk }}-content" class="my-2">
-                        {{ comment.content }}
-                      </div>
+                      <div id="comment-{{ comment.pk }}-content" class="my-2">{{ comment.content }}</div>
                     </div>
                   </div>
                   <!-- comment-contents 끝남 -->
                 </div>
                 <div id="comment-{{ comment.pk }}-update" class="d-none">
-                  {% if request.user.is_authenticated %}
+                  {% if request.user == comment.user %}
                     <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="{{ comment.pk }}">
                       {% csrf_token %}
                       <div class="comment-update">
@@ -416,7 +410,7 @@
                       </form>
                     </div>
                   {% endif %}
-                  {% if request.user == review.user %}
+                  {% if request.user == comment.user %}
                     <div class="d-flex">
                       <button class="btn btn-sm border-0 text-black comment-update-btn" data-review-id="{{ review.pk }}" data-comment-id="{{ comment.pk }}">
                         <i class="bi bi-pencil yellow fs-5"></i>
@@ -729,7 +723,7 @@
                   `);
                 }
 
-                if (response.data.request_is_authenticated) {
+                if (comments[i].username == response.data.request_username) {
                   dom.querySelector(`#comment-${comments[i].pk}-update`).insertAdjacentHTML("beforeend", `
                     <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
@@ -854,7 +848,7 @@
                   `);
                 }
 
-                if (response.data.request_is_authenticated) {
+                if (comments[i].username == response.data.request_username) {
                   dom.querySelector(`#comment-${comments[i].pk}-update`).insertAdjacentHTML("beforeend", `
                     <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
@@ -1031,7 +1025,7 @@
                   `);
                 }
 
-                if (response.data.request_is_authenticated) {
+                if (comments[i].username == response.data.request_username) {
                   dom.querySelector(`#comment-${comments[i].pk}-update`).insertAdjacentHTML("beforeend", `
                     <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
@@ -1156,7 +1150,7 @@
                   `);
                 }
 
-                if (response.data.request_is_authenticated) {
+                if (comments[i].username == response.data.request_username) {
                   dom.querySelector(`#comment-${comments[i].pk}-update`).insertAdjacentHTML("beforeend", `
                     <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
@@ -1332,7 +1326,7 @@
                   `);
                 }
 
-                if (response.data.request_is_authenticated) {
+                if (comments[i].username == response.data.request_username) {
                   dom.querySelector(`#comment-${comments[i].pk}-update`).insertAdjacentHTML("beforeend", `
                     <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
@@ -1457,7 +1451,7 @@
                   `);
                 }
 
-                if (response.data.request_is_authenticated) {
+                if (comments[i].username == response.data.request_username) {
                   dom.querySelector(`#comment-${comments[i].pk}-update`).insertAdjacentHTML("beforeend", `
                     <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">

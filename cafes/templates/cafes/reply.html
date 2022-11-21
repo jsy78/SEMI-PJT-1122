@@ -5,8 +5,8 @@
       <div id="comment-{{ comment.pk }}">
         <div id="comment-{{ comment.pk }}-block" class="d-flex mb-1 d-block">
           <!-- 프로필 사진 -->
-          {% if review.user.profile %}
-            <img src="{{ review.user.profile.url }}" class="sub-profile-img" alt="자신의 프로필 사진"/>
+          {% if comment.user.profile %}
+            <img src="{{ comment.user.profile.url }}" class="sub-profile-img" alt="자신의 프로필 사진"/>
           {% else %}
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Roasted_coffee_beans.jpg/1200px-Roasted_coffee_beans.jpg" class="profile-img" alt="기본 프로필 사진"/>
           {% endif %}
@@ -20,14 +20,12 @@
           <!-- comment-contents 끝남 -->
         </div>
         <div id="comment-{{ comment.pk }}-update" class="d-none">
-          {% if request.user.is_authenticated %}
+          {% if request.user == comment.user %}
             <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="{{ comment.pk }}">
               {% csrf_token %}
               <div class="comment-update">
                 <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true" value="{{ comment.content }}"/>
-                <div>
-                  <input class="comment-update-button btn btn-primary" type="submit" value="수정"/>
-                </div>
+                <input class="comment-update-button btn btn-primary" type="submit" value="수정"/>
               </div>
             </form>
           {% endif %}
