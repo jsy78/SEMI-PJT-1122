@@ -43,6 +43,7 @@ class Article(models.Model):
         processors=[ResizeToFill(1200, 760)],
         format="JPEG",
         options={"quality": 95},
+        default="default.jpg",
     )
     image2 = ProcessedImageField(
         upload_to="images/cafe",
