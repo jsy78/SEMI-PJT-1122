@@ -240,6 +240,8 @@ def cafe_search(request):
 
     if "q" in request.GET:
         query = request.GET.get("q")
+        if query == "":
+            return redirect("main")
         query = query.split("&")[0]
         articles = Article.objects.order_by("-pk").filter(
             Q(name__contains=query)
