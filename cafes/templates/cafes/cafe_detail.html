@@ -721,7 +721,7 @@
 
                 if (comments[i].username == response.data.request_username) {
                   dom.querySelector(`#comment-${comments[i].pk}-update`).insertAdjacentHTML("beforeend", `
-                    <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="${comments[i].pk}">
+                    <form class="comment-update-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                       <div class="comment-update">
                         <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true" value="${comments[i].content}">
@@ -842,7 +842,7 @@
 
                 if (comments[i].username == response.data.request_username) {
                   dom.querySelector(`#comment-${comments[i].pk}-update`).insertAdjacentHTML("beforeend", `
-                    <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="${comments[i].pk}">
+                    <form class="comment-update-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                       <div class="comment-update">
                         <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true" value="${comments[i].content}">
@@ -1015,7 +1015,7 @@
 
                 if (comments[i].username == response.data.request_username) {
                   dom.querySelector(`#comment-${comments[i].pk}-update`).insertAdjacentHTML("beforeend", `
-                    <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="${comments[i].pk}">
+                    <form class="comment-update-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                       <div class="comment-update">
                         <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true" value="${comments[i].content}">
@@ -1136,7 +1136,7 @@
 
                 if (comments[i].username == response.data.request_username) {
                   dom.querySelector(`#comment-${comments[i].pk}-update`).insertAdjacentHTML("beforeend", `
-                    <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="${comments[i].pk}">
+                    <form class="comment-update-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                       <div class="comment-update">
                         <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true" value="${comments[i].content}">
@@ -1308,7 +1308,7 @@
 
                 if (comments[i].username == response.data.request_username) {
                   dom.querySelector(`#comment-${comments[i].pk}-update`).insertAdjacentHTML("beforeend", `
-                    <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="${comments[i].pk}">
+                    <form class="comment-update-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                       <div class="comment-update">
                         <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true" value="${comments[i].content}">
@@ -1429,7 +1429,7 @@
 
                 if (comments[i].username == response.data.request_username) {
                   dom.querySelector(`#comment-${comments[i].pk}-update`).insertAdjacentHTML("beforeend", `
-                    <form class="comment-update-form" data-review-id="{{ review.pk }}" data-comment-id="${comments[i].pk}">
+                    <form class="comment-update-form" data-review-id="${reviewId}" data-comment-id="${comments[i].pk}">
                       <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}">
                       <div class="comment-update">
                         <input type="text" name="content" placeholder="댓글을 남겨보세요 💬" class="form-control" required="true" value="${comments[i].content}">
