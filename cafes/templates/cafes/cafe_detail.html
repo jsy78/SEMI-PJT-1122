@@ -91,18 +91,22 @@
     <!-- cafe-left 끝남 -->
 
     <!-- 수정 버튼 -->
-    <div class="cafe-right">
+    <div class="cafe-right d-flex align-items-center">
       {% if request.user == article.user %}
-        <a class="edit-button" href="{% url 'cafes:cafe_update' article.pk %}">
-          <img src="https://cdn-icons-png.flaticon.com/512/1014/1014883.png" alt="수정 아이콘"/>
-          <p>수정</p>
-        </a>
-        <form action="{% url 'cafes:cafe_delete' article.pk %}" method="POST">
-          <button class="edit-button" type="submit">
-            <img src="https://cdn-icons-png.flaticon.com/512/3096/3096673.png" alt="삭제 아이콘"/>
-            <p>삭제</p>
-          </button>
-        </form>
+        <div class="p-1" style="width: 50px;">
+          <a class="edit-button" href="{% url 'cafes:cafe_update' article.pk %}">
+            <img src="https://cdn-icons-png.flaticon.com/512/1014/1014883.png" alt="수정 아이콘"/>
+            <p>수정</p>
+          </a>
+        </div>
+        <div style="width: 50px;">
+          <form action="{% url 'cafes:cafe_delete' article.pk %}" method="POST">
+            <button class="edit-button" type="submit">
+              <img src="https://cdn-icons-png.flaticon.com/512/3096/3096673.png" alt="삭제 아이콘"/>
+              <p>삭제</p>
+            </button>
+          </form>
+        </div>
       {% endif %}
     </div>
   </div>
