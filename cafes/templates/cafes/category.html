@@ -9,7 +9,10 @@
 
 {% block content %}
 <!-- (카테고리명) 카페 -->
-<p class="result-text"> <span class="cate-title">{{ articleCategory }}</span> 카페</p>
+<p class="result-text">
+  <span class="cate-title">{{ articleCategory }}</span> 카페
+</p>
+
 <div class="cafe-list">
   {% for article in articles %}
   <div class="a-cafe">
@@ -102,15 +105,15 @@
           </form>
 
           <!-- 주소 -->
-          <form action="{% url 'cafes:cafe_search' %}">
-            <button type="submit" class="a-hash">
+          <form action="">
+            <button type="button" class="a-hash">
               {% if article.sido == '서울' %}
               <p>#{{ article.sido }} {{ article.sigungu }}</p>
-              <input type="search" value="{{ article.sido }} {{ article.sigungu }}" name="button"
+              <input type="button" value="{{ article.sido }} {{ article.sigungu }}" name="button"
                 class="category-value" />
               {% else %}
               <p>#{{ article.sigungu }}</p>
-              <input type="search" value="{{ article.sigungu }}" name="button" class="category-value" />
+              <input type="button" value="{{ article.sigungu }}" name="button" class="category-value" />
               {% endif %}
             </button>
           </form>
@@ -120,4 +123,7 @@
   </div>
   {% endfor %}
 </div>
-{% endblock content %} {% block js %} {% endblock js %}
+{% endblock content %}
+
+{% block js %}
+{% endblock js %}
