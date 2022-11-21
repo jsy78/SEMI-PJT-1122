@@ -1,23 +1,26 @@
-{% extends 'base.html' %} {% load django_bootstrap5 %} {% load static %} {% block css %}
+{% extends 'base.html' %}
+
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block css %}
 <link rel="stylesheet" href="{% static 'cafes/css/category.css' %}" />
-{% endblock css %} {% block content %}
-<p class="result-text">{{ articleCategory }} 카페</p>
+{% endblock css %}
+
+{% block content %}
+<!-- (카테고리명) 카페 -->
+<p class="result-text"> <span class="cate-title">{{ articleCategory }}</span> 카페</p>
 <div class="cafe-list">
   {% for article in articles %}
   <div class="a-cafe">
     <!-- 카페 위치 -->
     <div class="cafe-address">
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/67/67872.png"
-        alt="위치 아이콘"
-      />
+      <img src="https://cdn-icons-png.flaticon.com/512/67/67872.png" alt="위치 아이콘" />
       <p>{{ article.address }}</p>
     </div>
 
     <!-- 카페 이미지-->
-    <a href="{% url 'cafes:cafe_detail' article.pk %}"
-      ><img src="{{ article.image1.url }}" alt="카페 사진"
-    /></a>
+    <a href="{% url 'cafes:cafe_detail' article.pk %}"><img src="{{ article.image1.url }}" alt="카페 사진" /></a>
 
     <div class="cafe-text">
       <div class="name-hash">
@@ -33,12 +36,7 @@
           <form action="{% url 'cafes:category' '분위기가 좋은' %}">
             <button type="submit" class="a-hash">
               <p>#{{ article.cafeType }}</p>
-              <input
-                type="button"
-                value="{{ article.cafeType }}"
-                name="button"
-                class="category-value"
-              />
+              <input type="button" value="{{ article.cafeType }}" name="button" class="category-value" />
             </button>
           </form>
 
@@ -46,12 +44,7 @@
           <form action="{% url 'cafes:category' '디저트가 맛있는' %}">
             <button type="submit" class="a-hash">
               <p>#{{ article.cafeType }}</p>
-              <input
-                type="button"
-                value="{{ article.cafeType }}"
-                name="button"
-                class="category-value"
-              />
+              <input type="button" value="{{ article.cafeType }}" name="button" class="category-value" />
             </button>
           </form>
 
@@ -59,12 +52,7 @@
           <form action="{% url 'cafes:category' '커피가 맛있는' %}">
             <button type="submit" class="a-hash">
               <p>#{{ article.cafeType }}</p>
-              <input
-                type="button"
-                value="{{ article.cafeType }}"
-                name="button"
-                class="category-value"
-              />
+              <input type="button" value="{{ article.cafeType }}" name="button" class="category-value" />
             </button>
           </form>
 
@@ -72,12 +60,7 @@
           <form action="{% url 'cafes:category' '작업하기 좋은' %}">
             <button type="submit" class="a-hash">
               <p>#{{ article.cafeType }}</p>
-              <input
-                type="button"
-                value="{{ article.cafeType }}"
-                name="button"
-                class="category-value"
-              />
+              <input type="button" value="{{ article.cafeType }}" name="button" class="category-value" />
             </button>
           </form>
 
@@ -85,12 +68,7 @@
           <form action="{% url 'cafes:category' '커피가 저렴한' %}">
             <button type="submit" class="a-hash">
               <p>#{{ article.cafeType }}</p>
-              <input
-                type="button"
-                value="{{ article.cafeType }}"
-                name="button"
-                class="category-value"
-              />
+              <input type="button" value="{{ article.cafeType }}" name="button" class="category-value" />
             </button>
           </form>
 
@@ -98,12 +76,7 @@
           <form action="{% url 'cafes:category' '이색적인' %}">
             <button type="submit" class="a-hash">
               <p>#{{ article.cafeType }}</p>
-              <input
-                type="button"
-                value="{{ article.cafeType }}"
-                name="button"
-                class="category-value"
-              />
+              <input type="button" value="{{ article.cafeType }}" name="button" class="category-value" />
             </button>
           </form>
           {% endif %}
@@ -113,12 +86,7 @@
             <button type="button" class="a-hash">
               {% if article.average_rate != None %}
               <p>#{{ article.average_rate|floatformat }}점</p>
-              <input
-                type="button"
-                value="{{ article.average_rate }}"
-                name="button"
-                class="category-value"
-              />
+              <input type="button" value="{{ article.average_rate }}" name="button" class="category-value" />
               {% endif %}
             </button>
           </form>
@@ -138,20 +106,11 @@
             <button type="submit" class="a-hash">
               {% if article.sido == '서울' %}
               <p>#{{ article.sido }} {{ article.sigungu }}</p>
-              <input
-                type="search"
-                value="{{ article.sido }} {{ article.sigungu }}"
-                name="button"
-                class="category-value"
-              />
+              <input type="search" value="{{ article.sido }} {{ article.sigungu }}" name="button"
+                class="category-value" />
               {% else %}
               <p>#{{ article.sigungu }}</p>
-              <input
-                type="search"
-                value="{{ article.sigungu }}"
-                name="button"
-                class="category-value"
-              />
+              <input type="search" value="{{ article.sigungu }}" name="button" class="category-value" />
               {% endif %}
             </button>
           </form>
