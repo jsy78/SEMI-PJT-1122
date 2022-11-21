@@ -59,7 +59,9 @@ def cafe_detail(request, article_pk):
         .prefetch_related(
             Prefetch(
                 "comment_set",
-                queryset=Comment.objects.select_related("user").filter(parent=None),
+                queryset=Comment.objects.select_related("user")
+                .filter(parent=None)
+                .order_by("pk"),
                 to_attr="root_comments",
             )
         )
