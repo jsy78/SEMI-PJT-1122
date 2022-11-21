@@ -243,6 +243,7 @@ def cafe_search(request):
             Q(name__contains=query)
             | Q(address__contains=query)
             | Q(menu__contains=query)
+            | Q(cafeType__contains=query)
         )
     page = request.GET.get("page", "1")
     paginator = Paginator(articles, 9)
