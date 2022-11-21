@@ -63,10 +63,14 @@ def profile(request, username):
     user = get_object_or_404(get_user_model(), username=username)
     like_articles = user.like_articles.all()
     bookmark_articles = user.bookmark_articles.all()
+    following_users = user.followings.all()
+    follower_users = user.followers.all()
     context = {
         "user": user,
         "like_articles": like_articles,
         "bookmark_articles": bookmark_articles,
+        "following_users": following_users,
+        "follower_users": follower_users,
     }
     return render(request, "accounts/profile.html", context)
 
