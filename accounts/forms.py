@@ -1,5 +1,10 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    UserChangeForm,
+    AuthenticationForm,
+    UsernameField,
+)
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
@@ -23,7 +28,7 @@ class CustomUserCreationForm(UserCreationForm):
             "last_name",
         )
         labels = {
-            "username": "아이디",
+            "username": "닉네임",
             "address": "주소",
             "sido": "시/도",
             "sigungu": "시/군/구",
@@ -124,3 +129,9 @@ class CustomUserChangeForm(UserChangeForm):
         if len(get_user_model().objects.filter(email=email)) >= 2:
             raise ValidationError("중복된 이메일이 있습니다.")
         return
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = UsernameField(
+        label="닉네임", widget=forms.TextInput(attrs={"autofocus": True})
+    )

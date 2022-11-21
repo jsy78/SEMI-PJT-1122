@@ -4,7 +4,11 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import get_user_model, update_session_auth_hash
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .forms import (
+    CustomUserCreationForm,
+    CustomUserChangeForm,
+    CustomAuthenticationForm,
+)
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import (
@@ -42,12 +46,12 @@ def login(request):
         return redirect("main")
 
     if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
+        form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
             return redirect(request.GET.get("next") or "main")
     else:
-        form = AuthenticationForm()
+        form = CustomAuthenticationForm()
     context = {
         "form": form,
     }
