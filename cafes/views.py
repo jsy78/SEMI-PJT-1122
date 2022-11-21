@@ -13,6 +13,7 @@ from datetime import date, datetime, timedelta, timezone
 from .models import Article, Review, Comment
 from .forms import ArticleForm, ReviewForm, CommentForm, ReplyForm
 from django.core.paginator import Paginator
+from django.utils.html import strip_tags
 
 
 @require_safe
@@ -141,6 +142,7 @@ def cafe_create(request):
         if form.is_valid():
             article = form.save(commit=False)
             article.user = request.user
+            article.menuStripTag = strip_tags(article.menu)
             article.save()
             messages.success(request, "카페 작성이 완료되었습니다.")
             return redirect("cafes:cafe_detail", article.pk)
@@ -166,6 +168,7 @@ def cafe_update(request, article_pk):
         if form.is_valid():
             article = form.save(commit=False)
             article.is_updated = True
+            article.menuStripTag = strip_tags(article.menu)
             article.save()
             messages.success(request, "카페 수정이 완료되었습니다.")
             return redirect("cafes:cafe_detail", article_pk)
@@ -246,7 +249,7 @@ def cafe_search(request):
         articles = Article.objects.order_by("-pk").filter(
             Q(name__contains=query)
             | Q(address__contains=query)
-            | Q(menu__contains=query)
+            | Q(menuStripTag__contains=query)
             | Q(cafeType__contains=query)
         )
     page = request.GET.get("page", "1")
