@@ -537,11 +537,19 @@ td {
 
 /* 댓글 등록 버튼 */
 .comment-create-button {
+  align-items: center;
   background-color: #ECE7B4;
   border: none;
-  border-radius: 0 0.2rem 0.2rem 0;
+  border-radius: 0 0.3rem 0.3rem 0;
   color: #666666;
-  padding: 0.5rem 2rem;
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: 500;
+  height: 2.3rem;
+  justify-content: center;
+  margin-top: 0.2rem;
+  padding: 0;
+  width: 8rem;
 }
 
 
@@ -583,7 +591,7 @@ td {
 }
 
 
-/* 대댓글 생성 버튼 */
+/* 댓글 수정 버튼 */
 .comment-update-button {
   align-items: center;
   background-color: #ECE7B4;
