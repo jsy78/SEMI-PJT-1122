@@ -47,8 +47,8 @@
 }
 
 .login-form .go-signup a {
-    color: #ffffff;
-    opacity: 50%;
+    color: #cccccc;
+    font-size: 0.9rem;
     text-decoration: none;
 }
 
