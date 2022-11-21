@@ -26,6 +26,7 @@ class Article(models.Model):
             "heightMin": 200,
         }
     )
+    menuStripTag = models.TextField(default="", blank=True, null=True)
     parking = models.CharField(max_length=20)
     dayoff = models.CharField(max_length=20)
     category = (
