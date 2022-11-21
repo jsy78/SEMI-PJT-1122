@@ -7,12 +7,13 @@
 }
 
 
-/* (카테고리) 카페 */
+/* 어서오세요 별다방입니다 */
 .result-text {
     color: #ffffff;
     font-size: 1.7rem;
     font-weight: 800;
     margin-left: 0.6rem;
+    margin-top: 5rem;
 }
 
 .cate-title {

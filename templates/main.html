@@ -2,6 +2,7 @@
 
 {% load django_bootstrap5 %}
 {% load static %}
+
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 {% endblock css %}
@@ -18,8 +19,8 @@
     <div class="carousel-item active">
       <img src="{% static 'image/carousel_1.jpg' %}" class="d-block w-100" alt="carousel_1">
       <div class="carousel-caption d-none d-md-block">
-        <h5>안녕하세요, 별다방입니다</h5>
-        <p>카페 추천 서비스</p>
+        <h5>어서오세요, 별다방입니다!</h5>
+        <p>카페를 추천해드려요</p>
       </div>
     </div>
     <div class="carousel-item">
@@ -48,18 +49,12 @@
 </div>
 
 {% if request.resolver_match.url_name == 'main' %}
-<!-- (카테고리명) 카페 -->
+<!-- 카페가 준비되어 있어요 -->
 <p class="result-text">
-  <span class="cate-title">{{ articleCategory }}</span> 카페
+  당신을 위해 준비된 카페
 </p>
 
-
-<!-- 카페 추가 (임시) -->
-<div class="d-flex justify-content-end">
-  <a class="btn btn-success btn-lg text-white" href="{% url 'cafes:cafe_create' %}" role="button">카페 추가</a>
-</div>
-
-<div class="cafe-list infinite-container">
+<div id="scroll_data" class="infinite-container cafe-list">
   {% for article in page_obj %}
   <div class="a-cafe">
     <!-- 카페 위치 -->
@@ -199,14 +194,11 @@
     </div>
   </div>
   {% endfor %}
-
   {% if page_obj.has_next %}
   <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
   {% endif %}
 </div>
-
 {% endif %}
-
 {% endblock content %}
 
 {% block js %}
